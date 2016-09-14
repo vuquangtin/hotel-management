@@ -1,0 +1,15 @@
+package com.gsmart.ui.components
+
+import javafx.scene.layout.VBox
+import javafx.scene.control.Button
+import com.gsmart.ui.controller.HelloWorldController
+
+component HelloWorld controlledby HelloWorldController resourcefile "locale/messages_vi_VN.properties" styledwith "application.css"{
+	VBox {
+		Button {
+			styleClass : "myBtn",
+			text : rstring "mybutton.label",
+			onAction : controllermethod clicked
+		}
+	}
+}
