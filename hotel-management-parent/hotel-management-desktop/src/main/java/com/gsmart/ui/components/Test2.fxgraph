@@ -1,0 +1,15 @@
+package com.gsmart.ui.components
+
+import javafx.scene.layout.VBox
+import javafx.scene.control.Button
+import com.gsmart.ui.controller.OrderRoomController
+
+component Test2 controlledby OrderRoomController {
+	VBox {
+		//TODO Add Nodes
+		Button {
+			text : "AAAA",
+			onAction : controllermethod clicked
+		}
+	}
+}

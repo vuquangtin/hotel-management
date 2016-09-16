@@ -9,7 +9,7 @@
 <?scenebuilder-preview-i18n-resource locale/messages_vi_VN.properties?>
 <?scenebuilder-stylesheet application.css?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HelloWorldController">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HomeController">
 
 	<Button styleClass="myBtn" text="%mybutton.label" onAction="#clicked"/> 
 </VBox>
