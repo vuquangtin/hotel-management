@@ -45,7 +45,7 @@ public class ApplicationConfiguration {
     }
 	
 	@Bean
-    @Scope("prototype")
+    @Scope("singleton")
 	public HomeController homeController() {
         return new HomeController();
     }

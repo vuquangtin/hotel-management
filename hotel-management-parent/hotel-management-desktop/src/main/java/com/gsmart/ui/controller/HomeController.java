@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 
 @Component
 public class HomeController implements DialogController{
+	private FXMLDialog dialog;
 	
 	@Autowired
 	private ApplicationConfiguration applicationConfiguration;
@@ -32,10 +33,6 @@ public class HomeController implements DialogController{
     
     @Autowired
     private RoomService roomService;
-    
-//    public HomeController(ApplicationConfiguration applicationConfiguration) {
-//		this.applicationConfiguration = applicationConfiguration;
-//	}
     
 	@FXML
 	public void clicked(ActionEvent event) {
@@ -67,10 +64,13 @@ public class HomeController implements DialogController{
     	
     	applicationConfiguration.orderRoomDialog().show();
 	}
+	
+	public void closeDialog() {
+		dialog.close();
+	}
 
 	@Override
 	public void setDialog(FXMLDialog dialog) {
-		// TODO Auto-generated method stub
-		
+		this.dialog = dialog;
 	}
 }

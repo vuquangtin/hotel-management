@@ -13,6 +13,9 @@ import javafx.fxml.FXML;
 public class OrderRoomController implements DialogController{
 	
 	private FXMLDialog dialog;
+	
+	@Autowired
+	private HomeController homeController;
 
 	@Autowired
 	private RoomService roomService;
@@ -21,6 +24,7 @@ public class OrderRoomController implements DialogController{
 	public void clicked(ActionEvent event) {
 		roomService.SearchRoom();
 		dialog.close();
+		homeController.closeDialog();
 	}
 
 	@Override
