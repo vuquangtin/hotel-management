@@ -41,7 +41,8 @@ public class ApplicationConfiguration {
 	@Bean
     @Scope("prototype")
     public FXMLDialog orderRoomDialog() {
-        return new FXMLDialog(orderRoomController(), getClass().getResource("/com/gsmart/ui/components/Test2.fxml"), primaryStage);
+        return new FXMLDialog(orderRoomController(), getClass()
+        		.getResource("/com/gsmart/ui/components/Test2.fxml"), primaryStage);
     }
 	
 	@Bean
@@ -53,6 +54,7 @@ public class ApplicationConfiguration {
 	@Bean
     @Scope("prototype")
 	public FXMLDialog homeDialog() {
-        return new FXMLDialog(homeController(), getClass().getResource("/com/gsmart/ui/components/HelloWorld.fxml"), primaryStage);
+        return new FXMLDialog(homeController(), getClass().getResource("/com/gsmart/ui/components/Home.fxml")
+        		, primaryStage , new String[]{"css/home.css" , "css/order-info.css"} );
     }
 }

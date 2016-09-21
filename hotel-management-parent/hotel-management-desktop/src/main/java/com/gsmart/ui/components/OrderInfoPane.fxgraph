@@ -1,0 +1,76 @@
+package com.gsmart.ui.components
+
+import javafx.scene.layout.VBox
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.HBox
+import com.gsmart.ui.controller.HomeController
+import javafx.scene.control.Label
+import javafx.scene.image.ImageView
+import javafx.scene.image.Image
+import javafx.scene.control.Button
+import com.gsmart.ui.components.OrderInfoPane
+
+
+component OrderInfoPane controlledby HomeController styledwith "css/order-info.css" {
+	BorderPane {
+		prefHeight : 300,
+		styleClass : ["order-info-pane"],
+		top : HBox {
+			prefWidth : 700,
+			styleClass : ["top-bar"],
+			Label {
+				prefWidth : 500,
+				text : "Customer Information"
+			},
+			Button {
+				styleClass : [
+					"left-bar-btn"
+				],
+				graphic : ImageView {
+					image : Image {
+						url : location "images/edit.png"
+					},
+					fitHeight : 50,
+					fitWidth : 50
+				},
+				textAlignment : "CENTER",
+				contentDisplay : "TOP",
+				text : "Edit",
+				onAction : controllermethod clicked
+			},
+			Button {
+				styleClass : [
+					"left-bar-btn"
+				],
+				graphic : ImageView {
+					image : Image {
+						url : location "images/save.png"
+					},
+					fitHeight : 50,
+					fitWidth : 50
+				},
+				textAlignment : "CENTER",
+				contentDisplay : "TOP",
+				text : "Save"
+			},
+			Button {
+				styleClass : [
+					"left-bar-btn"
+				],
+				graphic : ImageView {
+					image : Image {
+						url : location "images/remove.png"
+					},
+					fitHeight : 50,
+					fitWidth : 50
+				},
+				textAlignment : "CENTER",
+				contentDisplay : "TOP",
+				text : "Remove"
+			}
+		},
+		center : OrderInfoPane id orderInfoPane {
+			
+		}
+	}
+}

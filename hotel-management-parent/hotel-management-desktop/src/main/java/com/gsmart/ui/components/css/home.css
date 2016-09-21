@@ -1,0 +1,25 @@
+.left-bar {
+	-fx-background-color: #d94f10;
+	-fx-fit-to-height: true;
+}
+
+
+.left-bar-btn {
+	-fx-background-fills: transparent;
+	-fx-background-color: transparent;
+	-fx-text-fill: white ;
+}
+
+.content .top-bar-btn {
+	-fx-background-fills: transparent;
+	-fx-background-color: transparent;
+	-fx-text-fill: white ;
+}
+
+.content .top-bar-btn:hover {
+	-fx-background-fills: #e7e7e7;
+}
+
+.content .top-bar {
+	-fx-background-color: #ebeaef;
+}

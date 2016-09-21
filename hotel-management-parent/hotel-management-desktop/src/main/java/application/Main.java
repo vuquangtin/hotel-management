@@ -1,5 +1,6 @@
 package application;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -20,7 +21,13 @@ public class Main extends Application{
 
 	private static String[] savedArgs;
 	public static ConfigurableApplicationContext applicationContext;
-
+	
+	@Autowired
+	public void injectTetingData(InjectTestingData injectTestingData) {
+		//TODO : Remove it on production version.
+		injectTestingData.doInject();
+	}
+	
 	@Override
 	public void init() throws Exception {
 		applicationContext = SpringApplication.run(getClass(), savedArgs);
