@@ -12,9 +12,8 @@ import com.gsmart.ui.components.CalculatePane
 import javafx.scene.control.Label
 import com.gsmart.ui.components.OrderTablePane
 
-component Home controlledby HomeController styledwith ["css/home.css" , "css/order-info.css"] {
+component Home controlledby HomeController styledwith ["css/home.css" , "css/order-info.css", "css/order-table-pane.css"] {
 	BorderPane {
-		prefHeight : 600,
 		left : VBox {
 			prefWidth : 70,
 			styleClass : [

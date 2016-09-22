@@ -39,7 +39,8 @@ public class HomeController implements DialogController {
 	@FXML
 	public void initialize() {
 		if (orderTablePane != null) {
-			orderTablePane.getTableView().setItems(FXCollections.observableArrayList(ordersRepository.findAll()));
+			orderTablePane.getTableView().setItems(FXCollections
+					.observableArrayList(ordersRepository.findAll()));
 			orderTablePane.setController(this);
 		}
 	}

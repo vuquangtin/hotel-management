@@ -13,12 +13,13 @@ import com.gsmart.ui.components.OrderInfoPane
 
 component OrderInfoPane controlledby HomeController styledwith "css/order-info.css" {
 	BorderPane {
-		prefHeight : 300,
+		prefHeight : 200,
 		styleClass : ["order-info-pane"],
 		top : HBox {
 			prefWidth : 700,
 			styleClass : ["top-bar"],
 			Label {
+				styleClass : ["top-label"],
 				prefWidth : 500,
 				text : "Customer Information"
 			},

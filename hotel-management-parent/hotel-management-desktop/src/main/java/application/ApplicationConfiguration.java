@@ -55,6 +55,6 @@ public class ApplicationConfiguration {
     @Scope("prototype")
 	public FXMLDialog homeDialog() {
         return new FXMLDialog(homeController(), getClass().getResource("/com/gsmart/ui/components/Home.fxml")
-        		, primaryStage , new String[]{"css/home.css" , "css/order-info.css"} );
+        		, primaryStage , new String[]{"css/home.css" , "css/order-info.css" , "css/order-table-pane.css"} );
     }
 }

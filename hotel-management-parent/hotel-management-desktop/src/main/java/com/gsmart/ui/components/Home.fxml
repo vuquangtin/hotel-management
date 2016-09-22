@@ -13,8 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?scenebuilder-stylesheet css/home.css?>
 <?scenebuilder-stylesheet css/order-info.css?>
+<?scenebuilder-stylesheet css/order-table-pane.css?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HomeController" prefHeight="600">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HomeController">
 
 	<left>
 		<VBox prefWidth="70"> 

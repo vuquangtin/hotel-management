@@ -39,6 +39,7 @@ public class InjectTestingData {
 		order_1.setCustomerAddress("Da Nang, Viet Nam");
 		order_1.setCustomerTelephone("0511 456 789");
 		order_1.setCreatedAt(new Date());
+		order_1.setCheckOutAt(new Date());
 		
 		HashSet<Orders> listOrder_1 = new HashSet<Orders>();
 		listOrder_1.add(order_1);
@@ -47,6 +48,7 @@ public class InjectTestingData {
 		room_1.setName("A123");
 		room_1.setListOrders(listOrder_1);
 		room_1.setRoomCategory(roomCategory);
+		order_1.setRoom(room_1);
 		
 		//=============Data 2 ==============//
 		Orders order_2 = new Orders();
@@ -54,6 +56,7 @@ public class InjectTestingData {
 		order_2.setCustomerAddress("Da Nang, Viet Nam");
 		order_2.setCustomerTelephone("0511 897 456");
 		order_2.setCreatedAt(new Date());
+		order_2.setCheckOutAt(new Date());
 		
 		HashSet<Orders> listOrder_2 = new HashSet<Orders>();
 		listOrder_2.add(order_2);
@@ -62,6 +65,8 @@ public class InjectTestingData {
 		room_2.setName("B456");
 		room_2.setListOrders(listOrder_2);
 		room_2.setRoomCategory(roomCategory);
+		
+		order_2.setRoom(room_2);
 		
 		roomRepository.save(room_1);
 		roomRepository.save(room_2);

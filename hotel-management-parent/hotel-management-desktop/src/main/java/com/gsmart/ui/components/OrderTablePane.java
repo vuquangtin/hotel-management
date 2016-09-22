@@ -6,9 +6,11 @@ import com.gsmart.model.Orders;
 import com.gsmart.model.RoomCategory;
 import com.gsmart.ui.controller.HomeController;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,8 +21,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class OrderTablePane extends VBox {
-	
-	private HomeController homeController ;
+
+	private HomeController homeController;
 
 	private TextField searchTextField = new TextField();
 
@@ -31,13 +33,14 @@ public class OrderTablePane extends VBox {
 	private DatePicker fromDate = new DatePicker();
 	private DatePicker toDate = new DatePicker();
 	private ComboBox<RoomCategory> roomType = new ComboBox<RoomCategory>();
-	
+
 	private TableView<Orders> table = new TableView<Orders>();
 
 	private Button searchButton = new Button("Search");
 
 	public OrderTablePane() {
 		super();
+		getStyleClass().add("order-table-pane");
 		getChildren().add(getTopBar());
 		getChildren().add(getTable());
 	}
@@ -48,6 +51,10 @@ public class OrderTablePane extends VBox {
 		VBox right = new VBox();
 
 		// == Initialization Left Pane === //
+		left.setPadding(new Insets(5, 5, 5, 5));
+		left.setSpacing(10);
+
+		searchTextField.setPromptText("Search ...");
 		left.getChildren().add(searchTextField);
 
 		ToggleGroup group = new ToggleGroup();
@@ -66,12 +73,25 @@ public class OrderTablePane extends VBox {
 
 		// == Initialization Right Pane === //
 		HBox rightTop = new HBox();
+		rightTop.setPadding(new Insets(5, 5, 5, 10));
+		rightTop.setSpacing(10);
 
+		Label fromDateLbl = new Label("From");
+		Label toDateLbl = new Label("To");
+
+		rightTop.getChildren().add(fromDateLbl);
 		rightTop.getChildren().add(fromDate);
+		rightTop.getChildren().add(toDateLbl);
 		rightTop.getChildren().add(toDate);
 		rightTop.getChildren().add(searchButton);
 
 		HBox rightBottom = new HBox();
+		rightBottom.setPadding(new Insets(5, 5, 5, 10));
+		rightBottom.setSpacing(10);
+
+		Label roomTypeLbl = new Label("Type");
+
+		rightBottom.getChildren().add(roomTypeLbl);
 		rightBottom.getChildren().add(roomType);
 
 		right.getChildren().add(rightTop);
@@ -96,31 +116,32 @@ public class OrderTablePane extends VBox {
 		TableColumn<Orders, Integer> dateNumberCol = new TableColumn<Orders, Integer>("Date Number");
 
 		indexCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("id"));
-		statusCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("status"));
+		statusCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("roomStatus"));
 		customerNameCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("customerName"));
 		roomNameCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("roomName"));
 		fromDateCol.setCellValueFactory(new PropertyValueFactory<Orders, Date>("createdAt"));
-		toDateCol.setCellValueFactory(new PropertyValueFactory<Orders, Date>("toDate"));
-		dateNumberCol.setCellValueFactory(new PropertyValueFactory<Orders, Integer>("dateNumber"));
+		toDateCol.setCellValueFactory(new PropertyValueFactory<Orders, Date>("checkOutAt"));
+		dateNumberCol.setCellValueFactory(new PropertyValueFactory<Orders, Integer>("numberDate"));
 
-		table.getColumns().addAll(indexCol, statusCol, customerNameCol, roomNameCol,
-				fromDateCol, toDateCol, dateNumberCol);
-		
+		table.getColumns().addAll(indexCol, statusCol, customerNameCol, roomNameCol, fromDateCol, toDateCol,
+				dateNumberCol);
+
 		table.getSelectionModel().selectedIndexProperty().addListener((object) -> {
 			getController().setOrderInfoItem(table.getSelectionModel().getSelectedItem());
 		});
-		
+
+		table.setMaxHeight(200);
 		return table;
 	}
 
 	public TableView<Orders> getTableView() {
 		return this.table;
 	}
-	
+
 	public void setController(HomeController homeController) {
 		this.homeController = homeController;
 	}
-	
+
 	public HomeController getController() {
 		return this.homeController;
 	}
