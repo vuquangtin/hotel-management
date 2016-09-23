@@ -1,5 +1,14 @@
-.myBtn {
-    -fx-background-color: #333333;
-	-fx-text-fill: white;
-	-fx-alignment: CENTER;
+.header-label {
+	-fx-font-size: 15px;
+	-fx-font-weight: 700;
+	-fx-padding: 10;
+}
+
+.top-bar {
+	-fx-background-color: #bdb8b5;
+	-fx-min-height: 80px;
+}
+
+.content-block-background {
+	-fx-background-color: #ebeaef;
 }

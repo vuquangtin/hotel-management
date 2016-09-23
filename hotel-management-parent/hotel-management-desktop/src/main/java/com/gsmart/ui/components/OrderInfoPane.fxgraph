@@ -16,11 +16,10 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 		prefHeight : 200,
 		styleClass : ["order-info-pane"],
 		top : HBox {
-			prefWidth : 700,
 			styleClass : ["top-bar"],
 			Label {
 				styleClass : ["top-label"],
-				prefWidth : 500,
+				prefWidth : 650,
 				text : "Customer Information"
 			},
 			Button {
@@ -31,8 +30,8 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 					image : Image {
 						url : location "images/edit.png"
 					},
-					fitHeight : 50,
-					fitWidth : 50
+					fitHeight : 45,
+					fitWidth : 45
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
@@ -47,8 +46,8 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 					image : Image {
 						url : location "images/save.png"
 					},
-					fitHeight : 50,
-					fitWidth : 50
+					fitHeight : 45,
+					fitWidth : 45
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
@@ -62,8 +61,8 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 					image : Image {
 						url : location "images/remove.png"
 					},
-					fitHeight : 50,
-					fitWidth : 50
+					fitHeight : 45,
+					fitWidth : 45
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",

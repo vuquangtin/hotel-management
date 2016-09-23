@@ -72,6 +72,8 @@ public class OrderTablePane extends VBox {
 		// == Initialization Left Pane === //
 
 		// == Initialization Right Pane === //
+		roomType.setPromptText("All room type");
+		
 		HBox rightTop = new HBox();
 		rightTop.setPadding(new Insets(5, 5, 5, 10));
 		rightTop.setSpacing(10);
@@ -130,7 +132,7 @@ public class OrderTablePane extends VBox {
 			getController().setOrderInfoItem(table.getSelectionModel().getSelectedItem());
 		});
 
-		table.setMaxHeight(200);
+		table.setMaxHeight(255);
 		return table;
 	}
 
@@ -144,6 +146,10 @@ public class OrderTablePane extends VBox {
 
 	public HomeController getController() {
 		return this.homeController;
+	}
+
+	public ComboBox<RoomCategory> getRoomType() {
+		return roomType;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,7 +45,7 @@ public class RoomCategory {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "roomCategory", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "roomCategory", cascade = CascadeType.ALL)
     public Set<Room> getRooms() {
         return rooms;
     }
@@ -53,7 +54,8 @@ public class RoomCategory {
         this.rooms = rooms;
     }
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public String toString() {
         String result = String.format(
                 "RoomCategory[id=%d, name='%s']%n",
@@ -65,8 +67,8 @@ public class RoomCategory {
                         rooms.getId(), rooms.getName());
             }
         }
-
-        return result;
+       
+        return this.getName();
     }
 
 	public String getDescription() {

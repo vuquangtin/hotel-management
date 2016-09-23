@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsmart.model.Orders;
 import com.gsmart.repository.OrdersRepository;
+import com.gsmart.repository.RoomCategoryRepository;
 import com.gsmart.service.RoomService;
 import com.gsmart.ui.components.FXMLDialog;
 import com.gsmart.ui.components.OrderInfoPane;
@@ -13,7 +14,7 @@ import application.ApplicationConfiguration;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 public class HomeController implements DialogController {
 	private FXMLDialog dialog;
@@ -23,24 +24,34 @@ public class HomeController implements DialogController {
 
 	@Autowired
 	private OrdersRepository ordersRepository;
+	
+	@Autowired
+	private RoomCategoryRepository roomCategoryRepository;
 
 	@Autowired
 	private RoomService roomService;
 
 	@FXML
-	BorderPane content;
+	VBox content;
 
 	@FXML
 	OrderInfoPane orderInfoPane;
-
+	
 	@FXML
+	@Autowired
 	OrderTablePane orderTablePane;
 
 	@FXML
 	public void initialize() {
 		if (orderTablePane != null) {
+			//Set date for table.
 			orderTablePane.getTableView().setItems(FXCollections
 					.observableArrayList(ordersRepository.findAll()));
+			
+			//Set date for combo box.
+			orderTablePane.getRoomType().setItems(FXCollections
+					.observableArrayList(roomCategoryRepository.findAll()));
+			
 			orderTablePane.setController(this);
 		}
 	}

@@ -11,9 +11,13 @@ import com.gsmart.ui.components.OrderInfoPane
 import com.gsmart.ui.components.CalculatePane
 import javafx.scene.control.Label
 import com.gsmart.ui.components.OrderTablePane
+import javafx.geometry.Insets
+import com.gsmart.ui.components.RoomInfoPane
 
-component Home controlledby HomeController styledwith ["css/home.css" , "css/order-info.css", "css/order-table-pane.css"] {
+component Home controlledby HomeController styledwith [ "css/home.css", "css/order-info.css",
+	"css/order-table-pane.css", "css/application.css" ] {
 	BorderPane {
+		prefWidth : 1100,
 		left : VBox {
 			prefWidth : 70,
 			styleClass : [
@@ -50,15 +54,13 @@ component Home controlledby HomeController styledwith ["css/home.css" , "css/ord
 				text : "Report"
 			}
 		},
-		right : BorderPane id content {
-			prefWidth : 700,
+		right : VBox id content {
 			styleClass : [
 				"content"
 			],
-			top : HBox {
-				prefWidth : 700,
+			HBox {
 				styleClass : [
-					"top-bar"
+					"top-menu-bar"
 				],
 				Button {
 					styleClass : [
@@ -76,8 +78,21 @@ component Home controlledby HomeController styledwith ["css/home.css" , "css/ord
 					text : "Report"
 				}
 			},
-			center : include OrderInfoPane,
-			bottom : OrderTablePane id orderTablePane
+			HBox {
+				style : "-fx-padding: 5 5 5 5",
+				spacing : 10,
+				VBox {
+
+					BorderPane {
+						center : include OrderInfoPane,
+						bottom : OrderTablePane id orderTablePane
+					}
+				},
+				VBox {
+					CalculatePane,
+					RoomInfoPane
+				}
+			}
 		}
 	}
 }

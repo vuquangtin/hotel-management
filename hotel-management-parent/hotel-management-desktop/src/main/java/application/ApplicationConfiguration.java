@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
 import com.gsmart.ui.components.FXMLDialog;
+import com.gsmart.ui.components.OrderTablePane;
 import com.gsmart.ui.controller.HomeController;
 import com.gsmart.ui.controller.OrderRoomController;
 
@@ -29,6 +30,11 @@ public class ApplicationConfiguration {
     public void showScreen(Parent screen) {
         primaryStage.setScene(new Scene(screen, 777, 500));
         primaryStage.show();
+    }
+    
+    @Bean
+    public OrderTablePane orderTablePane() {
+    	return new OrderTablePane();
     }
 	
 	@Bean
@@ -55,6 +61,7 @@ public class ApplicationConfiguration {
     @Scope("prototype")
 	public FXMLDialog homeDialog() {
         return new FXMLDialog(homeController(), getClass().getResource("/com/gsmart/ui/components/Home.fxml")
-        		, primaryStage , new String[]{"css/home.css" , "css/order-info.css" , "css/order-table-pane.css"} );
+        		, primaryStage , new String[]{"css/home.css" , "css/order-info.css" , "css/order-table-pane.css"
+        				,"css/application.css"} );
     }
 }
