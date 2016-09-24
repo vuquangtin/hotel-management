@@ -10,6 +10,7 @@ import com.gsmart.ui.components.FXMLDialog;
 import com.gsmart.ui.components.OrderTablePane;
 import com.gsmart.ui.controller.HomeController;
 import com.gsmart.ui.controller.OrderRoomController;
+import com.gsmart.ui.controller.QuickSearchRoomController;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -43,12 +44,26 @@ public class ApplicationConfiguration {
 		return new OrderRoomController();
 	}
 	
+	@Bean
+	@Scope("prototype")
+	public QuickSearchRoomController quickSearchRoomController() {
+		return new QuickSearchRoomController();
+	}
+	
+	@Bean
+    @Scope("prototype")
+    public FXMLDialog quickSearchRoomDialog() {
+        return new FXMLDialog(quickSearchRoomController(), getClass()
+        		.getResource("/com/gsmart/ui/components/QuickSearchRoomStage.fxml"), primaryStage
+        		, new String[]{"css/quick-search-room.css","css/application.css"});
+    }
 	
 	@Bean
     @Scope("prototype")
     public FXMLDialog orderRoomDialog() {
         return new FXMLDialog(orderRoomController(), getClass()
-        		.getResource("/com/gsmart/ui/components/Test2.fxml"), primaryStage);
+        		.getResource("/com/gsmart/ui/components/OrderRoomStage.fxml"), primaryStage
+        		, new String[]{"css/order-room-stage.css","css/application.css"});
     }
 	
 	@Bean

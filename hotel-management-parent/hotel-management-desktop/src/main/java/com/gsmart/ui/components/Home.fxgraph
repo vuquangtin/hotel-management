@@ -66,6 +66,7 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 					styleClass : [
 						"top-bar-btn"
 					],
+					onAction : controllermethod openOrderRoomStage,
 					graphic : ImageView {
 						image : Image {
 							url : location "images/order-room.png"

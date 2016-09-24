@@ -29,7 +29,7 @@ public class FXMLDialog extends Stage {
     public FXMLDialog(final DialogController controller, URL fxml, Window owner, StageStyle style , String[] css) {
         super(style);
         
-        
+        setAlwaysOnTop(true);
 		ResourceBundle bundle = ResourceBundle.getBundle("com.gsmart.ui.components.locale.messages",
 				new Locale("vi", "VN"));
 		

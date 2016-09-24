@@ -1,0 +1,26 @@
+.quick-search-room-stage .top-bar {
+	-fx-background-color: #bdb8b5;
+	-fx-min-height: 50px;
+}
+
+.quick-search-room-stage .hbox .label {
+	-fx-pref-width: 80px;
+}
+
+.quick-search-room-stage .find-button {
+	-fx-pref-width: 55px;
+	-fx-pref-height: 25px;
+	-fx-background-color: blue;
+	-fx-padding: 5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.quick-search-room-stage .selected-room-button {
+	-fx-pref-width: 100px;
+	-fx-pref-height: 35px;
+	-fx-background-color: green;
+	-fx-padding: 5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}

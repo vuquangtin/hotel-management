@@ -1,0 +1,42 @@
+.titled-pane {
+	
+}
+
+.titled-pane .label {
+	-fx-pref-width: 80px;
+}
+
+
+.order-room-stage .top-bar {
+	-fx-background-color: #bdb8b5;
+	-fx-min-height: 50px;
+}
+
+.order-room-stage .add-button {
+	-fx-pref-width: 100px;
+	-fx-pref-height: 50px;
+	-fx-background-color: blue;
+	-fx-padding: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.order-room-stage .reset-button {
+	-fx-pref-width: 100px;
+	-fx-pref-height: 50px;
+	-fx-background-color: red;
+	-fx-padding: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.order-room-stage .quick-search-button {
+	-fx-background-color: violet;
+	-fx-padding: 5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+}
+
+.order-room-stage .order-table-label {
+	-fx-font-size: 18px;
+}

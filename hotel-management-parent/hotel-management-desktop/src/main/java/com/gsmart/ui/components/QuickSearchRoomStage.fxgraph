@@ -1,0 +1,117 @@
+package com.gsmart.ui.components
+
+import javafx.scene.layout.VBox
+import javafx.scene.layout.HBox
+import javafx.scene.control.Label
+import javafx.scene.image.ImageView
+import javafx.scene.image.Image
+import javafx.scene.control.DatePicker
+import javafx.scene.control.TextField
+import javafx.scene.control.Button
+import javafx.scene.text.Text
+import javafx.scene.control.TableView
+import com.gsmart.model.Room
+import com.gsmart.ui.components.QuickSearchRoomTable
+
+component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/application.css" ] {
+	VBox {
+		styleClass : [
+			"quick-search-room-stage"
+		],
+		spacing : 10,
+		HBox {
+			styleClass : [
+				"top-bar"
+			],
+			Label {
+				styleClass : [
+					"header-label"
+				],
+				graphic : ImageView {
+					image : Image {
+						url : location "images/search.png"
+					},
+					fitHeight : 35,
+					fitWidth : 35
+				},
+				text : "Quick Search Room"
+			}
+		},
+		VBox {
+			style : "-fx-padding : 10px;",
+			spacing : 10,
+			HBox {
+				styleClass : [
+					"hbox"
+				],
+				spacing : 10,
+				Label {
+					text : "Date in"
+				},
+				DatePicker,
+				Label {
+					text : "Time in"
+				},
+				TextField {
+					prefWidth : 75
+				}
+			},
+			HBox {
+				styleClass : [
+					"hbox"
+				],
+				spacing : 10,
+				Label {
+					text : "Checkout date"
+				},
+				DatePicker,
+				Label {
+					text : "Time out"
+				},
+				TextField {
+					prefWidth : 75
+				}
+			},
+			Button {
+				styleClass : [
+					"find-button"
+				],
+				text : "Find"
+			},
+			HBox {
+				Label {
+					text : "Room Selected"
+				},
+				Text {
+
+				}
+			},
+			HBox {
+				Label {
+					text : "Room Type"
+				},
+				Text {
+
+				}
+			},
+			HBox {
+				Label {
+					text : "Price"
+				},
+				Text {
+
+				},
+				Label {
+					text : "/ Date"
+				}
+			},
+			Button {
+				styleClass : [
+					"selected-room-button"
+				],
+				text : "Select Room"
+			},
+			QuickSearchRoomTable
+		}
+	}
+} 

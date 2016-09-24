@@ -82,4 +82,9 @@ public class HomeController implements DialogController {
 		this.dialog = dialog;
 	}
 
+
+	@FXML public void openOrderRoomStage(ActionEvent event) {
+		applicationConfiguration.orderRoomDialog().show();
+	}
+
 }

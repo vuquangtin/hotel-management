@@ -54,7 +54,7 @@
 	<right>
 		<VBox fx:id="content"> 
 			<HBox> 
-				<Button textAlignment="CENTER" contentDisplay="TOP" text="Report"> 
+				<Button onAction="#openOrderRoomStage" textAlignment="CENTER" contentDisplay="TOP" text="Report"> 
 					<styleClass>
 						<String fx:value="top-bar-btn" />
 					</styleClass>
