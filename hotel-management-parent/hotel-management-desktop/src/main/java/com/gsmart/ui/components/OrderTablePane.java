@@ -129,11 +129,18 @@ public class OrderTablePane extends VBox {
 				dateNumberCol);
 
 		table.getSelectionModel().selectedIndexProperty().addListener((object) -> {
-			getController().setOrderInfoItem(table.getSelectionModel().getSelectedItem());
+			Orders orderSelected = table.getSelectionModel().getSelectedItem();
+			getController().setOrderInfoItem(orderSelected);
+			getController().getCalculatorPane().setCalculatorInformation(orderSelected);
+			getController().getRoomInfoPane().setRoomInformation(orderSelected);
 		});
 
 		table.setMaxHeight(255);
 		return table;
+	}
+	
+	public Orders getSeletedOrder() {
+		return table.getSelectionModel().getSelectedItem();
 	}
 
 	public TableView<Orders> getTableView() {

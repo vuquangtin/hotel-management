@@ -11,9 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Room{
     private int id;
+    @NotEmpty(message = "{NotEmpty.room.name}")
     private String name;
     private String acreage;
     private String description;

@@ -25,7 +25,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 			styleClass : [
 				"top-bar"
 			],
-			Label {
+			Label id titleStage {
 				styleClass : [
 					"header-label"
 				],
@@ -36,7 +36,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					fitHeight : 35,
 					fitWidth : 35
 				},
-				text : "Order Room"
+				text : "Order Room" 
 			}
 		},
 		HBox {
@@ -55,11 +55,11 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						Label {
 							text : "Date in"
 						},
-						DatePicker,
+						DatePicker id dateIn,
 						Label {
 							text : "Time in"
 						},
-						TextField {
+						TextField id timeInTxt{
 							prefWidth : 75
 						}
 					},
@@ -68,11 +68,11 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						Label {
 							text : "Checkout date"
 						},
-						DatePicker,
+						DatePicker id dateCheckout,
 						Label {
 							text : "Time out"
 						},
-						TextField {
+						TextField id timeOutTxt{
 							prefWidth : 75
 						}
 					},
@@ -81,7 +81,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						Label {
 							text : "Prepay"
 						},
-						TextField,
+						TextField id prepayTxt,
 						Label {
 							text : "VND"
 						}
@@ -91,7 +91,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						Label {
 							text : "Promotion"
 						},
-						TextField,
+						TextField id promotionTxt,
 						Label {
 							text : "Percent"
 						}
@@ -101,7 +101,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						Label {
 							text : "Notice"
 						},
-						TextArea {
+						TextArea id registrationNotice{
 							prefWidth : 350,
 							prefHeight : 100
 						}
@@ -111,7 +111,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						Label {
 							text : "Room"
 						},
-						TextField,
+						TextField id roomTxt,
 						Button {
 							onAction : controllermethod openQuickSeachRoomStage,
 							styleClass : ["quick-search-button"],
@@ -133,31 +133,31 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						Label {
 							text : "Name"
 						},
-						TextField
+						TextField id customerNameTxt
 					},
 					HBox {
 						Label {
 							text : "ID"
 						},
-						TextField
+						TextField id customerIDTxt
 					},
 					HBox {
 						Label {
 							text : "Address"
 						},
-						TextField
+						TextField id customerAddress
 					},
 					HBox {
 						Label {
 							text : "Telephone"
 						},
-						TextField
+						TextField id customerTelephone
 					},
 					HBox {
 						Label {
 							text : "Notice"
 						},
-						TextArea {
+						TextArea id customerNotice{
 							prefWidth : 150,
 							prefHeight : 100
 						}
@@ -168,11 +168,11 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 		HBox {
 			spacing : 10,
 			style : "-fx-padding : 10px;",
-			Button {
+			Button id saveBtn{
 				styleClass : ["add-button"],
-				text : "ADD"
+				text : "SAVE"
 			},
-			Button {
+			Button id resetBtn{
 				styleClass : ["reset-button"],
 				text : "RESET"
 			}

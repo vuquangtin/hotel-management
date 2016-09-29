@@ -25,7 +25,7 @@
 					<String fx:value="top-label" />
 				</styleClass>
 			</Label>
-			<Button textAlignment="CENTER" contentDisplay="TOP" text="Edit" onAction="#clicked"> 
+			<Button textAlignment="CENTER" contentDisplay="TOP" text="Edit" onAction="#openEditOrderStage"> 
 				<styleClass>
 					<String fx:value="left-bar-btn" />
 				</styleClass>

@@ -22,7 +22,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.OrderRoomController" prefHeight="600">
 
 	<HBox> 
-		<Label text="Order Room"> 
+		<Label fx:id="titleStage" text="Order Room"> 
 			<styleClass>
 				<String fx:value="header-label" />
 			</styleClass>
@@ -43,33 +43,33 @@
 			<VBox spacing="10"> 
 				<HBox spacing="10"> 
 					<Label text="Date in"/> 
-					<DatePicker/> 
+					<DatePicker fx:id="dateIn"/> 
 					<Label text="Time in"/> 
-					<TextField prefWidth="75"/> 
+					<TextField fx:id="timeInTxt" prefWidth="75"/> 
 				</HBox>
 				<HBox spacing="10"> 
 					<Label text="Checkout date"/> 
-					<DatePicker/> 
+					<DatePicker fx:id="dateCheckout"/> 
 					<Label text="Time out"/> 
-					<TextField prefWidth="75"/> 
+					<TextField fx:id="timeOutTxt" prefWidth="75"/> 
 				</HBox>
 				<HBox spacing="10"> 
 					<Label text="Prepay"/> 
-					<TextField/> 
+					<TextField fx:id="prepayTxt"/> 
 					<Label text="VND"/> 
 				</HBox>
 				<HBox spacing="10"> 
 					<Label text="Promotion"/> 
-					<TextField/> 
+					<TextField fx:id="promotionTxt"/> 
 					<Label text="Percent"/> 
 				</HBox>
 				<HBox spacing="10"> 
 					<Label text="Notice"/> 
-					<TextArea prefWidth="350" prefHeight="100"/> 
+					<TextArea fx:id="registrationNotice" prefWidth="350" prefHeight="100"/> 
 				</HBox>
 				<HBox spacing="10"> 
 					<Label text="Room"/> 
-					<TextField/> 
+					<TextField fx:id="roomTxt"/> 
 					<Button onAction="#openQuickSeachRoomStage" text="Quick search"> 
 						<styleClass>
 							<String fx:value="quick-search-button" />
@@ -85,23 +85,23 @@
 			<VBox spacing="10"> 
 				<HBox> 
 					<Label text="Name"/> 
-					<TextField/> 
+					<TextField fx:id="customerNameTxt"/> 
 				</HBox>
 				<HBox> 
 					<Label text="ID"/> 
-					<TextField/> 
+					<TextField fx:id="customerIDTxt"/> 
 				</HBox>
 				<HBox> 
 					<Label text="Address"/> 
-					<TextField/> 
+					<TextField fx:id="customerAddress"/> 
 				</HBox>
 				<HBox> 
 					<Label text="Telephone"/> 
-					<TextField/> 
+					<TextField fx:id="customerTelephone"/> 
 				</HBox>
 				<HBox> 
 					<Label text="Notice"/> 
-					<TextArea prefWidth="150" prefHeight="100"/> 
+					<TextArea fx:id="customerNotice" prefWidth="150" prefHeight="100"/> 
 				</HBox>
 			</VBox>
 			<styleClass>
@@ -110,12 +110,12 @@
 		</TitledPane>
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 10px;"> 
-		<Button text="ADD"> 
+		<Button fx:id="saveBtn" text="SAVE"> 
 			<styleClass>
 				<String fx:value="add-button" />
 			</styleClass>
 		</Button>
-		<Button text="RESET"> 
+		<Button fx:id="resetBtn" text="RESET"> 
 			<styleClass>
 				<String fx:value="reset-button" />
 			</styleClass>

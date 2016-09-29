@@ -1,5 +1,8 @@
 package com.gsmart.ui.components;
 
+import com.gsmart.model.Orders;
+import com.gsmart.model.Room;
+
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
@@ -39,6 +42,16 @@ public class RoomInfoPane extends VBox{
 				
 		hb.getChildren().add(vb);
 		return hb;
+	}
+	
+	public void setRoomInformation(Orders order) {
+		Room room = order.getRoom();
+		
+		roomNameTxt.setText(room.getName());
+		roomTypeTxt.setText(room.getRoomCategory().getName());
+		acreageTxt.setText(room.getAcreage());
+		priceTxt.setText(room.getRoomCategory().getPrice().toString());
+		capacityTxt.setText(room.getRoomCategory().getCapacity().toString());
 	}
 	
 	public VBox getContent() {

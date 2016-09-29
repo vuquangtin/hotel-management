@@ -22,20 +22,19 @@ public class Orders {
 	private Date paidAt;
 	private Double totalPrice;
 	private Double paymentPrice;
+	private Double prepay;
 	private String customerName;
 	private String customerAddress;
 	private String customerTelephone;
 	private String customerNotice;
 	private String customerId;
 	private String description;
+	private byte gender;
+	private Double promotion;
 	private int status;
 
 	private Room room;
 
-	// Non persistence fields.
-	
-//	private String roomStatus;
-//	private String roomName;
 	private int numberDate;
 
 	@Id
@@ -181,16 +180,32 @@ public class Orders {
 		return numberDate;
 	}
 
-//	public void setRoomStatus(String roomStatus) {
-//		this.roomStatus = roomStatus;
-//	}
-//
-//	public void setRoomName(String roomName) {
-//		this.roomName = roomName;
-//	}
-
 	public void setNumberDate(int numberDate) {
 		this.numberDate = numberDate;
+	}
+
+	public byte getGender() {
+		return gender;
+	}
+
+	public Double getPromotion() {
+		return promotion;
+	}
+
+	public void setGender(byte gender) {
+		this.gender = gender;
+	}
+
+	public void setPromotion(Double promotion) {
+		this.promotion = promotion;
+	}
+
+	public Double getPrepay() {
+		return prepay;
+	}
+
+	public void setPrepay(Double prepay) {
+		this.prepay = prepay;
 	}
 
 }

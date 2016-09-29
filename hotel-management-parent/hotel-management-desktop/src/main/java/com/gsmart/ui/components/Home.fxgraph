@@ -90,8 +90,8 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 					}
 				},
 				VBox {
-					CalculatePane,
-					RoomInfoPane
+					CalculatePane id calculatorPane,
+					RoomInfoPane id roomInfoPane
 				}
 			}
 		}

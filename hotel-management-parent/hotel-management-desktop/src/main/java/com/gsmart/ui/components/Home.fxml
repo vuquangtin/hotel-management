@@ -82,8 +82,8 @@
 					</BorderPane>
 				</VBox>
 				<VBox> 
-					<CalculatePane/> 
-					<RoomInfoPane/> 
+					<CalculatePane fx:id="calculatorPane"/> 
+					<RoomInfoPane fx:id="roomInfoPane"/> 
 				</VBox>
 			</HBox>
 			<styleClass>

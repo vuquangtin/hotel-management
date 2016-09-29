@@ -1,10 +1,13 @@
 package application;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import com.gsmart.ui.components.FXMLDialog;
 import com.gsmart.ui.components.OrderTablePane;
@@ -33,19 +36,37 @@ public class ApplicationConfiguration {
         primaryStage.show();
     }
     
+    
+    @Bean( name = "validationMessageSource" )
+    public ReloadableResourceBundleMessageSource validationMessageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:validation-messages/ValidationMessages_vi_VN");
+        messageSource.setCacheSeconds(10); // reload messages every 10 seconds
+        messageSource.setDefaultEncoding("UTF-8");
+    
+        return messageSource;
+    }
+    
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+    	LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+        validator.setValidationMessageSource((MessageSource) validationMessageSource());
+        return validator;
+    }
+    
     @Bean
     public OrderTablePane orderTablePane() {
     	return new OrderTablePane();
     }
 	
 	@Bean
-	@Scope("prototype")
+	@Scope("singleton")
 	public OrderRoomController orderRoomController() {
 		return new OrderRoomController();
 	}
 	
 	@Bean
-	@Scope("prototype")
+	@Scope("singleton")
 	public QuickSearchRoomController quickSearchRoomController() {
 		return new QuickSearchRoomController();
 	}
@@ -59,7 +80,6 @@ public class ApplicationConfiguration {
     }
 	
 	@Bean
-    @Scope("prototype")
     public FXMLDialog orderRoomDialog() {
         return new FXMLDialog(orderRoomController(), getClass()
         		.getResource("/com/gsmart/ui/components/OrderRoomStage.fxml"), primaryStage

@@ -1,5 +1,7 @@
 package com.gsmart.ui.components;
 
+import com.gsmart.model.Orders;
+
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Button;
@@ -21,6 +23,7 @@ public class CalculatePane extends VBox{
 	private TextField paymentPriceTxt = new TextField();
 	private TextField customerSentPriceTxt = new TextField();
 	private TextField changePriceTxt = new TextField();
+	private Orders orders;
 	
 	public CalculatePane() {
 		super();
@@ -30,6 +33,19 @@ public class CalculatePane extends VBox{
 		
 		getChildren().add(getTopBar());
 		getChildren().add(getContent());
+		
+		//Setup event handler for text field.
+		addEventHandler();
+	}
+	
+	public void setCalculatorInformation(Orders order) {
+		this.orders = order;
+		
+		this.promotionPercentTxt.setText(order.getPromotion().toString());
+		this.totalPriceTxt.setText(order.getTotalPrice().toString());
+
+		Double paymentPrice = (order.getTotalPrice()*(1 - order.getPromotion()));
+		this.paymentPriceTxt.setText(paymentPrice.toString());
 	}
 	
 	public HBox getTopBar() {
@@ -93,5 +109,17 @@ public class CalculatePane extends VBox{
 		hb.getChildren().add(_unitName);
 		
 		return hb;
+	}
+	
+	public void addEventHandler() {
+		this.customerSentPriceTxt.textProperty().addListener((observable, oldValue, newValue) -> {
+			//We need check it because user can edit that text field when user not yet select the order.
+			if(!newValue.isEmpty() && this.orders != null) {
+				Double customerSent = Double.valueOf(newValue);
+				
+				Double value = (customerSent - orders.getTotalPrice()*(1 - orders.getPromotion()));
+				this.changePriceTxt.setText(value.toString());
+			}
+		});
 	}
 }

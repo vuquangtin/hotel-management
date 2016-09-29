@@ -44,6 +44,8 @@ public class OrderInfoPane extends GridPane{
 		this.addressTxt.setText(order.getCustomerAddress());
 		this.telephoneTxt.setText(order.getCustomerTelephone());
 		this.idTxt.setText(order.getCustomerId());
+		this.fromDateTxt.setText(order.getCreatedAt().toString());
+		this.toDateTxt.setText(order.getCheckOutAt().toString());
 	}
 	
 	public void renderColumn1 () {
