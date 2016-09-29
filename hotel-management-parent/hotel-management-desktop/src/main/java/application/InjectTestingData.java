@@ -42,6 +42,7 @@ public class InjectTestingData {
 		order_1.setCheckOutAt(new Date());
 		order_1.setGender((byte) 1);
 		order_1.setPromotion(0.1);
+		order_1.setPrepay(250.0);
 		order_1.setCustomerId("468312187956");
 		
 		HashSet<Orders> listOrder_1 = new HashSet<Orders>();
@@ -64,6 +65,7 @@ public class InjectTestingData {
 		order_2.setCheckOutAt(new Date());
 		order_2.setGender((byte) 1);
 		order_2.setPromotion(0.1);
+		order_2.setPrepay(200.0);
 		order_2.setCustomerId("68235412356");
 		
 		HashSet<Orders> listOrder_2 = new HashSet<Orders>();
