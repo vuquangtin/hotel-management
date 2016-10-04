@@ -40,12 +40,17 @@ public class OrderInfoPane extends GridPane{
 	}
 	
 	public void setOrderInfomation(Orders order) {
-		this.nameTxt.setText(order.getCustomerName());
-		this.addressTxt.setText(order.getCustomerAddress());
-		this.telephoneTxt.setText(order.getCustomerTelephone());
-		this.idTxt.setText(order.getCustomerId());
-		this.fromDateTxt.setText(order.getCreatedAt().toString());
-		this.toDateTxt.setText(order.getCheckOutAt().toString());
+		this.nameTxt.setText(getValidString(order.getCustomerName()));
+		this.addressTxt.setText(getValidString(order.getCustomerAddress()));
+		this.telephoneTxt.setText(getValidString(order.getCustomerTelephone()));
+		this.idTxt.setText(getValidString(order.getCustomerId()));
+		this.fromDateTxt.setText(getValidString(order.getCreatedAt().toString()));
+		this.toDateTxt.setText(getValidString(order.getCheckOutAt().toString()));
+	}
+	
+	public String getValidString(String value) {
+		if(value.isEmpty() || value == null) return "";
+		return value;
 	}
 	
 	public void renderColumn1 () {

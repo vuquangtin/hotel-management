@@ -6,6 +6,10 @@
 	-fx-pref-width: 80px;
 }
 
+.order-room-stage .error-text {
+	-fx-text-fill: red!important;
+}
+
 
 .order-room-stage .top-bar {
 	-fx-background-color: #bdb8b5;

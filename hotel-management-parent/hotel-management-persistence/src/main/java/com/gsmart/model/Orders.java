@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 
@@ -17,17 +20,32 @@ import javax.persistence.Transient;
 public class Orders {
 
 	private int id;
+	
+	@NotNull(message = "{NotNull.orders.createdAt}")
 	private Date createdAt;
+	
+	@NotNull(message = "{NotNull.orders.checkOutAt}")
 	private Date checkOutAt;
+	
 	private Date paidAt;
 	private Double totalPrice;
 	private Double paymentPrice;
 	private Double prepay;
+	
+	@NotEmpty(message = "{NotEmpty.orders.customerName}")
 	private String customerName;
+	
+	@NotEmpty(message = "{NotEmpty.orders.customerAddress}")
 	private String customerAddress;
+	
+	@NotEmpty(message = "{NotEmpty.orders.customerTelephone}")
 	private String customerTelephone;
+	
 	private String customerNotice;
+	
+	@NotEmpty(message = "{NotEmpty.orders.customerId}")
 	private String customerId;
+	
 	private String description;
 	private byte gender;
 	private Double promotion;

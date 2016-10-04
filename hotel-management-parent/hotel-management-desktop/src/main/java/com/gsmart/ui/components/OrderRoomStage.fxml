@@ -15,6 +15,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?scenebuilder-stylesheet css/application.css?>
 <?scenebuilder-stylesheet css/order-room-stage.css?>
@@ -45,13 +46,13 @@
 					<Label text="Date in"/> 
 					<DatePicker fx:id="dateIn"/> 
 					<Label text="Time in"/> 
-					<TextField fx:id="timeInTxt" prefWidth="75"/> 
+					<TextField fx:id="timeInTxt" promptText="--:--" prefWidth="75"/> 
 				</HBox>
 				<HBox spacing="10"> 
 					<Label text="Checkout date"/> 
 					<DatePicker fx:id="dateCheckout"/> 
 					<Label text="Time out"/> 
-					<TextField fx:id="timeOutTxt" prefWidth="75"/> 
+					<TextField fx:id="timeOutTxt" promptText="--:--" prefWidth="75"/> 
 				</HBox>
 				<HBox spacing="10"> 
 					<Label text="Prepay"/> 
@@ -110,7 +111,7 @@
 		</TitledPane>
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 10px;"> 
-		<Button fx:id="saveBtn" text="SAVE"> 
+		<Button fx:id="saveBtn" text="SAVE" onAction="#saveOrder"> 
 			<styleClass>
 				<String fx:value="add-button" />
 			</styleClass>
@@ -120,6 +121,11 @@
 				<String fx:value="reset-button" />
 			</styleClass>
 		</Button>
+		<Text fx:id="errorTextMessage" fill="rgb(255,0,0)"> 
+			<font>
+				<Font size="15"/> 
+			</font>
+		</Text>
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 10px;"> 
 		<Text text="List of registered customers current room"> 

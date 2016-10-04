@@ -24,7 +24,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 			},
 			Button {
 				styleClass : [
-					"left-bar-btn"
+					"top-bar-btn"
 				],
 				graphic : ImageView {
 					image : Image {
@@ -40,7 +40,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 			},
 			Button {
 				styleClass : [
-					"left-bar-btn"
+					"top-bar-btn"
 				],
 				graphic : ImageView {
 					image : Image {
@@ -55,7 +55,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 			},
 			Button {
 				styleClass : [
-					"left-bar-btn"
+					"top-bar-btn"
 				],
 				graphic : ImageView {
 					image : Image {

@@ -27,7 +27,7 @@
 			</Label>
 			<Button textAlignment="CENTER" contentDisplay="TOP" text="Edit" onAction="#openEditOrderStage"> 
 				<styleClass>
-					<String fx:value="left-bar-btn" />
+					<String fx:value="top-bar-btn" />
 				</styleClass>
 				<graphic>
 					<ImageView fitHeight="45" fitWidth="45"> 
@@ -39,7 +39,7 @@
 			</Button>
 			<Button textAlignment="CENTER" contentDisplay="TOP" text="Save"> 
 				<styleClass>
-					<String fx:value="left-bar-btn" />
+					<String fx:value="top-bar-btn" />
 				</styleClass>
 				<graphic>
 					<ImageView fitHeight="45" fitWidth="45"> 
@@ -51,7 +51,7 @@
 			</Button>
 			<Button textAlignment="CENTER" contentDisplay="TOP" text="Remove"> 
 				<styleClass>
-					<String fx:value="left-bar-btn" />
+					<String fx:value="top-bar-btn" />
 				</styleClass>
 				<graphic>
 					<ImageView fitHeight="45" fitWidth="45"> 

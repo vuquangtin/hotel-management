@@ -40,7 +40,7 @@ public class ApplicationConfiguration {
     @Bean( name = "validationMessageSource" )
     public ReloadableResourceBundleMessageSource validationMessageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:validation-messages/ValidationMessages_vi_VN");
+        messageSource.setBasename("classpath:validation-messages/ValidationMessages_en_US");
         messageSource.setCacheSeconds(10); // reload messages every 10 seconds
         messageSource.setDefaultEncoding("UTF-8");
     

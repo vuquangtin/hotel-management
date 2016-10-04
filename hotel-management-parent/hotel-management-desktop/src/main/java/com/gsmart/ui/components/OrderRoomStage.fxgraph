@@ -16,6 +16,7 @@ import com.gsmart.ui.components.RoomOrderTable
 import com.gsmart.ui.controller.OrderRoomController
 import javafx.scene.image.ImageView
 import javafx.scene.image.Image
+import javafx.scene.text.Font
 
 component OrderRoomStage controlledby OrderRoomController styledwith [ "css/application.css", "css/order-room-stage.css" ] {
 	VBox {
@@ -60,6 +61,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 							text : "Time in"
 						},
 						TextField id timeInTxt{
+							promptText : "--:--",
 							prefWidth : 75
 						}
 					},
@@ -73,6 +75,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 							text : "Time out"
 						},
 						TextField id timeOutTxt{
+							promptText : "--:--",
 							prefWidth : 75
 						}
 					},
@@ -170,11 +173,18 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 			style : "-fx-padding : 10px;",
 			Button id saveBtn{
 				styleClass : ["add-button"],
-				text : "SAVE"
+				text : "SAVE",
+				onAction : controllermethod saveOrder 
 			},
 			Button id resetBtn{
 				styleClass : ["reset-button"],
 				text : "RESET"
+			},
+			Text id errorTextMessage{
+				font : Font {
+					size : 15
+				},
+				fill : "rgb(255,0,0)"
 			}
 		},
 		HBox {

@@ -76,7 +76,7 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 					},
 					textAlignment : "CENTER",
 					contentDisplay : "TOP",
-					text : "Report"
+					text : "Order Room"
 				}
 			},
 			HBox {
