@@ -78,7 +78,8 @@ public class HomeController implements DialogController {
 	}
 
 	public void setOrderInfoItem(Orders order) {
-		orderInfoPane.setOrderInfomation(order);
+		if (orderInfoPane != null)
+			orderInfoPane.setOrderInfomation(order);
 	}
 
 	public void closeDialog() {

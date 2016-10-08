@@ -18,8 +18,13 @@ public class RoomUtils {
 			orderItem = orders.next();
 
 			if (orderItem.getCheckOutAt().after(currentTime)) {
-				result += (orderItem.getCheckOutAt().getTime() - orderItem.getCreatedAt().getTime());
+				if(orderItem.getCreatedAt().before(currentTime)) {
+					result += (orderItem.getCheckOutAt().getTime() - orderItem.getCreatedAt().getTime());
+				} else {
+					result += (orderItem.getCheckOutAt().getTime() - currentTime.getTime());
+				}
 			}
+			
 			// If on the last order.
 			if (!orders.hasNext()) {
 				result = (orderItem.getCheckOutAt().getTime() - currentTime.getTime()) - result;
