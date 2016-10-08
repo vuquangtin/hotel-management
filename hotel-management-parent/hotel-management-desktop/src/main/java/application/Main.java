@@ -8,13 +8,14 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.gsmart.business.HelloFromBussiness;
 import com.gsmart.config.ConfigurationDAO;
+import com.gsmart.service.config.ServiceModuleConfiguration;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 
 @SpringBootApplication
-@ContextConfiguration(classes = { ConfigurationDAO.class , ApplicationConfiguration.class})
+@ContextConfiguration(classes = { ConfigurationDAO.class , ApplicationConfiguration.class , ServiceModuleConfiguration.class})
 public class Main extends Application{
 	
 	ApplicationConfiguration applicationConfiguration;

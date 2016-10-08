@@ -18,23 +18,31 @@ import javafx.util.Callback;
 
 public class FXMLDialog extends Stage {
 	
+	public FXMLDialog(DialogController controller, URL fxml, Window owner , String[] css , Modality modality) {
+        this(controller, fxml, owner, StageStyle.DECORATED , css , modality);
+    }
+	
 	public FXMLDialog(DialogController controller, URL fxml, Window owner , String[] css) {
-        this(controller, fxml, owner, StageStyle.DECORATED , css);
+        this(controller, fxml, owner, StageStyle.DECORATED , css , null);
+    }
+	
+	public FXMLDialog(DialogController controller, URL fxml, Window owner , Modality modality) {
+        this(controller, fxml, owner, StageStyle.DECORATED , null , modality);
     }
 	
     public FXMLDialog(DialogController controller, URL fxml, Window owner) {
-        this(controller, fxml, owner, StageStyle.DECORATED , null);
+        this(controller, fxml, owner, StageStyle.DECORATED , null , null);
     }
 
-    public FXMLDialog(final DialogController controller, URL fxml, Window owner, StageStyle style , String[] css) {
+    public FXMLDialog(final DialogController controller, URL fxml, Window owner, StageStyle style , String[] css , Modality modality) {
         super(style);
-        
-        setAlwaysOnTop(true);
+   
 		ResourceBundle bundle = ResourceBundle.getBundle("com.gsmart.ui.components.locale.messages",
 				new Locale("vi", "VN"));
 		
         initOwner(owner);
-        initModality(Modality.WINDOW_MODAL);
+        initModality(modality);
+        
         FXMLLoader loader = new FXMLLoader(fxml, bundle);
         try {
             loader.setControllerFactory(new Callback<Class<?>, Object>() {

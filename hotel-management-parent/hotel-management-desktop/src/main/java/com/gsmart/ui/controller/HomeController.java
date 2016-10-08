@@ -43,15 +43,17 @@ public class HomeController implements DialogController {
 	@Autowired
 	OrderTablePane orderTablePane;
 
-	@FXML CalculatePane calculatorPane;
+	@FXML
+	CalculatePane calculatorPane;
 
-	@FXML RoomInfoPane roomInfoPane;
+	@FXML
+	RoomInfoPane roomInfoPane;
 
 	@FXML
 	public void initialize() {
 		updateOrderTable();
 	}
-	
+
 	public void updateOrderTable() {
 		if (orderTablePane != null) {
 			// Set date for table.
@@ -66,12 +68,13 @@ public class HomeController implements DialogController {
 	@FXML
 	public void openEditOrderStage(ActionEvent event) {
 		roomService.SearchRoom();
-		
+		if (orderTablePane.getSeletedOrder() == null)
+			return;
+
 		applicationConfiguration.orderRoomDialog().show();
-		
-		// Before open order room stage, we need call controller and setup date for it.
+		// Before open order room stage, we need call controller and setup data
 		applicationConfiguration.orderRoomController().setOrderInformation(orderTablePane.getSeletedOrder());
-		
+
 	}
 
 	public void setOrderInfoItem(Orders order) {

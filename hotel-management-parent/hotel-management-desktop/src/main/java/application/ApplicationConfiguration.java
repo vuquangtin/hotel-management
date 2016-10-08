@@ -17,6 +17,7 @@ import com.gsmart.ui.controller.QuickSearchRoomController;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 @Lazy
@@ -75,15 +76,15 @@ public class ApplicationConfiguration {
     @Scope("prototype")
     public FXMLDialog quickSearchRoomDialog() {
         return new FXMLDialog(quickSearchRoomController(), getClass()
-        		.getResource("/com/gsmart/ui/components/QuickSearchRoomStage.fxml"), primaryStage
-        		, new String[]{"css/quick-search-room.css","css/application.css"});
+        		.getResource("/com/gsmart/ui/components/QuickSearchRoomStage.fxml"), orderRoomDialog()
+        		, new String[]{"css/quick-search-room.css","css/application.css"}, Modality.APPLICATION_MODAL);
     }
 	
 	@Bean
     public FXMLDialog orderRoomDialog() {
         return new FXMLDialog(orderRoomController(), getClass()
         		.getResource("/com/gsmart/ui/components/OrderRoomStage.fxml"), primaryStage
-        		, new String[]{"css/order-room-stage.css","css/application.css"});
+        		, new String[]{"css/order-room-stage.css","css/application.css"}, Modality.APPLICATION_MODAL);
     }
 	
 	@Bean

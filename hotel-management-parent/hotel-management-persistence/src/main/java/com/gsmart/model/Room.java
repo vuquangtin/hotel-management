@@ -4,12 +4,14 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -83,7 +85,8 @@ public class Room{
 		this.description = description;
 	}
 	
-	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER , mappedBy = "room", cascade = CascadeType.ALL)
+	@OrderBy("createdAt ASC")
 	public Set<Orders> getListOrders() {
 		return listOrders;
 	}

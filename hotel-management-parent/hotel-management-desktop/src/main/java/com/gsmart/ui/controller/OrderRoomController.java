@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 
 @Component
 public class OrderRoomController implements DialogController {
@@ -199,6 +200,7 @@ public class OrderRoomController implements DialogController {
 
 	@FXML
 	public void openQuickSeachRoomStage(ActionEvent event) {
+		applicationConfiguration.quickSearchRoomDialog().initModality(Modality.APPLICATION_MODAL);
 		applicationConfiguration.quickSearchRoomDialog().show();
 	}
 
