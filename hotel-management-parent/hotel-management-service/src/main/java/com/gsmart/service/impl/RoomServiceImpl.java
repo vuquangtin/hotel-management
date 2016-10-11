@@ -39,7 +39,7 @@ public class RoomServiceImpl implements RoomService {
 		return false;
 	}
 	
-	private boolean isActiveOrder(Orders order) {
+	private boolean isNotEndedOrder(Orders order) {
 		return order.getCheckOutAt().after(new Date());
 	}
 
@@ -54,7 +54,7 @@ public class RoomServiceImpl implements RoomService {
 			Iterator<Orders> orders = room.getListOrders().iterator();
 			while(orders.hasNext()) {
 				Orders firstOrder = orders.next();
-				while(isActiveOrder(firstOrder) && orders.hasNext()) firstOrder = orders.next();
+				while(isNotEndedOrder(firstOrder) && orders.hasNext()) firstOrder = orders.next();
 				
 				Orders secondOrder = null;
 				
@@ -70,7 +70,7 @@ public class RoomServiceImpl implements RoomService {
 			}
 		}
 		
-		//It mean can't add to between, try to add to last
+		//It mean can't add to between free time, try add to last
 		if(searchRoomResults.size() == 0) {
 			for(int index = 0 ; index < rooms.size() ; index ++) {
 				if(lastOrder.get(index) != null) {

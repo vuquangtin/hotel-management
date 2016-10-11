@@ -2,15 +2,19 @@ package application;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
 
 import com.gsmart.model.Orders;
 import com.gsmart.model.Room;
 import com.gsmart.model.RoomCategory;
+import com.gsmart.repository.OrdersRepository;
 import com.gsmart.repository.RoomCategoryRepository;
 import com.gsmart.repository.RoomRepository;
+import com.gsmart.repository.specification.OrdersSpecification;
 
 
 @Component
@@ -20,6 +24,9 @@ public class InjectTestingData {
 	
 	@Autowired
 	private RoomRepository roomRepository;
+	
+	@Autowired
+	private OrdersRepository ordersRepository;
 	
 	public InjectTestingData() {
 		
@@ -83,5 +90,27 @@ public class InjectTestingData {
 		roomRepository.save(room_2);
 		
 		System.out.println("Inject Testing Data Completed !!");
+		
+		testFindByNameWithSpecification();
 	}
+	
+	public void testFindByNameWithSpecification() {
+		System.out.println("TESTING SEARCHING METHOD .......");
+		
+		Orders exampler = new Orders();
+		//exampler.setCustomerName("Nguyen Huu Quyen");
+		
+		Room room = new Room();
+		//room.setName("B456");
+		
+		room.setRoomCategory(roomCategoryRepository.findOne(1));
+		exampler.setRoom(room);
+		
+		OrdersSpecification ordersSpecification = new OrdersSpecification(exampler);
+		
+		List<Orders> orders = ordersRepository.findAll(Specifications.where(ordersSpecification));
+		for(Orders item : orders) {
+			System.out.println("SEARCHING RESULT ---- " + "ORDER ID : " + item.getId() + " CUSTOMER NAME : " + item.getCustomerName() + " CREATED AT : " + item.getCreatedAt());
+		}
+	} 
 }
