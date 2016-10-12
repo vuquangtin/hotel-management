@@ -1,5 +1,5 @@
 .left-bar {
-	-fx-background-color: #d94f10;
+	-fx-background-color: #FF5722;
 	-fx-fit-to-height: true;
 }
 
@@ -8,6 +8,13 @@
 	-fx-background-fills: transparent;
 	-fx-background-color: transparent;
 	-fx-text-fill: white ;
+	-fx-font-weight: bold;
+}
+
+.left-bar-btn:hover {
+	-fx-background-fills: #BF360C;
+	-fx-background-color: #BF360C;
+	-fx-fit-to-width: true;
 }
 
 .content .top-bar-btn {
@@ -21,5 +28,9 @@
 }
 
 .content .top-menu-bar {
-	-fx-background-color: #ebeaef;
+	-fx-background-color: #8BC34A;
+}
+
+.content {
+	-fx-background-color: #FFFFFF;
 }

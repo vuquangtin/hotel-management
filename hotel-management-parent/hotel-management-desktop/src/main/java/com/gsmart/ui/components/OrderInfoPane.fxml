@@ -67,6 +67,10 @@
 		</HBox>
 	</top>
 	<center>
-		<OrderInfoPane fx:id="orderInfoPane"/> 
+		<OrderInfoPane fx:id="orderInfoPane"> 
+			<styleClass>
+				<String fx:value="content-block-background" />
+			</styleClass>
+		</OrderInfoPane>
 	</center>
 </BorderPane>

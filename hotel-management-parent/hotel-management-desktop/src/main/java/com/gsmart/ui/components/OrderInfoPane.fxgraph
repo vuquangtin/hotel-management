@@ -70,7 +70,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 			}
 		},
 		center : OrderInfoPane id orderInfoPane {
-			
+			styleClass : ["content-block-background"]
 		}
 	}
 }

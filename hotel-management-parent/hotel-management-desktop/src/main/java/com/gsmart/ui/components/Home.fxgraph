@@ -19,7 +19,7 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 	BorderPane {
 		prefWidth : 1100,
 		left : VBox {
-			prefWidth : 70,
+			prefWidth : 80,
 			styleClass : [
 				"left-bar"
 			],
@@ -31,8 +31,8 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 					image : Image {
 						url : location "images/home.png"
 					},
-					fitHeight : 50,
-					fitWidth : 50
+					fitHeight : 65,
+					fitWidth : 65
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
@@ -46,8 +46,8 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 					image : Image {
 						url : location "images/report.png"
 					},
-					fitHeight : 50,
-					fitWidth : 50
+					fitHeight : 65,
+					fitWidth : 65
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
@@ -64,7 +64,7 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 				],
 				Button {
 					styleClass : [
-						"top-bar-btn"
+						"top-menu-bar-btn"
 					],
 					onAction : controllermethod openOrderRoomStage,
 					graphic : ImageView {
