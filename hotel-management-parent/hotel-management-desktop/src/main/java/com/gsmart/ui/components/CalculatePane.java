@@ -1,17 +1,21 @@
 package com.gsmart.ui.components;
 
+
 import com.gsmart.model.Orders;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class CalculatePane extends VBox{
 	
@@ -29,7 +33,7 @@ public class CalculatePane extends VBox{
 		super();
 		setPrefWidth(300);
 		setSpacing(10);
-		getStyleClass().add("content-block-background");
+		getStyleClass().add("card");
 		
 		getChildren().add(getTopBar());
 		getChildren().add(getContent());
@@ -51,27 +55,29 @@ public class CalculatePane extends VBox{
 	public HBox getTopBar() {
 		HBox hb = new HBox();
 		VBox vb = new VBox();
-		//Set Style CSS.
-		hb.getStyleClass().add("top-bar");
-		printInvoicesCheckBox.setStyle("-fx-padding: 0 0 0 8;");
-		hb.setPadding(new Insets(5, 5, 5, 5));
+		
+		//hb.setPadding(new Insets(5, 5, 5, 5));
 		
 		Label label = new Label("Payment Room");
-		label.getStyleClass().add("header-label");
+		label.getStyleClass().add("card-title");
+		
 		vb.setPrefWidth(160);
 		vb.getChildren().add(label);
 		vb.getChildren().add(printInvoicesCheckBox);
 		
 		//Set image for payment button.
-		paymentBtn.setStyle("-fx-background-color: blue; -fx-text-fill: white; -fx-font-weight: bold;");
-		
-		ImageView buttonImage = new ImageView(new Image("com/gsmart/ui/components/images/payment-button.png"));
-		buttonImage.setFitWidth(75);
-		buttonImage.setFitHeight(50);
-		
+		paymentBtn.getStyleClass().add("button-raised");
+		paymentBtn.setDefaultButton(true);
+		paymentBtn.setMnemonicParsing(false);
 		paymentBtn.setText("Payment");
-		paymentBtn.setGraphic(buttonImage);
+		paymentBtn.setPadding(new Insets(10));
+		paymentBtn.setFont( new Font("Material-Design-Iconic-Font", 12));
 		
+		Text materialDesignIcon =
+				GlyphsDude.createIcon(MaterialDesignIcon.CALCULATOR , "2.5em");
+				 paymentBtn.setGraphic(materialDesignIcon); 
+				 materialDesignIcon.setFill(Color.WHITE);
+				 
 		hb.getChildren().add(vb);
 		hb.getChildren().add(paymentBtn);
 		
@@ -80,29 +86,28 @@ public class CalculatePane extends VBox{
 	
 	public VBox getContent() {
 		VBox vb = new VBox();
-		vb.setSpacing(10);
-		vb.setPadding(new Insets(10, 10 , 10 , 10));
+		vb.setSpacing(2);
 		
-		vb.getChildren().add(getRowField("Total Price", totalPriceTxt, "VNĐ" , "#ff0000" ));
-		vb.getChildren().add(getRowField("Promotion Percent", promotionPercentTxt, "VNĐ" , "#ff0000"));
-		vb.getChildren().add(getRowField("Payment Price", paymentPriceTxt, "VNĐ", "#ff0000"));
-		vb.getChildren().add(getRowField("Customer Sent", customerSentPriceTxt, "VNĐ", "#6600ff"));
-		vb.getChildren().add(getRowField("Customer Change", changePriceTxt, "VNĐ", "#99ff66"));
+		vb.getChildren().add(getRowField("Total Price", totalPriceTxt, " VNĐ" , "#ff0000" ));
+		vb.getChildren().add(getRowField("Promotion Percent ", promotionPercentTxt, " VNĐ" , "#ff0000"));
+		vb.getChildren().add(getRowField("Payment Price", paymentPriceTxt, " VNĐ", "#ff0000"));
+		vb.getChildren().add(getRowField("Customer Sent", customerSentPriceTxt, " VNĐ", "#6600ff"));
+		vb.getChildren().add(getRowField("Customer Change", changePriceTxt, " VNĐ", "#99ff66"));
 		
 		return vb;
 	}
 	
 	public HBox getRowField(String label, TextField textField, String unitName , String textColor){
 		Label _label = new Label(label);
+		Label _unitName = new Label(unitName);
 		_label.setPrefWidth(100);
 		
-		Label _unitName = new Label(unitName);
+		_label.getStyleClass().add("control-label");
+		_unitName.getStyleClass().add("control-label");
 		
 		textField.setStyle("-fx-text-fill:" + textColor + ";");
 		textField.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-		
 		HBox hb = new HBox();
-		hb.setSpacing(5);
 		
 		hb.getChildren().add(_label);
 		hb.getChildren().add(textField);

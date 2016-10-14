@@ -18,6 +18,7 @@ import com.gsmart.service.config.ServiceModuleConfiguration;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+
 @SpringBootApplication
 @ContextConfiguration(classes = { ConfigurationDAO.class, ApplicationConfiguration.class,
 		ServiceModuleConfiguration.class })
@@ -59,7 +60,7 @@ public class Main extends Application {
 	@Override
 	public void init() throws Exception {
 		showLoadingFrame();
-
+		
 		applicationContext = SpringApplication.run(getClass(), savedArgs);
 		applicationConfiguration = applicationContext.getBean(ApplicationConfiguration.class);
 		

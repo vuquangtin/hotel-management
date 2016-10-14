@@ -1,3 +1,8 @@
+
+@font-face {
+	src: url("/com/gsmart/ui/components/font/Material-Design-Iconic-Font.ttf");
+}
+
 .header-label {
 	-fx-font-size: 15px;
 	-fx-font-weight: 700;
@@ -5,34 +10,18 @@
 }
 
 .top-bar {
-	-fx-background-color: #F5F5F5;
-	-fx-min-height: 80px;
+	-fx-background-color: #8BC34A;
+	-fx-min-height: 50px;
+}
+.top-bar .header-label {
+	-fx-text-fill: #FFFFFF;
 }
 
+.text-area .content {
+      -fx-background-color: #FFFFFF!important;
+}
+  
 .content-block-background {
 	-fx-background-color: #FAFAFA;
 }
 
-.top-bar-btn {
-	-fx-text-fill: rgb(0,0,0,0.8)!important;
-	-fx-font-weight: bold;
-}
-
-.top-menu-bar-btn {
-	-fx-background-color: transparent;
-	-fx-background-fills: transparent;
-	-fx-text-fill: white;
-	-fx-font-weight: bold;
-}
-
-.top-menu-bar-btn:hover {
-	-fx-background-color: #689F38;
-	-fx-background-fills: #689F38;
-}
-
-.top-bar-btn:hover {
-	-fx-scale-x:1.1;
-    -fx-scale-y:1.1;
-    -fx-scale-z:1.1;
-    -fx-text-fill: black!important;
-}

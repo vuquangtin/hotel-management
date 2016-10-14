@@ -31,12 +31,12 @@ public class OrderInfoPane extends GridPane{
 	
 	public OrderInfoPane () {
 		super();
-		setPadding(new Insets(10, 10, 10, 10));
-		setVgap(5);
-		setHgap(5);
+		setPadding(new Insets(5));
+		//setVgap(5);
+		//setHgap(5);
 
-		renderColumn1 ();
-		renderColumn2 ();
+		renderColumn1();
+		renderColumn2();
 	}
 	
 	public void setOrderInfomation(Orders order) {
@@ -55,9 +55,9 @@ public class OrderInfoPane extends GridPane{
 	
 	public void renderColumn1 () {
 		column1 = new GridPane();
-		column1.setPadding(new Insets(10, 10, 10, 10));
-		column1.setVgap(5);
-		column1.setHgap(5);
+		column1.setPadding(new Insets(5));
+		//column1.setVgap(5);
+		//column1.setHgap(5);
 		
 		addNodeToGridPane(column1 , getRow(nameLbl, nameTxt) , 0 , 0);
 		addNodeToGridPane(column1 , getRow(addressLbl, addressTxt) , 0 , 1);
@@ -71,9 +71,9 @@ public class OrderInfoPane extends GridPane{
 	
 	public void renderColumn2 () {
 		column2 = new GridPane();
-		column2.setPadding(new Insets(10, 10, 10, 10));
-		column2.setVgap(5);
-		column2.setHgap(5);
+		column2.setPadding(new Insets(5));
+		//column2.setVgap(5);
+		//column2.setHgap(5);
 			
 		addNodeToGridPane(column2 , getRow(fromDateLbl, fromDateTxt) , 0 , 0);
 		addNodeToGridPane(column2 , getRow(toDateLbl, toDateTxt) , 0 , 1);
@@ -91,8 +91,10 @@ public class OrderInfoPane extends GridPane{
 	
 	public HBox getRow(Label label , TextField textField) {
 		HBox hb = new HBox();
+		label.getStyleClass().add("control-label");
+		label.setPrefSize(100, 10);
 		hb.getChildren().addAll(label, textField);
-		hb.setSpacing(10);
+		//hb.setSpacing(10);
 		return hb;
 	}
 	

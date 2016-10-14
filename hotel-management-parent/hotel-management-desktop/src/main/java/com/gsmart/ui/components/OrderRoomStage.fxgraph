@@ -18,10 +18,13 @@ import javafx.scene.image.ImageView
 import javafx.scene.image.Image
 import javafx.scene.text.Font
 
-component OrderRoomStage controlledby OrderRoomController styledwith [ "css/application.css", "css/order-room-stage.css" ] {
+component OrderRoomStage controlledby OrderRoomController styledwith [ "css/application.css",
+	"css/order-room-stage.css", "css/material-fx-v0_3.css" ] {
 	VBox {
-		prefHeight : 600,
-		styleClass : ["order-room-stage"],
+	//prefHeight : 600,
+		styleClass : [
+			"order-room-stage"
+		],
 		HBox {
 			styleClass : [
 				"top-bar"
@@ -32,12 +35,12 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 				],
 				graphic : ImageView {
 					image : Image {
-							url : location "images/order-room.png"
+						url : location "images/order-room.png"
 					},
 					fitHeight : 35,
 					fitWidth : 35
 				},
-				text : "Order Room" 
+				text : "Order Room"
 			}
 		},
 		HBox {
@@ -50,17 +53,25 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 				collapsible : false,
 				text : "Registration Information",
 				VBox {
-					spacing : 10,
+					styleClass : [
+						"card"
+					],
 					HBox {
 						spacing : 10,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Date in"
 						},
 						DatePicker id dateIn,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Time in"
 						},
-						TextField id timeInTxt{
+						TextField id timeInTxt {
 							promptText : "--:--",
 							prefWidth : 75
 						}
@@ -68,13 +79,19 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					HBox {
 						spacing : 10,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Checkout date"
 						},
 						DatePicker id dateCheckout,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Time out"
 						},
-						TextField id timeOutTxt{
+						TextField id timeOutTxt {
 							promptText : "--:--",
 							prefWidth : 75
 						}
@@ -82,6 +99,9 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					HBox {
 						spacing : 10,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Prepay"
 						},
 						TextField id prepayTxt,
@@ -92,77 +112,109 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					HBox {
 						spacing : 10,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Promotion"
 						},
 						TextField id promotionTxt,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Percent"
 						}
 					},
 					HBox {
 						spacing : 10,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Notice"
 						},
-						TextArea id registrationNotice{
+						TextArea id registrationNotice {
 							prefWidth : 350,
-							prefHeight : 100
+							prefHeight : 50
 						}
 					},
 					HBox {
+						style : "-fx-padding : 10px;",
 						spacing : 10,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Room"
 						},
 						TextField id roomTxt,
 						Button {
 							onAction : controllermethod openQuickSeachRoomStage,
-							styleClass : ["quick-search-button"],
+							styleClass : [
+								"quick-search-button"
+							],
 							text : "Quick search"
 						}
 					}
 				}
 			},
 			TitledPane {
-				prefHeight : 350,
+				prefHeight : 320,
 				styleClass : [
 					"titled-pane"
 				],
 				collapsible : false,
 				text : "Customer Information",
 				VBox {
-					spacing : 10,
+					styleClass : [
+						"card"
+					],
 					HBox {
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Name"
 						},
 						TextField id customerNameTxt
 					},
 					HBox {
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "ID"
 						},
 						TextField id customerIDTxt
 					},
 					HBox {
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Address"
 						},
 						TextField id customerAddress
 					},
 					HBox {
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Telephone"
 						},
 						TextField id customerTelephone
 					},
 					HBox {
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "Notice"
 						},
-						TextArea id customerNotice{
+						TextArea id customerNotice {
 							prefWidth : 150,
-							prefHeight : 100
+							prefHeight : 50
 						}
 					}
 				}
@@ -171,16 +223,20 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 		HBox {
 			spacing : 10,
 			style : "-fx-padding : 10px;",
-			Button id saveBtn{
-				styleClass : ["add-button"],
+			Button id saveBtn {
+				styleClass : [
+					"add-button"
+				],
 				text : "SAVE",
-				onAction : controllermethod saveOrder 
+				onAction : controllermethod saveOrder
 			},
-			Button id resetBtn{
-				styleClass : ["reset-button"],
+			Button id resetBtn {
+				styleClass : [
+					"reset-button"
+				],
 				text : "RESET"
 			},
-			Text id errorTextMessage{
+			Text id errorTextMessage {
 				font : Font {
 					size : 15
 				},
@@ -191,10 +247,15 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 			spacing : 10,
 			style : "-fx-padding : 10px;",
 			Text {
-				styleClass : ["order-table-label"],
+				styleClass : [
+					"order-table-label"
+				],
 				text : "List of registered customers current room"
 			}
 		},
-		RoomOrderTable id roomOrderTable
+		RoomOrderTable id roomOrderTable {
+			style : "-fx-padding : 10px;",
+			maxHeight : 200
+		}
 	}
 }

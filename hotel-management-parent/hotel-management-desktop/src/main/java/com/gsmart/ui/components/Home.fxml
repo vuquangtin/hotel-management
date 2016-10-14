@@ -17,17 +17,18 @@
 <?scenebuilder-stylesheet css/order-info.css?>
 <?scenebuilder-stylesheet css/order-table-pane.css?>
 <?scenebuilder-stylesheet css/application.css?>
+<?scenebuilder-stylesheet css/material-fx-v0_3.css?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HomeController" prefWidth="1100">
 
 	<left>
-		<VBox prefWidth="80"> 
+		<VBox prefWidth="60"> 
 			<Button textAlignment="CENTER" contentDisplay="TOP" text="Home"> 
 				<styleClass>
 					<String fx:value="left-bar-btn" />
 				</styleClass>
 				<graphic>
-					<ImageView fitHeight="65" fitWidth="65"> 
+					<ImageView fitHeight="50" fitWidth="50"> 
 						<image>
 							<Image url="@images/home.png"/> 
 						</image>
@@ -39,7 +40,7 @@
 					<String fx:value="left-bar-btn" />
 				</styleClass>
 				<graphic>
-					<ImageView fitHeight="65" fitWidth="65"> 
+					<ImageView fitHeight="50" fitWidth="50"> 
 						<image>
 							<Image url="@images/report.png"/> 
 						</image>
@@ -59,7 +60,7 @@
 						<String fx:value="top-menu-bar-btn" />
 					</styleClass>
 					<graphic>
-						<ImageView fitHeight="50" fitWidth="50"> 
+						<ImageView fitHeight="45" fitWidth="45"> 
 							<image>
 								<Image url="@images/order-room.png"/> 
 							</image>
@@ -81,7 +82,7 @@
 						</bottom>
 					</BorderPane>
 				</VBox>
-				<VBox> 
+				<VBox spacing="10"> 
 					<CalculatePane fx:id="calculatorPane"/> 
 					<RoomInfoPane fx:id="roomInfoPane"/> 
 				</VBox>

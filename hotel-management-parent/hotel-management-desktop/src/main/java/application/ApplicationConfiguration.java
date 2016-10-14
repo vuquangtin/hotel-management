@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 @ComponentScan(basePackages = {"com.gsmart"})
 public class ApplicationConfiguration {
 	
-	
 	private Stage primaryStage;
 
     public void setPrimaryStage(Stage primaryStage) {
@@ -59,6 +58,7 @@ public class ApplicationConfiguration {
     public OrderTablePane orderTablePane() {
     	return new OrderTablePane();
     }
+    
 	
 	@Bean
 	@Scope("singleton")
@@ -77,14 +77,14 @@ public class ApplicationConfiguration {
     public FXMLDialog quickSearchRoomDialog() {
         return new FXMLDialog(quickSearchRoomController(), getClass()
         		.getResource("/com/gsmart/ui/components/QuickSearchRoomStage.fxml"), orderRoomDialog()
-        		, new String[]{"css/quick-search-room.css","css/application.css"}, Modality.APPLICATION_MODAL);
+        		, new String[]{"css/quick-search-room.css","css/application.css" , "css/material-fx-v0_3.css"}, Modality.APPLICATION_MODAL);
     }
 	
 	@Bean
     public FXMLDialog orderRoomDialog() {
         return new FXMLDialog(orderRoomController(), getClass()
         		.getResource("/com/gsmart/ui/components/OrderRoomStage.fxml"), primaryStage
-        		, new String[]{"css/order-room-stage.css","css/application.css"}, Modality.APPLICATION_MODAL);
+        		, new String[]{"css/order-room-stage.css","css/application.css" , "css/material-fx-v0_3.css"}, Modality.APPLICATION_MODAL);
     }
 	
 	@Bean
@@ -97,7 +97,7 @@ public class ApplicationConfiguration {
     @Scope("prototype")
 	public FXMLDialog homeDialog() {
         return new FXMLDialog(homeController(), getClass().getResource("/com/gsmart/ui/components/Home.fxml")
-        		, primaryStage , new String[]{"css/home.css" , "css/order-info.css" , "css/order-table-pane.css"
+        		, primaryStage , new String[]{"css/home.css" , "css/order-info.css" , "css/order-table-pane.css" , "css/material-fx-v0_3.css"
         				,"css/application.css"} );
     }
 }

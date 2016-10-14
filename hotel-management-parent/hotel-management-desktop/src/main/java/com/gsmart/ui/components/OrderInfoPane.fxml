@@ -9,68 +9,57 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?scenebuilder-stylesheet css/order-info.css?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HomeController" prefHeight="200">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HomeController">
 
+	<HBox> 
+		<Label prefWidth="700" text="Customer Information"> 
+			<styleClass>
+				<String fx:value="card-title" />
+			</styleClass>
+		</Label>
+		<Button textAlignment="CENTER" contentDisplay="TOP" text="Edit" onAction="#openEditOrderStage"> 
+			<styleClass>
+				<String fx:value="top-bar-btn" />
+			</styleClass>
+			<graphic>
+				<ImageView fitHeight="45" fitWidth="45"> 
+					<image>
+						<Image url="@images/edit.png"/> 
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+		<Button textAlignment="CENTER" contentDisplay="TOP" text="Save"> 
+			<styleClass>
+				<String fx:value="top-bar-btn" />
+			</styleClass>
+			<graphic>
+				<ImageView fitHeight="45" fitWidth="45"> 
+					<image>
+						<Image url="@images/save.png"/> 
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+		<Button textAlignment="CENTER" contentDisplay="TOP" text="Remove"> 
+			<styleClass>
+				<String fx:value="top-bar-btn" />
+			</styleClass>
+			<graphic>
+				<ImageView fitHeight="45" fitWidth="45"> 
+					<image>
+						<Image url="@images/remove.png"/> 
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+	</HBox>
+	<OrderInfoPane fx:id="orderInfoPane"/> 
 	<styleClass>
-		<String fx:value="order-info-pane" />
+		<String fx:value="card" />
 	</styleClass>
-	<top>
-		<HBox> 
-			<Label prefWidth="650" text="Customer Information"> 
-				<styleClass>
-					<String fx:value="top-label" />
-				</styleClass>
-			</Label>
-			<Button textAlignment="CENTER" contentDisplay="TOP" text="Edit" onAction="#openEditOrderStage"> 
-				<styleClass>
-					<String fx:value="top-bar-btn" />
-				</styleClass>
-				<graphic>
-					<ImageView fitHeight="45" fitWidth="45"> 
-						<image>
-							<Image url="@images/edit.png"/> 
-						</image>
-					</ImageView>
-				</graphic>
-			</Button>
-			<Button textAlignment="CENTER" contentDisplay="TOP" text="Save"> 
-				<styleClass>
-					<String fx:value="top-bar-btn" />
-				</styleClass>
-				<graphic>
-					<ImageView fitHeight="45" fitWidth="45"> 
-						<image>
-							<Image url="@images/save.png"/> 
-						</image>
-					</ImageView>
-				</graphic>
-			</Button>
-			<Button textAlignment="CENTER" contentDisplay="TOP" text="Remove"> 
-				<styleClass>
-					<String fx:value="top-bar-btn" />
-				</styleClass>
-				<graphic>
-					<ImageView fitHeight="45" fitWidth="45"> 
-						<image>
-							<Image url="@images/remove.png"/> 
-						</image>
-					</ImageView>
-				</graphic>
-			</Button>
-			<styleClass>
-				<String fx:value="top-bar" />
-			</styleClass>
-		</HBox>
-	</top>
-	<center>
-		<OrderInfoPane fx:id="orderInfoPane"> 
-			<styleClass>
-				<String fx:value="content-block-background" />
-			</styleClass>
-		</OrderInfoPane>
-	</center>
-</BorderPane>
+</VBox>

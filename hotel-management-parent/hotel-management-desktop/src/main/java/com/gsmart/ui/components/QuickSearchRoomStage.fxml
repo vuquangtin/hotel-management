@@ -16,8 +16,9 @@
 <?import javafx.scene.text.Text?>
 <?scenebuilder-stylesheet css/quick-search-room.css?>
 <?scenebuilder-stylesheet css/application.css?>
+<?scenebuilder-stylesheet css/material-fx-v0_3.css?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" spacing="10">
+<VBox xmlns:fx="http://javafx.com/fxml">
 
 	<HBox> 
 		<Label text="Quick Search Room"> 
@@ -79,6 +80,9 @@
 			</styleClass>
 		</Button>
 		<QuickSearchRoomTable/> 
+		<styleClass>
+			<String fx:value="card" />
+		</styleClass>
 	</VBox>
 	<styleClass>
 		<String fx:value="quick-search-room-stage" />

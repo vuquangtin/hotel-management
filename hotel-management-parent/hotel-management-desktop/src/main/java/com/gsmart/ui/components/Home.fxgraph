@@ -15,11 +15,11 @@ import javafx.geometry.Insets
 import com.gsmart.ui.components.RoomInfoPane
 
 component Home controlledby HomeController styledwith [ "css/home.css", "css/order-info.css",
-	"css/order-table-pane.css", "css/application.css" ] {
+	"css/order-table-pane.css", "css/application.css" , "css/material-fx-v0_3.css" ] {
 	BorderPane {
 		prefWidth : 1100,
 		left : VBox {
-			prefWidth : 80,
+			prefWidth : 60,
 			styleClass : [
 				"left-bar"
 			],
@@ -31,8 +31,8 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 					image : Image {
 						url : location "images/home.png"
 					},
-					fitHeight : 65,
-					fitWidth : 65
+					fitHeight : 50,
+					fitWidth : 50
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
@@ -46,8 +46,8 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 					image : Image {
 						url : location "images/report.png"
 					},
-					fitHeight : 65,
-					fitWidth : 65
+					fitHeight : 50,
+					fitWidth : 50
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
@@ -71,8 +71,8 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 						image : Image {
 							url : location "images/order-room.png"
 						},
-						fitHeight : 50,
-						fitWidth : 50
+						fitHeight : 45,
+						fitWidth : 45
 					},
 					textAlignment : "CENTER",
 					contentDisplay : "TOP",
@@ -83,13 +83,13 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 				style : "-fx-padding: 5 5 5 5",
 				spacing : 10,
 				VBox {
-
 					BorderPane {
 						center : include OrderInfoPane,
 						bottom : OrderTablePane id orderTablePane
 					}
 				},
 				VBox {
+					spacing : 10,
 					CalculatePane id calculatorPane,
 					RoomInfoPane id roomInfoPane
 				}

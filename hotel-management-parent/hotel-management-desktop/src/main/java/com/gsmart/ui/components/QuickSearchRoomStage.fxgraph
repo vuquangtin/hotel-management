@@ -13,12 +13,11 @@ import javafx.scene.control.TableView
 import com.gsmart.model.Room
 import com.gsmart.ui.components.QuickSearchRoomTable
 
-component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/application.css" ] {
+component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/application.css" , "css/material-fx-v0_3.css" ] {
 	VBox {
 		styleClass : [
 			"quick-search-room-stage"
 		],
-		spacing : 10,
 		HBox {
 			styleClass : [
 				"top-bar"
@@ -40,6 +39,9 @@ component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/ap
 		VBox {
 			style : "-fx-padding : 10px;",
 			spacing : 10,
+			styleClass : [
+					"card"
+				],
 			HBox {
 				styleClass : [
 					"hbox"

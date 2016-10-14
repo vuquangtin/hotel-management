@@ -6,6 +6,8 @@ import com.gsmart.model.Orders;
 import com.gsmart.model.RoomCategory;
 import com.gsmart.ui.controller.HomeController;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -19,6 +21,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class OrderTablePane extends VBox {
 
@@ -43,6 +47,7 @@ public class OrderTablePane extends VBox {
 		getStyleClass().add("order-table-pane");
 		getChildren().add(getTopBar());
 		getChildren().add(getTable());
+		setPadding(new Insets(10));
 	}
 
 	public HBox getTopBar() {
@@ -51,8 +56,8 @@ public class OrderTablePane extends VBox {
 		VBox right = new VBox();
 
 		// == Initialization Left Pane === //
-		left.setPadding(new Insets(5, 5, 5, 5));
-		left.setSpacing(10);
+		left.setPadding(new Insets(20, 0, 0, 0));
+		// left.setSpacing(10);
 
 		searchTextField.setPromptText("Search ...");
 		left.getChildren().add(searchTextField);
@@ -73,31 +78,40 @@ public class OrderTablePane extends VBox {
 
 		// == Initialization Right Pane === //
 		roomType.setPromptText("All room type");
-		
+
 		HBox rightTop = new HBox();
-		rightTop.setPadding(new Insets(5, 5, 5, 10));
-		rightTop.setSpacing(10);
+		rightTop.setPadding(new Insets(10));
+		rightTop.setSpacing(20);
 
 		Label fromDateLbl = new Label("From");
 		Label toDateLbl = new Label("To");
+
+		fromDateLbl.getStyleClass().add("control-label");
+		toDateLbl.getStyleClass().add("control-label");
+
+		fromDate.setPrefWidth(120);
+		toDate.setPrefWidth(120);
 
 		rightTop.getChildren().add(fromDateLbl);
 		rightTop.getChildren().add(fromDate);
 		rightTop.getChildren().add(toDateLbl);
 		rightTop.getChildren().add(toDate);
-		rightTop.getChildren().add(searchButton);
-
-		HBox rightBottom = new HBox();
-		rightBottom.setPadding(new Insets(5, 5, 5, 10));
-		rightBottom.setSpacing(10);
 
 		Label roomTypeLbl = new Label("Type");
+		roomTypeLbl.getStyleClass().add("control-label");
+		rightTop.getChildren().add(roomTypeLbl);
+		rightTop.getChildren().add(roomType);
 
-		rightBottom.getChildren().add(roomTypeLbl);
-		rightBottom.getChildren().add(roomType);
-
+		searchButton.getStyleClass().add("button-raised");
+		searchButton.setDefaultButton(true);
+		searchButton.setMnemonicParsing(false);
+		searchButton.setPadding(new Insets(10));
+		Text materialDesignIcon = GlyphsDude.createIcon(MaterialDesignIcon.MAGNIFY, "2.5em");
+		materialDesignIcon.setFill(Color.WHITE);
+		searchButton.setGraphic(materialDesignIcon);
+		
+		rightTop.getChildren().add(searchButton);
 		right.getChildren().add(rightTop);
-		right.getChildren().add(rightBottom);
 		// == Initialization Right Pane === //
 
 		hb.getChildren().add(left);
@@ -138,7 +152,7 @@ public class OrderTablePane extends VBox {
 		table.setMaxHeight(255);
 		return table;
 	}
-	
+
 	public Orders getSeletedOrder() {
 		return table.getSelectionModel().getSelectedItem();
 	}

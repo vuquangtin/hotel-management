@@ -10,16 +10,17 @@ import javafx.scene.image.Image
 import javafx.scene.control.Button
 import com.gsmart.ui.components.OrderInfoPane
 
-
 component OrderInfoPane controlledby HomeController styledwith "css/order-info.css" {
-	BorderPane {
-		prefHeight : 200,
-		styleClass : ["order-info-pane"],
-		top : HBox {
-			styleClass : ["top-bar"],
+	VBox {
+		styleClass : [
+			"card"
+		],
+		HBox {
 			Label {
-				styleClass : ["top-label"],
-				prefWidth : 650,
+				styleClass : [
+					"card-title"
+				],
+				prefWidth : 700,
 				text : "Customer Information"
 			},
 			Button {
@@ -69,8 +70,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				text : "Remove"
 			}
 		},
-		center : OrderInfoPane id orderInfoPane {
-			styleClass : ["content-block-background"]
+		OrderInfoPane id orderInfoPane {
 		}
 	}
 }

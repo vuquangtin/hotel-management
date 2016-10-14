@@ -7,13 +7,20 @@
 .left-bar-btn {
 	-fx-background-fills: transparent;
 	-fx-background-color: transparent;
-	-fx-text-fill: white ;
+	-fx-text-fill: white!important;
 	-fx-font-weight: bold;
+	-fx-border-radius: none;
 }
 
 .left-bar-btn:hover {
 	-fx-background-fills: #BF360C;
 	-fx-background-color: #BF360C;
+	-fx-fit-to-width: true;
+}
+
+.left-bar-btn:selected , .left-bar-btn:focused , left-bar-btn:pressed {
+	-fx-background-fills: #FB8C00!important;
+	-fx-background-color: #FB8C00!important;
 	-fx-fit-to-width: true;
 }
 
@@ -33,4 +40,34 @@
 
 .content {
 	-fx-background-color: #FFFFFF;
+}
+
+.top-bar-btn {
+	-fx-text-fill: rgb(0,0,0,0.7)!important;
+	-fx-font-weight: bold;
+}
+
+.top-menu-bar-btn {
+	-fx-background-color: transparent;
+	-fx-background-fills: transparent;
+	-fx-text-fill: white!important;
+	-fx-font-weight: bold;
+}
+
+.top-menu-bar-btn:hover {
+	-fx-background-color: #689F38;
+	-fx-background-fills: #689F38;
+}
+
+.top-menu-bar-btn:selected , .top-menu-bar-btn:focused , top-menu-bar-btn:pressed {
+	-fx-background-fills: #8BC34A!important;
+	-fx-background-color: #8BC34A!important;
+	-fx-fit-to-width: true;
+}
+
+.top-bar-btn:hover {
+	-fx-scale-x:1.1;
+    -fx-scale-y:1.1;
+    -fx-scale-z:1.1;
+    -fx-text-fill: black!important;
 }
