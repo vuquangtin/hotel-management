@@ -18,7 +18,7 @@
 <?scenebuilder-stylesheet css/application.css?>
 <?scenebuilder-stylesheet css/material-fx-v0_3.css?>
 
-<VBox xmlns:fx="http://javafx.com/fxml">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.QuickSearchRoomController">
 
 	<HBox> 
 		<Label text="Quick Search Room"> 
@@ -40,23 +40,23 @@
 	<VBox style="-fx-padding : 10px;" spacing="10"> 
 		<HBox spacing="10"> 
 			<Label text="Date in"/> 
-			<DatePicker/> 
+			<DatePicker fx:id="dateIn"/> 
 			<Label text="Time in"/> 
-			<TextField prefWidth="75"/> 
+			<TextField fx:id="timeIn" prefWidth="75"/> 
 			<styleClass>
 				<String fx:value="hbox" />
 			</styleClass>
 		</HBox>
 		<HBox spacing="10"> 
 			<Label text="Checkout date"/> 
-			<DatePicker/> 
+			<DatePicker fx:id="dateCheckOut"/> 
 			<Label text="Time out"/> 
-			<TextField prefWidth="75"/> 
+			<TextField fx:id="timeCheckOut" prefWidth="75"/> 
 			<styleClass>
 				<String fx:value="hbox" />
 			</styleClass>
 		</HBox>
-		<Button text="Find"> 
+		<Button text="Find" onAction="#searchRoomByDateAction"> 
 			<styleClass>
 				<String fx:value="find-button" />
 			</styleClass>
@@ -74,12 +74,12 @@
 			<Text/> 
 			<Label text="/ Date"/> 
 		</HBox>
-		<Button text="Select Room"> 
+		<Button text="Select Room" onAction="#seletecRoomAction"> 
 			<styleClass>
 				<String fx:value="selected-room-button" />
 			</styleClass>
 		</Button>
-		<QuickSearchRoomTable/> 
+		<QuickSearchRoomTable fx:id="quickSearchRoomTable"/> 
 		<styleClass>
 			<String fx:value="card" />
 		</styleClass>

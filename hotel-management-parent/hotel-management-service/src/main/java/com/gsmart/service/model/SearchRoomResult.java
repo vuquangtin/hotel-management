@@ -14,6 +14,19 @@ public class SearchRoomResult {
 		this.dateIn = dateIn;
 	}
 	
+	public String getName() {
+		return room != null ? room.getName() : "";
+	}
+	
+	public Date getEndedTime() {
+		return dateIn != null ? dateIn : null;
+	}
+	
+	public long getDistance() {
+		Date currentTime = new Date();
+		return dateIn != null ? currentTime.getTime() - dateIn.getTime() : null;
+	}
+	
 	public Room getRoom() {
 		return room;
 	}

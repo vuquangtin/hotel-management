@@ -32,14 +32,14 @@ public class OrdersSpecification implements Specification<Orders> {
 		 */
 		if (!StringUtils.isEmpty(orderCreiteria.getCustomerName()) && orderCreiteria.getCustomerName() != null) {
 			predicates.add(cb.like(cb.lower(root.get(Orders_.customerName)),
-					orderCreiteria.getCustomerName().toLowerCase() + "%"));
+					"%" + orderCreiteria.getCustomerName().toLowerCase() + "%"));
 		}
 
 		/**
 		 * Find by customer ID.
 		 */
 		if (!StringUtils.isEmpty(orderCreiteria.getCustomerId()) && orderCreiteria.getCustomerId() != null) {
-			predicates.add(cb.like(cb.lower(root.get(Orders_.customerId)), orderCreiteria.getCustomerId() + "%"));
+			predicates.add(cb.like(cb.lower(root.get(Orders_.customerId)), "%" + orderCreiteria.getCustomerId() + "%"));
 		}
 
 		/**
@@ -50,6 +50,20 @@ public class OrdersSpecification implements Specification<Orders> {
 			predicates.add(cb.or(cb.greaterThan(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()),
 					cb.lessThan(root.get(Orders_.checkOutAt), orderCreiteria.getCheckOutAt())));
 		}
+		
+		/**
+		 * Find all order had date created equal or greater.
+		 */
+		if(orderCreiteria.getCreatedAt() != null && orderCreiteria.getCheckOutAt() == null) {
+			predicates.add(cb.greaterThan(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()));
+		}
+		
+		/**
+		 * Find all order had date checkout equal or less than.
+		 */
+		if(orderCreiteria.getCreatedAt() == null && orderCreiteria.getCheckOutAt() != null) {
+			predicates.add(cb.lessThan(root.get(Orders_.checkOutAt), orderCreiteria.getCreatedAt()));
+		}
 
 		if (orderCreiteria.getRoom() != null) {
 			/**
@@ -57,7 +71,8 @@ public class OrdersSpecification implements Specification<Orders> {
 			 */
 			if (!StringUtils.isEmpty(orderCreiteria.getRoom().getName())
 					&& orderCreiteria.getRoom().getName() != null) {
-				predicates.add(cb.like(cb.lower(root.get(Orders_.room).get(Room_.name)), orderCreiteria.getRoom().getName() + "%"));
+				predicates.add(cb.like(cb.lower(root.get(Orders_.room).get(Room_.name)),
+						"%" + orderCreiteria.getRoom().getName() + "%"));
 			}
 
 			/**
@@ -65,10 +80,11 @@ public class OrdersSpecification implements Specification<Orders> {
 			 */
 			if (!StringUtils.isEmpty(orderCreiteria.getRoom().getRoomCategory())
 					&& orderCreiteria.getRoom().getRoomCategory() != null) {
-				predicates.add(cb.equal(root.get(Orders_.room).get(Room_.roomCategory), orderCreiteria.getRoom().getRoomCategory()));
+				predicates.add(cb.equal(root.get(Orders_.room).get(Room_.roomCategory),
+						orderCreiteria.getRoom().getRoomCategory()));
 			}
 		}
-	
+
 		return andTogether(predicates, cb);
 	}
 

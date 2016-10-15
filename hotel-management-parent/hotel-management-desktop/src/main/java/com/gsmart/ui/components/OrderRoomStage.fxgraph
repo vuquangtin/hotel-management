@@ -17,6 +17,7 @@ import com.gsmart.ui.controller.OrderRoomController
 import javafx.scene.image.ImageView
 import javafx.scene.image.Image
 import javafx.scene.text.Font
+import com.gsmart.ui.controls.FXTextField
 
 component OrderRoomStage controlledby OrderRoomController styledwith [ "css/application.css",
 	"css/order-room-stage.css", "css/material-fx-v0_3.css" ] {
@@ -106,6 +107,9 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						},
 						TextField id prepayTxt,
 						Label {
+							styleClass : [
+								"control-label"
+							],
 							text : "VND"
 						}
 					},

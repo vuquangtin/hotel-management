@@ -2,7 +2,6 @@ package com.gsmart.ui.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gsmart.model.Orders;
 import com.gsmart.repository.OrdersRepository;
 import com.gsmart.repository.RoomCategoryRepository;
 import com.gsmart.service.RoomService;
@@ -40,7 +39,6 @@ public class HomeController implements DialogController {
 	OrderInfoPane orderInfoPane;
 
 	@FXML
-	@Autowired
 	OrderTablePane orderTablePane;
 
 	@FXML
@@ -62,6 +60,7 @@ public class HomeController implements DialogController {
 			// Set date for combo box.
 			orderTablePane.getRoomType().setItems(FXCollections.observableArrayList(roomCategoryRepository.findAll()));
 			orderTablePane.setController(this);
+			orderTablePane.setOrdersRepository(this.ordersRepository);
 		}
 	}
 
@@ -75,11 +74,6 @@ public class HomeController implements DialogController {
 		// Before open order room stage, we need call controller and setup data
 		applicationConfiguration.orderRoomController().setOrderInformation(orderTablePane.getSeletedOrder());
 
-	}
-
-	public void setOrderInfoItem(Orders order) {
-		if (orderInfoPane != null)
-			orderInfoPane.setOrderInfomation(order);
 	}
 
 	public void closeDialog() {
@@ -102,6 +96,10 @@ public class HomeController implements DialogController {
 
 	public RoomInfoPane getRoomInfoPane() {
 		return roomInfoPane;
+	}
+
+	public OrderInfoPane getOrderInfoPane() {
+		return orderInfoPane;
 	}
 
 }

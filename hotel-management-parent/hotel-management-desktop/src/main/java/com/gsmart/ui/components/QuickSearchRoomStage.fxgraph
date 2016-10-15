@@ -12,8 +12,9 @@ import javafx.scene.text.Text
 import javafx.scene.control.TableView
 import com.gsmart.model.Room
 import com.gsmart.ui.components.QuickSearchRoomTable
+import com.gsmart.ui.controller.QuickSearchRoomController
 
-component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/application.css" , "css/material-fx-v0_3.css" ] {
+component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith [ "css/quick-search-room.css", "css/application.css" , "css/material-fx-v0_3.css" ] {
 	VBox {
 		styleClass : [
 			"quick-search-room-stage"
@@ -50,11 +51,11 @@ component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/ap
 				Label {
 					text : "Date in"
 				},
-				DatePicker,
+				DatePicker id dateIn,
 				Label {
 					text : "Time in"
 				},
-				TextField {
+				TextField id timeIn {
 					prefWidth : 75
 				}
 			},
@@ -66,11 +67,11 @@ component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/ap
 				Label {
 					text : "Checkout date"
 				},
-				DatePicker,
+				DatePicker id dateCheckOut,
 				Label {
 					text : "Time out"
 				},
-				TextField {
+				TextField id timeCheckOut{
 					prefWidth : 75
 				}
 			},
@@ -78,7 +79,8 @@ component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/ap
 				styleClass : [
 					"find-button"
 				],
-				text : "Find"
+				text : "Find",
+				onAction : controllermethod searchRoomByDateAction
 			},
 			HBox {
 				Label {
@@ -111,9 +113,10 @@ component QuickSearchRoomStage styledwith [ "css/quick-search-room.css", "css/ap
 				styleClass : [
 					"selected-room-button"
 				],
-				text : "Select Room"
+				text : "Select Room",
+				onAction : controllermethod seletecRoomAction
 			},
-			QuickSearchRoomTable
+			QuickSearchRoomTable id quickSearchRoomTable
 		}
 	}
 } 

@@ -78,7 +78,11 @@
 						</styleClass>
 					</Label>
 					<TextField fx:id="prepayTxt"/> 
-					<Label text="VND"/> 
+					<Label text="VND"> 
+						<styleClass>
+							<String fx:value="control-label" />
+						</styleClass>
+					</Label>
 				</HBox>
 				<HBox spacing="10"> 
 					<Label text="Promotion"> 
