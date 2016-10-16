@@ -5,17 +5,16 @@
 
 <?import java.lang.*?>
 <?import com.gsmart.ui.components.RoomOrderTable?>
+<?import com.gsmart.ui.controls.FXDateTimePicker?>
+<?import com.gsmart.ui.controls.FXTextField?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?scenebuilder-stylesheet css/application.css?>
 <?scenebuilder-stylesheet css/order-room-stage.css?>
@@ -43,60 +42,9 @@
 	<HBox spacing="10" style="-fx-padding : 10px;"> 
 		<TitledPane collapsible="false" text="Registration Information"> 
 			<VBox> 
-				<HBox spacing="10"> 
-					<Label text="Date in"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<DatePicker fx:id="dateIn"/> 
-					<Label text="Time in"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="timeInTxt" promptText="--:--" prefWidth="75"/> 
-				</HBox>
-				<HBox spacing="10"> 
-					<Label text="Checkout date"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<DatePicker fx:id="dateCheckout"/> 
-					<Label text="Time out"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="timeOutTxt" promptText="--:--" prefWidth="75"/> 
-				</HBox>
-				<HBox spacing="10"> 
-					<Label text="Prepay"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="prepayTxt"/> 
-					<Label text="VND"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-				</HBox>
-				<HBox spacing="10"> 
-					<Label text="Promotion"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="promotionTxt"/> 
-					<Label text="Percent"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-				</HBox>
+				<FXDateTimePicker fx:id="dateTimePicker" isInlineStyle="false" firstDateLabel="Date in" firstTimeLabel="Time in" secondDateLabel="Date out" secondTimeLabel="Time out"/> 
+				<FXTextField fx:id="prepayTxt" isInlineStyle="true" label="Prepay" unit=" VND" fieldName="prepay"/> 
+				<FXTextField fx:id="promotionTxt" isInlineStyle="true" label="Promotion" unit=" Percent" fieldName="promotion"/> 
 				<HBox spacing="10"> 
 					<Label text="Notice"> 
 						<styleClass>
@@ -106,12 +54,7 @@
 					<TextArea fx:id="registrationNotice" prefWidth="350" prefHeight="50"/> 
 				</HBox>
 				<HBox style="-fx-padding : 10px;" spacing="10"> 
-					<Label text="Room"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="roomTxt"/> 
+					<FXTextField fx:id="roomTxt" label="Room" fieldName="room" editAble="false"/> 
 					<Button onAction="#openQuickSeachRoomStage" text="Quick search"> 
 						<styleClass>
 							<String fx:value="quick-search-button" />
@@ -128,38 +71,10 @@
 		</TitledPane>
 		<TitledPane prefHeight="320" collapsible="false" text="Customer Information"> 
 			<VBox> 
-				<HBox> 
-					<Label text="Name"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="customerNameTxt"/> 
-				</HBox>
-				<HBox> 
-					<Label text="ID"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="customerIDTxt"/> 
-				</HBox>
-				<HBox> 
-					<Label text="Address"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="customerAddress"/> 
-				</HBox>
-				<HBox> 
-					<Label text="Telephone"> 
-						<styleClass>
-							<String fx:value="control-label" />
-						</styleClass>
-					</Label>
-					<TextField fx:id="customerTelephone"/> 
-				</HBox>
+				<FXTextField fx:id="customerNameTxt" label="Name" fieldName="customerName"/> 
+				<FXTextField fx:id="customerIDTxt" label="ID" fieldName="customerId"/> 
+				<FXTextField fx:id="customerAddress" label="Address" fieldName="customerAddress"/> 
+				<FXTextField fx:id="customerTelephone" label="Telephone" fieldName="customerTelephone"/> 
 				<HBox> 
 					<Label text="Notice"> 
 						<styleClass>
@@ -188,11 +103,6 @@
 				<String fx:value="reset-button" />
 			</styleClass>
 		</Button>
-		<Text fx:id="errorTextMessage" fill="rgb(255,0,0)"> 
-			<font>
-				<Font size="15"/> 
-			</font>
-		</Text>
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 10px;"> 
 		<Text text="List of registered customers current room"> 

@@ -1,83 +1,63 @@
 package com.gsmart.ui.controller;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.gsmart.service.RoomService;
+import com.gsmart.service.model.SearchRoomResult;
 import com.gsmart.ui.components.FXMLDialog;
 import com.gsmart.ui.components.QuickSearchRoomTable;
-import com.gsmart.ui.utils.DateUtils;
+import com.gsmart.ui.controls.FXDateTimePicker;
 
-import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 
 public class QuickSearchRoomController implements DialogController {
-
+	
+	private FXMLDialog dialog;
+	
 	@FXML
 	QuickSearchRoomTable quickSearchRoomTable;
-
-	private Calendar calendar = GregorianCalendar.getInstance();
-
 	@Autowired
 	RoomService roomService;
-
-	@SuppressWarnings("unused")
-	private FXMLDialog dialog;
-
-	@FXML
-	DatePicker dateIn;
-
-	@FXML
-	TextField timeIn;
-
-	@FXML
-	DatePicker dateCheckOut;
-
-	@FXML
-	TextField timeCheckOut;
+	@Autowired
+	OrderRoomController orderRoomController;
+	
+	@FXML Text roomNameTxt;
+	@FXML Text roomTypeTxt;
+	@FXML Text priceTxt;
+	@FXML FXDateTimePicker dateTimePicker;
 
 	@Override
 	public void setDialog(FXMLDialog dialog) {
 		this.dialog = dialog;
 	}
 
-	/**
-	 * Called when user clicked on row and submit selection by press
-	 * "Select Room" button.
-	 * <p>
-	 * 
-	 * @param event
-	 */
+	@FXML
+	public void initialize() {
+		if (quickSearchRoomTable != null) {
+			quickSearchRoomTable.setController(this);
+		}
+	}
+
+	public void updateSeletedRoomPane(SearchRoomResult searchRoomResult) {
+		this.roomNameTxt.setText(searchRoomResult.getRoom().getName());
+		this.roomTypeTxt.setText(searchRoomResult.getRoom().getRoomCategory().getName());
+		this.priceTxt.setText(searchRoomResult.getEndedTime().toString());
+	}
+
 	@FXML
 	public void seletecRoomAction(ActionEvent event) {
-
+		orderRoomController.updateCheckInInformation(quickSearchRoomTable.getRoomSeleted(),
+				dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate());
+		this.dialog.close();
 	}
 
 	@FXML
 	public void searchRoomByDateAction(ActionEvent event) {
-		Date dateInSelected;
-		Date dateCheckOutSelected;
-
-		calendar.setTime(DateUtils.asDate(dateIn.getValue()));
-		String[] timeInArray = timeIn.getText().split(":");
-		calendar.set(Calendar.HOUR, Integer.parseInt(timeInArray[0]));
-		calendar.set(Calendar.MINUTE, Integer.parseInt(timeInArray[1]));
-		dateInSelected = calendar.getTime();
-
-		calendar.setTime(DateUtils.asDate(dateCheckOut.getValue()));
-		String[] timeCheckOutArray = timeCheckOut.getText().split(":");
-		calendar.set(Calendar.HOUR, Integer.parseInt(timeCheckOutArray[0]));
-		calendar.set(Calendar.MINUTE, Integer.parseInt(timeCheckOutArray[1]));
-		dateCheckOutSelected = calendar.getTime();
-
-		quickSearchRoomTable.setItems(
-				FXCollections.observableArrayList(roomService.findRoomByDate(dateInSelected, dateCheckOutSelected)));
+		if (dateTimePicker.isValidDateTime())
+			quickSearchRoomTable.setItems(FXCollections.observableArrayList(
+					roomService.findRoomByDate(dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate())));
 	}
 
 }

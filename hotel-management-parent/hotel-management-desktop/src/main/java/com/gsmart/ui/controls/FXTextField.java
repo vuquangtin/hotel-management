@@ -1,11 +1,13 @@
 package com.gsmart.ui.controls;
 
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.NamedArg;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class FXTextField extends HBox {
@@ -15,38 +17,47 @@ public class FXTextField extends HBox {
 	private Label unit;
 	private Text tipText;
 	private Text errorMessage;
-	
-	private StringProperty labelText;
-	private StringProperty unitText;
-	private StringProperty errorMessageText;
-	private StringProperty tipTextMessage;
-	
-	private boolean isInlineStyle = false;
+
+	private String fieldName;
+
+	private boolean isInlineStyle = true;
 	private boolean isError = false;
-	private final String ERROR_STYLE_CLASS = "error-text-field";
-
+	private final String ERROR_STYLE_CLASS = "field-error";
+	
 	private int preWidth = 100;
-
+	
 	public FXTextField() {
-		this(null, null, null, null);
+		this(null, null, null, null, true);
+	}
+	
+	/**
+	 * By using @NamedArg("isInlineStyle") we can pass parameter from FXML file
+	 * in to constructor of this
+	 * 
+	 * @param isInlineStyle
+	 */
+	public FXTextField(@NamedArg("isInlineStyle") boolean isInlineStyle) {
+		this(null, null, null, null, isInlineStyle);
 	}
 
-	public FXTextField(String labelText) {
-		this(labelText, null, null, null);
+	public FXTextField(String labelText, boolean isInlineStyle) {
+		this(labelText, null, null, null, isInlineStyle);
 	}
 
-	public FXTextField(String labelText, String unitText) {
-		this(labelText, unitText, null, null);
+	public FXTextField(String labelText, String unitText, boolean isInlineStyle) {
+		this(labelText, unitText, null, null, isInlineStyle);
 	}
 
-	public FXTextField(String labelText, String unitText, String errorMessageText) {
-		this(labelText, unitText, errorMessageText, null);
+	public FXTextField(String labelText, String unitText, String errorMessageText, boolean isInlineStyle) {
+		this(labelText, unitText, errorMessageText, null, isInlineStyle);
 	}
 
-	public FXTextField(String labelText, String unitText, String errorMessageText, String tipTextMessage) {
+	public FXTextField(String labelText, String unitText, String errorMessageText, String tipTextMessage,
+			boolean isInlineStyle) {
 		super();
+		this.isInlineStyle = isInlineStyle;
 		setComponentData(labelText, unitText, errorMessageText, tipTextMessage);
-		renderComponent();
+		renderComponent(isInlineStyle);
 	}
 
 	public void updateTextFieldStyleState() {
@@ -54,6 +65,7 @@ public class FXTextField extends HBox {
 			this.textField.getStyleClass().add(ERROR_STYLE_CLASS);
 		} else {
 			this.textField.getStyleClass().remove(ERROR_STYLE_CLASS);
+			this.errorMessage.setText("");
 		}
 	}
 
@@ -63,6 +75,21 @@ public class FXTextField extends HBox {
 		unit = new Label();
 		tipText = new Text();
 		errorMessage = new Text();
+
+		this.label.getStyleClass().add("control-label");
+		this.label.setPrefSize(this.preWidth, 10);
+
+		this.unit.getStyleClass().add("control-label");
+		this.unit.setPrefSize(this.preWidth, 10);
+		
+		textField.textProperty().addListener((event) -> {
+			//When field has error if use typed new one , we need change style and waiting next validation.
+			this.isError = false;
+			updateTextFieldStyleState();
+		});
+		
+		errorMessage.setFont(new Font(10));
+		errorMessage.setFill(Color.RED);
 	}
 
 	public void setComponentData(String label, String unit, String errorMessage, String tipText) {
@@ -76,17 +103,10 @@ public class FXTextField extends HBox {
 			this.tipText.setText(tipText);
 		if (unit != null)
 			this.unit.setText(tipText);
-		
-		this.label.setText(getLabelText());
-		
-		this.label.getStyleClass().add("control-label");
-		this.label.setPrefSize(this.preWidth, 10);
 
-		this.unit.getStyleClass().add("control-label");
-		this.unit.setPrefSize(this.preWidth, 10);
 	}
 
-	public void renderComponent() {
+	public void renderComponent(boolean isInlineStyle) {
 		if (isInlineStyle) {
 			getChildren().add(getHorizontalStyleBox());
 		} else {
@@ -111,81 +131,88 @@ public class FXTextField extends HBox {
 
 		return vb;
 	}
-	
-	//---------------------------------
-	
-	public final StringProperty labelTextProperty() {
-		if(labelText == null) {
-			return new SimpleStringProperty(this, "labelText", "");
-		}
-		return labelText;
-	}
-	
+
+	/**
+	 * With strut function like this we can access label , text and set value
+	 * for it. is called properties.
+	 * 
+	 * We also choose alternate option is using @NamedArg instead, so i just
+	 * want using two ways for show how can i handle this problem.
+	 * 
+	 */
+
 	public final StringProperty unitTextProperty() {
-		if(unitText == null) {
-			return new SimpleStringProperty(this, "unitText", "");
+		if (unit == null) {
+			unit = new Label();
+			return unit.textProperty();
 		}
-		return unitText;
+		return unit.textProperty();
 	}
-	
-	
-	public final StringProperty errorMessageTextProperty() {
-		if(errorMessageText == null) {
-			return new SimpleStringProperty(this, "errorMessageText", "");
+
+	public final StringProperty errorMessageProperty() {
+		if (errorMessage == null) {
+			errorMessage = new Text();
+			return errorMessage.textProperty();
 		}
-		return errorMessageText;
+		return errorMessage.textProperty();
 	}
-	
-	public final StringProperty tipTextMessageProperty() {
-		if(tipTextMessage == null) {
-			return new SimpleStringProperty(this, "tipTextMessage", "");
+
+	public final StringProperty tipTextProperty() {
+		if (tipText == null) {
+			tipText = new Text();
+			return tipText.textProperty();
 		}
-		return tipTextMessage;
+		return tipText.textProperty();
 	}
-	
-	public final StringProperty LabelTextProperty() {
-		if(labelText == null) {
-			return new SimpleStringProperty(this, "text", "");
+
+	public final StringProperty labelProperty() {
+		if (label == null) {
+			label = new Label();
+			return label.textProperty();
 		}
-		return labelText;
-	}
-	
-	public final String getLabelText() {
-		return labelText == null ? "" : labelText.getValue();
+		return label.textProperty();
 	}
 
-	public final String getUnitText() {
-		return unitText == null ? "" : unitText.getValue();
+	public final String getLabel() {
+		return label == null ? "" : label.getText();
 	}
 
-	public final String getErrorMessageText() {
-		return errorMessageText == null ? "" : errorMessageText.getValue();
+	public final String getUnit() {
+		return unit == null ? "" : unit.getText();
 	}
 
-	public final String  getTipTextMessage() {
-		return tipTextMessage == null ? "" : tipTextMessage.getValue();
+	public final String getErrorMessage() {
+		return errorMessage == null ? "" : errorMessage.getText();
 	}
 
-	public final void setLabelText(String labelText) {
-		labelTextProperty().set(labelText);
+	public final String getTipText() {
+		return tipText == null ? "" : tipText.getText();
 	}
 
-	public final void setUnitText(String unitText) {
+	public final void setLabel(String label) {
+		labelProperty().set(label);
+	}
+
+	public final void setUnit(String unitText) {
 		unitTextProperty().set(unitText);
 	}
 
-	public final void setErrorMessageText(String errorMessageText) {
-		errorMessageTextProperty().set(errorMessageText);
+	public final void setErrorMessage(String errorMessageText) {
+		errorMessageProperty().set(errorMessageText);
 	}
 
-	public final void setTipTextMessage(String tipTextMessage) {
-		tipTextMessageProperty().set(tipTextMessage);
+	public final void setTipText(String tipTextMessage) {
+		tipTextProperty().set(tipTextMessage);
 	}
-	
-	//-----------------------------------
+
+	// -----------------------------------
 
 	public String getText() {
 		return this.textField.getText();
+	}
+
+	public void setText(String text) {
+		this.textField.setText(text);
 	}
 
 	public boolean isInlineStyle() {
@@ -213,4 +240,27 @@ public class FXTextField extends HBox {
 		this.preWidth = preWidth;
 	}
 
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
+	}
+	
+	public void setEditAble(boolean editAble) {
+		this.textField.setEditable(editAble);
+	}
+	
+	public boolean getEditAble() {
+		return this.textField.isEditable();
+	}
+
+	public TextField getTextField() {
+		return textField;
+	}
+
+	public void setTextField(TextField textField) {
+		this.textField = textField;
+	}
 }

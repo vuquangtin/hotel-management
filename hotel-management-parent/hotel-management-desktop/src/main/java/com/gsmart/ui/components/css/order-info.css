@@ -8,13 +8,6 @@
 	-fx-text-fill: white ;
 }
 
-.top-bar .top-label {
-	-fx-font-size: 15px;
-	-fx-font-weight: 700;
-	-fx-padding: 15;
-	-fx-pref-width: 450px!important;
-}
-
 .order-info-pane .label {
 	-fx-pref-width: 70px;
 }

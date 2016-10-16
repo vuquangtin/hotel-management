@@ -84,6 +84,7 @@ public class OrderInfoPane extends GridPane{
 	}
 	
 	public HBox getRow(Label label , TextField textField) {
+		textField.setEditable(false);
 		HBox hb = new HBox();
 		label.getStyleClass().add("control-label");
 		label.setPrefSize(100, 10);

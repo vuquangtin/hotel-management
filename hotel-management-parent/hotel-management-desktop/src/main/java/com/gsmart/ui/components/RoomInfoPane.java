@@ -19,8 +19,7 @@ public class RoomInfoPane extends VBox{
 	
 	public RoomInfoPane() {
 		super();
-		setPrefWidth(310);
-		//setSpacing(10);
+		setPrefWidth(320);
 		getStyleClass().add("card");
 		getChildren().add(getTopBar());
 		getChildren().add(getContent());

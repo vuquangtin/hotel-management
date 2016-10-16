@@ -13,8 +13,10 @@ import javafx.scene.control.TableView
 import com.gsmart.model.Room
 import com.gsmart.ui.components.QuickSearchRoomTable
 import com.gsmart.ui.controller.QuickSearchRoomController
+import com.gsmart.ui.controls.FXDateTimePicker
 
-component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith [ "css/quick-search-room.css", "css/application.css" , "css/material-fx-v0_3.css" ] {
+component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith [ "css/quick-search-room.css",
+	"css/application.css", "css/material-fx-v0_3.css" ] {
 	VBox {
 		styleClass : [
 			"quick-search-room-stage"
@@ -41,39 +43,15 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 			style : "-fx-padding : 10px;",
 			spacing : 10,
 			styleClass : [
-					"card"
-				],
-			HBox {
-				styleClass : [
-					"hbox"
-				],
-				spacing : 10,
-				Label {
-					text : "Date in"
-				},
-				DatePicker id dateIn,
-				Label {
-					text : "Time in"
-				},
-				TextField id timeIn {
-					prefWidth : 75
-				}
-			},
-			HBox {
-				styleClass : [
-					"hbox"
-				],
-				spacing : 10,
-				Label {
-					text : "Checkout date"
-				},
-				DatePicker id dateCheckOut,
-				Label {
-					text : "Time out"
-				},
-				TextField id timeCheckOut{
-					prefWidth : 75
-				}
+				"card"
+			],
+			FXDateTimePicker id dateTimePicker {
+				labelPreWidth : 60,
+				isInlineStyle : false,
+				firstDateLabel : "Date in",
+				firstTimeLabel : "Time in",
+				secondDateLabel : "Date out",
+				secondTimeLabel : "Time out"
 			},
 			Button {
 				styleClass : [
@@ -86,7 +64,7 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 				Label {
 					text : "Room Selected"
 				},
-				Text {
+				Text id roomNameTxt {
 
 				}
 			},
@@ -94,7 +72,7 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 				Label {
 					text : "Room Type"
 				},
-				Text {
+				Text id roomTypeTxt {
 
 				}
 			},
@@ -102,7 +80,7 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 				Label {
 					text : "Price"
 				},
-				Text {
+				Text id priceTxt {
 
 				},
 				Label {

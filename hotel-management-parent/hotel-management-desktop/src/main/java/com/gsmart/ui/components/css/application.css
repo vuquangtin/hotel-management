@@ -1,8 +1,4 @@
 
-@font-face {
-	src: url("/com/gsmart/ui/components/font/Material-Design-Iconic-Font.ttf");
-}
-
 .header-label {
 	-fx-font-size: 15px;
 	-fx-font-weight: 700;
@@ -25,3 +21,11 @@
 	-fx-background-color: #FAFAFA;
 }
 
+.field-error {
+	-fx-border-color: rgb(255,0,0)!important;
+}
+
+.error-message {
+	-fx-text-fill: red!important;
+	-fx-font-size: 10px;
+} 

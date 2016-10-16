@@ -5,10 +5,9 @@
 
 <?import java.lang.*?>
 <?import com.gsmart.ui.components.QuickSearchRoomTable?>
+<?import com.gsmart.ui.controls.FXDateTimePicker?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -38,24 +37,7 @@
 		</styleClass>
 	</HBox>
 	<VBox style="-fx-padding : 10px;" spacing="10"> 
-		<HBox spacing="10"> 
-			<Label text="Date in"/> 
-			<DatePicker fx:id="dateIn"/> 
-			<Label text="Time in"/> 
-			<TextField fx:id="timeIn" prefWidth="75"/> 
-			<styleClass>
-				<String fx:value="hbox" />
-			</styleClass>
-		</HBox>
-		<HBox spacing="10"> 
-			<Label text="Checkout date"/> 
-			<DatePicker fx:id="dateCheckOut"/> 
-			<Label text="Time out"/> 
-			<TextField fx:id="timeCheckOut" prefWidth="75"/> 
-			<styleClass>
-				<String fx:value="hbox" />
-			</styleClass>
-		</HBox>
+		<FXDateTimePicker fx:id="dateTimePicker" labelPreWidth="60" isInlineStyle="false" firstDateLabel="Date in" firstTimeLabel="Time in" secondDateLabel="Date out" secondTimeLabel="Time out"/> 
 		<Button text="Find" onAction="#searchRoomByDateAction"> 
 			<styleClass>
 				<String fx:value="find-button" />
@@ -63,15 +45,15 @@
 		</Button>
 		<HBox> 
 			<Label text="Room Selected"/> 
-			<Text/> 
+			<Text fx:id="roomNameTxt"/> 
 		</HBox>
 		<HBox> 
 			<Label text="Room Type"/> 
-			<Text/> 
+			<Text fx:id="roomTypeTxt"/> 
 		</HBox>
 		<HBox> 
 			<Label text="Price"/> 
-			<Text/> 
+			<Text fx:id="priceTxt"/> 
 			<Label text="/ Date"/> 
 		</HBox>
 		<Button text="Select Room" onAction="#seletecRoomAction"> 

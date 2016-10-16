@@ -56,7 +56,7 @@
 	-fx-text-control-title-color: rgb(130.0, 130.0, 130.0);
 	-fx-text-fill: -fx-text-base-color;
 	-dark: rgb(47.0, 52.0, 57.0);
-	-fx-background-color: #E5E5E5;
+	-fx-background-color: #FF5722;
 	/*default font */
 	-fx-font-family: 'Roboto Medium';
 	-fx-font-size: 12.0px;
@@ -705,6 +705,11 @@
  * Text, Text field & Text area                                                *
  *                                                                             *
  ******************************************************************************/
+
+.field-error {
+	-fx-border-color: rgb(255,0,0)!important;
+}
+
 .text {
 	-fx-font-smoothing-type: gray;
 }

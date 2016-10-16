@@ -1,6 +1,8 @@
 package com.gsmart.ui.components;
 
+import com.gsmart.model.Room;
 import com.gsmart.service.model.SearchRoomResult;
+import com.gsmart.ui.controller.QuickSearchRoomController;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.TableColumn;
@@ -8,6 +10,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class QuickSearchRoomTable extends TableView<SearchRoomResult> {
+	private QuickSearchRoomController controller;
+	
 	public QuickSearchRoomTable() {
 		super();
 		init();
@@ -26,7 +30,26 @@ public class QuickSearchRoomTable extends TableView<SearchRoomResult> {
 		distanceCol.setCellValueFactory(new PropertyValueFactory<SearchRoomResult, String>("distance"));
 
 		this.getColumns().addAll(indexCol, roomNameCol, endedTimeCol, distanceCol);
+		
+		this.getSelectionModel().selectedIndexProperty().addListener((object) -> {
+			SearchRoomResult searchRoomResult = this.getSelectionModel().getSelectedItem();
+			if (searchRoomResult != null) {
+				getController().updateSeletedRoomPane(searchRoomResult);
+			}
+		});
 
 		this.setMaxHeight(180);
+	}
+	
+	public Room getRoomSeleted() {
+		return this.getSelectionModel().getSelectedItem().getRoom();
+	}
+	
+	public QuickSearchRoomController getController() {
+		return controller;
+	}
+
+	public void setController(QuickSearchRoomController controller) {
+		this.controller = controller;
 	}
 }

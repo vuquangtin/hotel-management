@@ -18,11 +18,11 @@ import javafx.scene.image.ImageView
 import javafx.scene.image.Image
 import javafx.scene.text.Font
 import com.gsmart.ui.controls.FXTextField
+import com.gsmart.ui.controls.FXDateTimePicker
 
 component OrderRoomStage controlledby OrderRoomController styledwith [ "css/application.css",
 	"css/order-room-stage.css", "css/material-fx-v0_3.css" ] {
 	VBox {
-	//prefHeight : 600,
 		styleClass : [
 			"order-room-stage"
 		],
@@ -57,77 +57,24 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					styleClass : [
 						"card"
 					],
-					HBox {
-						spacing : 10,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Date in"
-						},
-						DatePicker id dateIn,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Time in"
-						},
-						TextField id timeInTxt {
-							promptText : "--:--",
-							prefWidth : 75
-						}
+					FXDateTimePicker id dateTimePicker{
+						isInlineStyle : false,
+						firstDateLabel : "Date in",
+						firstTimeLabel : "Time in",
+						secondDateLabel :"Date out",
+						secondTimeLabel : "Time out"
 					},
-					HBox {
-						spacing : 10,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Checkout date"
-						},
-						DatePicker id dateCheckout,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Time out"
-						},
-						TextField id timeOutTxt {
-							promptText : "--:--",
-							prefWidth : 75
-						}
+					FXTextField id prepayTxt {
+						isInlineStyle : true,
+						label : "Prepay",
+						unit : " VND",
+						fieldName : "prepay"
 					},
-					HBox {
-						spacing : 10,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Prepay"
-						},
-						TextField id prepayTxt,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "VND"
-						}
-					},
-					HBox {
-						spacing : 10,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Promotion"
-						},
-						TextField id promotionTxt,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Percent"
-						}
+					FXTextField id promotionTxt {
+						isInlineStyle : true,
+						label : "Promotion",
+						unit : " Percent",
+						fieldName : "promotion"
 					},
 					HBox {
 						spacing : 10,
@@ -145,13 +92,11 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					HBox {
 						style : "-fx-padding : 10px;",
 						spacing : 10,
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Room"
+						FXTextField id roomTxt {
+							label : "Room",
+							fieldName : "room",
+							editAble : false
 						},
-						TextField id roomTxt,
 						Button {
 							onAction : controllermethod openQuickSeachRoomStage,
 							styleClass : [
@@ -173,41 +118,21 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					styleClass : [
 						"card"
 					],
-					HBox {
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Name"
-						},
-						TextField id customerNameTxt
+					FXTextField id customerNameTxt {
+						label : "Name",
+						fieldName : "customerName"
 					},
-					HBox {
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "ID"
-						},
-						TextField id customerIDTxt
+					FXTextField id customerIDTxt {
+						label : "ID",
+						fieldName : "customerId"
 					},
-					HBox {
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Address"
-						},
-						TextField id customerAddress
+					FXTextField id customerAddress {
+						label : "Address",
+						fieldName : "customerAddress"
 					},
-					HBox {
-						Label {
-							styleClass : [
-								"control-label"
-							],
-							text : "Telephone"
-						},
-						TextField id customerTelephone
+					FXTextField id customerTelephone {
+						label : "Telephone",
+						fieldName : "customerTelephone"
 					},
 					HBox {
 						Label {
@@ -239,12 +164,6 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					"reset-button"
 				],
 				text : "RESET"
-			},
-			Text id errorTextMessage {
-				font : Font {
-					size : 15
-				},
-				fill : "rgb(255,0,0)"
 			}
 		},
 		HBox {

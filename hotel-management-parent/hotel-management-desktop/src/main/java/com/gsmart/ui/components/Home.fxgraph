@@ -13,13 +13,13 @@ import javafx.scene.control.Label
 import com.gsmart.ui.components.OrderTablePane
 import javafx.geometry.Insets
 import com.gsmart.ui.components.RoomInfoPane
-
+import javafx.scene.layout.AnchorPane
 component Home controlledby HomeController styledwith [ "css/home.css", "css/order-info.css",
-	"css/order-table-pane.css", "css/application.css" , "css/material-fx-v0_3.css" ] {
-	BorderPane {
-		prefWidth : 1100,
-		left : VBox {
-			prefWidth : 60,
+	"css/order-table-pane.css", "css/application.css", "css/material-fx-v0_3.css" ] {
+	AnchorPane {
+		VBox {
+			call AnchorPane#leftAnchor : 0,
+			prefWidth : 65,
 			styleClass : [
 				"left-bar"
 			],
@@ -54,10 +54,15 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 				text : "Report"
 			}
 		},
-		right : VBox id content {
+		VBox id content {
+			call AnchorPane#leftAnchor : 65,
+			call AnchorPane#bottomAnchor : 0,
+			call AnchorPane#rightAnchor : 0,
+			call AnchorPane#topAnchor : 0,
 			styleClass : [
 				"content"
 			],
+			fillWidth : true,
 			HBox {
 				styleClass : [
 					"top-menu-bar"
@@ -71,8 +76,8 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 						image : Image {
 							url : location "images/order-room.png"
 						},
-						fitHeight : 45,
-						fitWidth : 45
+						fitHeight : 35,
+						fitWidth : 35
 					},
 					textAlignment : "CENTER",
 					contentDisplay : "TOP",

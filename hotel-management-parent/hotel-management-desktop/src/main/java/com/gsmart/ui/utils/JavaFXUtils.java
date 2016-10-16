@@ -6,6 +6,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class JavaFXUtils {	
+	
+	public JavaFXUtils() {
+		
+	}
 	public static String getTextFieldValue(TextField textField) {
 		if (textField.getText() == null)
 			return "";

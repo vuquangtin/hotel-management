@@ -1,8 +1,8 @@
 .left-bar {
 	-fx-background-color: #FF5722;
-	-fx-fit-to-height: true;
+	-fx-fit-to-height: true!important;
+	-fx-fill-height: true!important;
 }
-
 
 .left-bar-btn {
 	-fx-background-fills: transparent;

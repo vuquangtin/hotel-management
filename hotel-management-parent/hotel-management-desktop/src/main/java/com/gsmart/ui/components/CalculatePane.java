@@ -31,7 +31,7 @@ public class CalculatePane extends VBox{
 	
 	public CalculatePane() {
 		super();
-		setPrefWidth(300);
+		setPrefWidth(310);
 		setSpacing(10);
 		getStyleClass().add("card");
 		
@@ -72,7 +72,6 @@ public class CalculatePane extends VBox{
 		paymentBtn.setText("Payment");
 		paymentBtn.setPadding(new Insets(10));
 		paymentBtn.setFont( new Font("Material-Design-Iconic-Font", 12));
-		
 		Text materialDesignIcon =
 				GlyphsDude.createIcon(MaterialDesignIcon.CALCULATOR , "2.5em");
 				 paymentBtn.setGraphic(materialDesignIcon); 

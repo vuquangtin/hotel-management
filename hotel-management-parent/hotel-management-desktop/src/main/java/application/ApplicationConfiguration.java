@@ -83,6 +83,7 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
+	@Scope("prototype")
 	public FXMLDialog orderRoomDialog() {
 		return new FXMLDialog(orderRoomController(),
 				getClass().getResource("/com/gsmart/ui/components/OrderRoomStage.fxml"), primaryStage, cssFiles,
