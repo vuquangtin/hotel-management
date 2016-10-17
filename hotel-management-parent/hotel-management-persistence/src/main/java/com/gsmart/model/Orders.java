@@ -28,9 +28,9 @@ public class Orders {
 	private Date checkOutAt;
 	
 	private Date paidAt;
-	private Double totalPrice;
-	private Double paymentPrice;
-	private Double prepay;
+	private Double totalPrice = 0.0;
+	private Double paymentPrice = 0.0;
+	private Double prepay = 0.0;
 	
 	@NotEmpty(message = "{NotEmpty.orders.customerName}")
 	private String customerName;

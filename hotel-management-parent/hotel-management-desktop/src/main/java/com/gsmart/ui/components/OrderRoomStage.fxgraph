@@ -163,7 +163,8 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 				styleClass : [
 					"reset-button"
 				],
-				text : "RESET"
+				text : "RESET",
+				onAction : controllermethod resetOrderForm
 			}
 		},
 		HBox {

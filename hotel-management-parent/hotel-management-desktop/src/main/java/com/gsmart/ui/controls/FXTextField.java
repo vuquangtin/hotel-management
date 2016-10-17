@@ -249,7 +249,7 @@ public class FXTextField extends HBox {
 	}
 	
 	public void setEditAble(boolean editAble) {
-		this.textField.setEditable(editAble);
+		this.textField.setEditable(!editAble);
 	}
 	
 	public boolean getEditAble() {

@@ -23,7 +23,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.stage.Modality;
 
 @Component
 public class OrderRoomController implements DialogController {
@@ -79,6 +78,7 @@ public class OrderRoomController implements DialogController {
 	}
 
 	public void updateCheckInInformation(Room room, Date timeIn, Date timeCheckOut) {
+		System.out.println("ROOM NAME :" + room.getName());
 		roomTxt.setUserData(room);
 		roomTxt.setText(room.getName());
 		dateTimePicker.setDateTime(timeIn, timeCheckOut);
@@ -110,8 +110,6 @@ public class OrderRoomController implements DialogController {
 	public boolean isValidOrderInformation() {
 
 		// Firstly , we need to validated date time.
-		System.out.println("STATE ::: " + dateTimePicker.isValidDateTime());
-
 		if (!dateTimePicker.isValidDateTime())
 			return false;
 
@@ -153,9 +151,10 @@ public class OrderRoomController implements DialogController {
 		order.setCustomerAddress(customerAddress.getText());
 		order.setCustomerTelephone(customerTelephone.getText());
 		order.setRoom((Room) roomTxt.getUserData());
+
 		return order;
 	}
-	
+
 	public Double getDoubleValueFromTextField(FXTextField textField) {
 		try {
 			return Double.parseDouble(textField.getText());
@@ -171,8 +170,26 @@ public class OrderRoomController implements DialogController {
 
 	@FXML
 	public void openQuickSeachRoomStage(ActionEvent event) {
-		applicationConfiguration.quickSearchRoomDialog().initModality(Modality.APPLICATION_MODAL);
 		applicationConfiguration.quickSearchRoomDialog().show();
+	}
+
+	@FXML
+	public void resetOrderForm() {
+		this.order = null;
+
+		dateTimePicker.reset();
+		prepayTxt.setText("");
+		promotionTxt.setText("");
+		registrationNotice.setText("");
+		roomTxt.setText("");
+		roomTxt.setUserData(null);
+		customerNameTxt.setText("");
+		customerIDTxt.setText("");
+		customerAddress.setText("");
+		customerTelephone.setText("");
+		customerNotice.setText("");
+
+		this.dateTimePicker.disableDateTimePicker(false);
 	}
 
 	@FXML
@@ -181,6 +198,11 @@ public class OrderRoomController implements DialogController {
 			ordersRepository.save(getOrder());
 			// Call this method will be update order table with new record.
 			homeController.updateOrderTable();
+
+			// And reset all field of form to empty.
+			resetOrderForm();
+			this.dialog.close();
 		}
 	}
+
 }

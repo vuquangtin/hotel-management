@@ -75,7 +75,7 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
-	@Scope("prototype")
+	@Scope("singleton")
 	public FXMLDialog quickSearchRoomDialog() {
 		return new FXMLDialog(quickSearchRoomController(),
 				getClass().getResource("/com/gsmart/ui/components/QuickSearchRoomStage.fxml"), orderRoomDialog(),
@@ -83,7 +83,7 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
-	@Scope("prototype")
+	@Scope("singleton")
 	public FXMLDialog orderRoomDialog() {
 		return new FXMLDialog(orderRoomController(),
 				getClass().getResource("/com/gsmart/ui/components/OrderRoomStage.fxml"), primaryStage, cssFiles,

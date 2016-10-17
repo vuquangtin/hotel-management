@@ -13,20 +13,24 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
 public class QuickSearchRoomController implements DialogController {
-	
+
 	private FXMLDialog dialog;
-	
+
 	@FXML
 	QuickSearchRoomTable quickSearchRoomTable;
 	@Autowired
 	RoomService roomService;
 	@Autowired
 	OrderRoomController orderRoomController;
-	
-	@FXML Text roomNameTxt;
-	@FXML Text roomTypeTxt;
-	@FXML Text priceTxt;
-	@FXML FXDateTimePicker dateTimePicker;
+
+	@FXML
+	Text roomNameTxt;
+	@FXML
+	Text roomTypeTxt;
+	@FXML
+	Text priceTxt;
+	@FXML
+	FXDateTimePicker dateTimePicker;
 
 	@Override
 	public void setDialog(FXMLDialog dialog) {
@@ -48,9 +52,11 @@ public class QuickSearchRoomController implements DialogController {
 
 	@FXML
 	public void seletecRoomAction(ActionEvent event) {
-		orderRoomController.updateCheckInInformation(quickSearchRoomTable.getRoomSeleted(),
-				dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate());
-		this.dialog.close();
+		if (quickSearchRoomTable.getRoomSeleted() != null) {
+			orderRoomController.updateCheckInInformation(quickSearchRoomTable.getRoomSeleted(),
+					dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate());
+			this.dialog.close();
+		}
 	}
 
 	@FXML

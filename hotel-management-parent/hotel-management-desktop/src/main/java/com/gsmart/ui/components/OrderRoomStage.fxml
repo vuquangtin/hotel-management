@@ -98,7 +98,7 @@
 				<String fx:value="add-button" />
 			</styleClass>
 		</Button>
-		<Button fx:id="resetBtn" text="RESET"> 
+		<Button fx:id="resetBtn" text="RESET" onAction="#resetOrderForm"> 
 			<styleClass>
 				<String fx:value="reset-button" />
 			</styleClass>

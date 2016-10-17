@@ -150,6 +150,17 @@ public class FXDateTimePicker extends VBox {
 		firstDateSelected.setValue(DateUtils.asLocalDate(firstDate));
 		secondDateSelected.setValue(DateUtils.asLocalDate(secondDate));
 	}
+	
+	public void reset() {
+		firstDateSelected.getEditor().clear();
+		firstDateSelected.setValue(null);
+		
+		secondDateSelected.getEditor().clear();
+		secondDateSelected.setValue(null);
+		
+		firstTimeTxt.clear();
+		secondTimeTxt.clear();
+	}
 
 	public Date getFirstDate() {
 		calendar.setTime(DateUtils.asDate(firstDateSelected.getValue()));

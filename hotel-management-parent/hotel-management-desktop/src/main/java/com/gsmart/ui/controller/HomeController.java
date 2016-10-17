@@ -28,7 +28,7 @@ public class HomeController implements DialogController {
 
 	@Autowired
 	private RoomCategoryRepository roomCategoryRepository;
-
+	
 	@Autowired
 	private RoomService roomService;
 
