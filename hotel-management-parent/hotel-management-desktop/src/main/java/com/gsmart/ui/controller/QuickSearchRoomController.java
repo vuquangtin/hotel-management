@@ -1,5 +1,7 @@
 package com.gsmart.ui.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.gsmart.service.RoomService;
 import com.gsmart.service.model.SearchRoomResult;
@@ -31,6 +33,10 @@ public class QuickSearchRoomController implements DialogController {
 	Text priceTxt;
 	@FXML
 	FXDateTimePicker dateTimePicker;
+	
+	public void setDateTimeForSearch(Date dataIn , Date dateCheckOut) {
+		dateTimePicker.setDateTime(dataIn, dateCheckOut);
+	}
 
 	@Override
 	public void setDialog(FXMLDialog dialog) {
@@ -47,7 +53,7 @@ public class QuickSearchRoomController implements DialogController {
 	public void updateSeletedRoomPane(SearchRoomResult searchRoomResult) {
 		this.roomNameTxt.setText(searchRoomResult.getRoom().getName());
 		this.roomTypeTxt.setText(searchRoomResult.getRoom().getRoomCategory().getName());
-		this.priceTxt.setText(searchRoomResult.getEndedTime().toString());
+		this.priceTxt.setText(searchRoomResult.getRoom().getRoomCategory().getPrice().toString());
 	}
 
 	@FXML

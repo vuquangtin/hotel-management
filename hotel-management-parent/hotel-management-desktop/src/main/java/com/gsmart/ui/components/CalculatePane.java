@@ -55,7 +55,8 @@ public class CalculatePane extends VBox {
 
 		// hb.setPadding(new Insets(5, 5, 5, 5));
 
-		Label label = new Label("Payment Room");
+		Label label = new Label("Payment");
+		label.setGraphic(GlyphsDude.createIcon(MaterialDesignIcon.CASH_USD, "1.2em"));
 		label.getStyleClass().add("card-title");
 
 		vb.setPrefWidth(160);

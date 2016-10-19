@@ -1,12 +1,16 @@
 package com.gsmart.service.model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import com.gsmart.model.Room;
 
 public class SearchRoomResult {
 	private Room room;
 	private Date dateIn;
+	
+	private final Calendar calendar = GregorianCalendar.getInstance();
 	
 	public SearchRoomResult(Room room, Date dateIn) {
 		super();
@@ -22,9 +26,16 @@ public class SearchRoomResult {
 		return dateIn != null ? dateIn : null;
 	}
 	
-	public long getDistance() {
+	public String getDistance() {
 		Date currentTime = new Date();
-		return dateIn != null ? currentTime.getTime() - dateIn.getTime() : null;
+		if(dateIn != null) {
+			calendar.setTimeInMillis(currentTime.getTime() - dateIn.getTime());
+			return calendar.get(Calendar.DATE) + " Date" + calendar.get(Calendar.HOUR) + " Hour" + calendar.get(Calendar.MINUTE) + " Minute";
+		}
+		if(dateIn.equals(currentTime)) {
+			return "Now";
+		}
+		return "";
 	}
 	
 	public Room getRoom() {

@@ -1,12 +1,14 @@
 .titled-pane {
 	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,
 		1.5);
+		-fx-text-fill: #FFFFFF;
 }
 
 .titled-pane > .title {
-	-fx-background-radius: 0!important;
+	-fx-background-radius: none;
 	-fx-font-weight: bold;
-	-fx-pref-height: 30;
+	-fx-pref-height: 30.0;
+	-fx-background-color: rgb(255.0,128.0,64.0);
 	
 }
 
@@ -18,7 +20,7 @@
 }
 
 .titled-pane .label {
-	-fx-pref-width: 80px;
+	-fx-pref-width: 80.0px;
 }
 
 .order-room-stage {
@@ -31,36 +33,37 @@
 
 
 .order-room-stage .add-button {
-	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 6.0, 0.3, 0,
-		1);
-	-fx-pref-width: 75px;
-	-fx-pref-height: 35px;
+	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.3), 6.0, 0.3, 0.0,
+		1.0);
+	-fx-pref-width: 75.0px;
+	-fx-pref-height: 35.0px;
 	-fx-background-color: blue;
-	-fx-padding: 10px;
+	-fx-padding: 10.0px;
 	-fx-font-weight: bold;
 	-fx-text-fill: white;
 }
 
 .order-room-stage .reset-button {
-	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 6.0, 0.3, 0,
-		1);
-	-fx-pref-width: 75px;
-	-fx-pref-height: 35px;
+	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.3), 6.0, 0.3, 0.0,
+		1.0);
+	-fx-pref-width: 75.0px;
+	-fx-pref-height: 35.0px;
 	-fx-background-color: red;
-	-fx-padding: 10px;
+	-fx-padding: 10.0px;
 	-fx-font-weight: bold;
 	-fx-text-fill: white;
 }
 
 .order-room-stage .quick-search-button {
-	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 6.0, 0.3, 0,
-		1);
+	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.3), 6.0, 0.3, 0.0,
+		1.0);
 	-fx-background-color: violet;
-	-fx-padding: 5px;
+	-fx-padding: 5.0px;
 	-fx-font-weight: bold;
 	-fx-text-fill: white;
 }
 
 .order-room-stage .order-table-label {
-	-fx-font-size: 18px;
+	-fx-font-size: 15.0px;
+	-fx-font-weight: 500.0;
 }

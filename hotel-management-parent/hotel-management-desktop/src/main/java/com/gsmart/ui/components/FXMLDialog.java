@@ -10,6 +10,7 @@ import com.gsmart.ui.controller.DialogController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -42,6 +43,9 @@ public class FXMLDialog extends Stage {
 		
         initOwner(owner);
         initModality(modality);
+        
+        getIcons().add(new Image(getClass().getResource("/com/gsmart/ui/components/images/logo.png").toExternalForm()));
+        setTitle("Hotel Management - Version 1.0.0");
         
         FXMLLoader loader = new FXMLLoader(fxml, bundle);
         try {

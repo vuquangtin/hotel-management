@@ -170,7 +170,9 @@ public class OrderTablePane extends VBox {
 		orderSampler.setCreatedAt(JavaFXUtils.getDatePickerValue(fromDate));
 		orderSampler.setCheckOutAt(JavaFXUtils.getDatePickerValue(toDate));
 		orderSampler.getRoom().setRoomCategory(roomType.getValue());
-
+		
+		System.out.println("Created Date : " + JavaFXUtils.getDatePickerValue(fromDate) );
+		
 		OrdersSpecification ordersSpecification = new OrdersSpecification(orderSampler);
 		table.setItems(FXCollections
 				.observableArrayList(getOrdersRepository().findAll(Specifications.where(ordersSpecification))));

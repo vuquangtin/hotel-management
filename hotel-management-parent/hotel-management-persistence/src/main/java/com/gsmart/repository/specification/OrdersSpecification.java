@@ -47,7 +47,7 @@ public class OrdersSpecification implements Specification<Orders> {
 		 * give.
 		 */
 		if (orderCreiteria.getCreatedAt() != null && orderCreiteria.getCheckOutAt() != null) {
-			predicates.add(cb.or(cb.greaterThan(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()),
+			predicates.add(cb.and(cb.greaterThan(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()),
 					cb.lessThan(root.get(Orders_.checkOutAt), orderCreiteria.getCheckOutAt())));
 		}
 		
@@ -55,14 +55,14 @@ public class OrdersSpecification implements Specification<Orders> {
 		 * Find all order had date created equal or greater.
 		 */
 		if(orderCreiteria.getCreatedAt() != null && orderCreiteria.getCheckOutAt() == null) {
-			predicates.add(cb.greaterThan(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()));
+			predicates.add(cb.greaterThanOrEqualTo(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()));
 		}
 		
 		/**
 		 * Find all order had date checkout equal or less than.
 		 */
 		if(orderCreiteria.getCreatedAt() == null && orderCreiteria.getCheckOutAt() != null) {
-			predicates.add(cb.lessThan(root.get(Orders_.checkOutAt), orderCreiteria.getCreatedAt()));
+			predicates.add(cb.lessThanOrEqualTo(root.get(Orders_.checkOutAt), orderCreiteria.getCheckOutAt()));
 		}
 
 		if (orderCreiteria.getRoom() != null) {

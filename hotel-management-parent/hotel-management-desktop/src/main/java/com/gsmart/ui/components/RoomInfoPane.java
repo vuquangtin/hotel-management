@@ -3,6 +3,8 @@ package com.gsmart.ui.components;
 import com.gsmart.model.Orders;
 import com.gsmart.model.Room;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -29,6 +31,7 @@ public class RoomInfoPane extends VBox{
 		HBox hb = new HBox();
 		//Set Style CSS.
 		Label label = new Label("Room Information");
+		label.setGraphic(GlyphsDude.createIcon(MaterialDesignIcon.FILE_DOCUMENT, "1.2em"));
 		label.getStyleClass().add("card-title");
 		hb.getChildren().add(label);
 		return hb;

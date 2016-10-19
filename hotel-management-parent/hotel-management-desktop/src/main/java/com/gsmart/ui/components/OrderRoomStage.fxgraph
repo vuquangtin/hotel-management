@@ -46,7 +46,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 		},
 		HBox {
 			spacing : 10,
-			style : "-fx-padding : 10px;",
+			style : "-fx-padding : 5px;",
 			TitledPane {
 				styleClass : [
 					"titled-pane"
@@ -108,7 +108,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 				}
 			},
 			TitledPane {
-				prefHeight : 320,
+				prefHeight : 390,
 				styleClass : [
 					"titled-pane"
 				],
@@ -142,7 +142,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 							text : "Notice"
 						},
 						TextArea id customerNotice {
-							prefWidth : 150,
+							prefWidth : 100,
 							prefHeight : 50
 						}
 					}

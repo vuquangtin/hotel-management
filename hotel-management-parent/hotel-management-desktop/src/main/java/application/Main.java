@@ -35,7 +35,7 @@ public class Main extends Application {
 		loadingFrame = new JFrame();
 		loadingFrame.setUndecorated(true);
 		loadingFrame.setSize(400, 400);
-
+		
 		Dimension screenSize, frameSize;
 		int x, y;
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -60,10 +60,8 @@ public class Main extends Application {
 	@Override
 	public void init() throws Exception {
 		showLoadingFrame();
-		
 		applicationContext = SpringApplication.run(getClass(), savedArgs);
 		applicationConfiguration = applicationContext.getBean(ApplicationConfiguration.class);
-		
 		closeLoadingFrame();
 	}
 
@@ -75,7 +73,6 @@ public class Main extends Application {
 	}
 
 	static void launchApp(Class<? extends Application> appClass, String[] args) {
-
 		Main.savedArgs = args;
 		Application.launch(appClass, args);
 	}
@@ -85,7 +82,6 @@ public class Main extends Application {
 		try {
 			new HelloFromBussiness();
 			applicationConfiguration.setPrimaryStage(primaryStage);
-			applicationConfiguration.homeDialog().setTitle("Hotel Management - Version 1.0.0");
 			applicationConfiguration.homeDialog().show();
 		} catch (Exception e) {
 			e.printStackTrace();

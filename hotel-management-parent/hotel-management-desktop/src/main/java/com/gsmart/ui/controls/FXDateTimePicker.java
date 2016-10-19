@@ -138,17 +138,17 @@ public class FXDateTimePicker extends VBox {
 	}
 
 	public void setDateTime(Date firstDate, Date secondDate) {
-		calendar.setTime(firstDate);
-		String firstValue = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
-
-		calendar.setTime(secondDate);
-		String secondTimeValue = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
-
-		firstTimeTxt.setText(firstValue);
-		secondTimeTxt.setText(secondTimeValue);
-
-		firstDateSelected.setValue(DateUtils.asLocalDate(firstDate));
-		secondDateSelected.setValue(DateUtils.asLocalDate(secondDate));
+		if(firstDate != null ) {
+			calendar.setTime(firstDate);
+			firstTimeTxt.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+			firstDateSelected.setValue(DateUtils.asLocalDate(firstDate));
+		}
+		
+		if(secondDate != null) {
+			calendar.setTime(secondDate);
+			secondTimeTxt.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+			secondDateSelected.setValue(DateUtils.asLocalDate(secondDate));
+		}
 	}
 	
 	public void reset() {
@@ -163,21 +163,27 @@ public class FXDateTimePicker extends VBox {
 	}
 
 	public Date getFirstDate() {
-		calendar.setTime(DateUtils.asDate(firstDateSelected.getValue()));
-		String[] timeInArray = firstTimeTxt.getText().split(":");
-		calendar.set(Calendar.HOUR, Integer.parseInt(timeInArray[0]));
-		calendar.set(Calendar.MINUTE, Integer.parseInt(timeInArray[1]));
+		if(firstDateSelected.getValue() != null) {
+			calendar.setTime(DateUtils.asDate(firstDateSelected.getValue()));
+			String[] timeInArray = firstTimeTxt.getText().split(":");
+			calendar.set(Calendar.HOUR, Integer.parseInt(timeInArray[0]));
+			calendar.set(Calendar.MINUTE, Integer.parseInt(timeInArray[1]));
 
-		return calendar.getTime();
+			return calendar.getTime();
+		}
+		return null;
 	}
 
 	public Date getSecondDate() {
-		calendar.setTime(DateUtils.asDate(secondDateSelected.getValue()));
-		String[] timeCheckOutArray = secondTimeTxt.getText().split(":");
-		calendar.set(Calendar.HOUR, Integer.parseInt(timeCheckOutArray[0]));
-		calendar.set(Calendar.MINUTE, Integer.parseInt(timeCheckOutArray[1]));
+		if(secondDateSelected.getValue() != null) {
+			calendar.setTime(DateUtils.asDate(secondDateSelected.getValue()));
+			String[] timeCheckOutArray = secondTimeTxt.getText().split(":");
+			calendar.set(Calendar.HOUR, Integer.parseInt(timeCheckOutArray[0]));
+			calendar.set(Calendar.MINUTE, Integer.parseInt(timeCheckOutArray[1]));
 
-		return calendar.getTime();
+			return calendar.getTime();
+		}
+		return null;
 	}
 
 	public boolean isValidDateTime() {

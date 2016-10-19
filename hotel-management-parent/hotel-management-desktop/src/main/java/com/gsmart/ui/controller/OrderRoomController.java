@@ -1,8 +1,10 @@
 package com.gsmart.ui.controller;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,14 +20,16 @@ import com.gsmart.ui.controls.FXDateTimePicker;
 import com.gsmart.ui.controls.FXTextField;
 
 import application.ApplicationConfiguration;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 @Component
-public class OrderRoomController implements DialogController {
+public class OrderRoomController implements DialogController , Initializable {
 
 	private FXMLDialog dialog;
 	@Autowired
@@ -34,6 +38,8 @@ public class OrderRoomController implements DialogController {
 	private Validator validator;
 	@Autowired
 	private HomeController homeController;
+	@Autowired
+	private QuickSearchRoomController quickSearchRoomController;
 	@Autowired
 	private OrdersRepository ordersRepository;
 	private Orders order;
@@ -78,11 +84,16 @@ public class OrderRoomController implements DialogController {
 	}
 
 	public void updateCheckInInformation(Room room, Date timeIn, Date timeCheckOut) {
-		System.out.println("ROOM NAME :" + room.getName());
 		roomTxt.setUserData(room);
 		roomTxt.setText(room.getName());
 		dateTimePicker.setDateTime(timeIn, timeCheckOut);
 		this.dateTimePicker.disableDateTimePicker(true);
+		
+		updateRoomOrderTable(room);
+	}
+	
+	public void updateRoomOrderTable(Room roomSelected) {
+		roomOrderTable.setItems(FXCollections.observableArrayList(ordersRepository.findByRoom(roomSelected)));
 	}
 
 	public void updateViewComponent() {
@@ -171,6 +182,8 @@ public class OrderRoomController implements DialogController {
 	@FXML
 	public void openQuickSeachRoomStage(ActionEvent event) {
 		applicationConfiguration.quickSearchRoomDialog().show();
+		//This method will send current date time selected to quick search stage.
+		quickSearchRoomController.setDateTimeForSearch(dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate());
 	}
 
 	@FXML
@@ -198,11 +211,16 @@ public class OrderRoomController implements DialogController {
 			ordersRepository.save(getOrder());
 			// Call this method will be update order table with new record.
 			homeController.updateOrderTable();
-
-			// And reset all field of form to empty.
 			resetOrderForm();
 			this.dialog.close();
 		}
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		this.dialog.setOnCloseRequest(event ->{
+			resetOrderForm();
+		});
 	}
 
 }

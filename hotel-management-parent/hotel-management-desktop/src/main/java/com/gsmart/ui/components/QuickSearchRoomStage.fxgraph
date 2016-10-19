@@ -62,7 +62,7 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 			},
 			HBox {
 				Label {
-					text : "Room Selected"
+					text : "Room Selected : "
 				},
 				Text id roomNameTxt {
 
@@ -70,7 +70,7 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 			},
 			HBox {
 				Label {
-					text : "Room Type"
+					text : "Room Type : "
 				},
 				Text id roomTypeTxt {
 
@@ -78,7 +78,7 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 			},
 			HBox {
 				Label {
-					text : "Price"
+					text : "Price : "
 				},
 				Text id priceTxt {
 

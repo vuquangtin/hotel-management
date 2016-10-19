@@ -60,7 +60,7 @@
 	/*default font */
 	-fx-font-family: 'Roboto Medium';
 	-fx-font-size: 12.0px;
-	-fx-disabled-opacity: 0.6;
+	-fx-disabled-opacity: 0.9;
 	/*default colors */
 	-swatch-grey: rgb(200.0, 200.0, 200.0);
 	-swatch-dark-grey: rgb(150.0, 150.0, 150.0);
@@ -404,6 +404,14 @@
 	-fx-border-width: 0;
 }
 
+.date-picker:disabled {
+     -fx-opacity: 0.9;
+}
+
+.date-picker > .date-picker-display-node:disabled {
+    -fx-opacity: 0.9;
+}
+
 /*******************************************************************************
  *                                                                             *
  * HTML Editor 				                       			  				   *
@@ -745,6 +753,14 @@
 
 .text-area:focused, .text-field:focused {
 	-fx-border-color: -swatch-500;
+}
+
+.text-field:readonly {
+	-fx-opacity: 0.9;
+}
+
+.text-field:disabled {
+	-fx-opacity: 0.9;
 }
 
 /*******************************************************************************

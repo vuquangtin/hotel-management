@@ -44,15 +44,15 @@
 			</styleClass>
 		</Button>
 		<HBox> 
-			<Label text="Room Selected"/> 
+			<Label text="Room Selected : "/> 
 			<Text fx:id="roomNameTxt"/> 
 		</HBox>
 		<HBox> 
-			<Label text="Room Type"/> 
+			<Label text="Room Type : "/> 
 			<Text fx:id="roomTypeTxt"/> 
 		</HBox>
 		<HBox> 
-			<Label text="Price"/> 
+			<Label text="Price : "/> 
 			<Text fx:id="priceTxt"/> 
 			<Label text="/ Date"/> 
 		</HBox>
