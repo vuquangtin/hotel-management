@@ -1,5 +1,7 @@
 package com.gsmart.ui.components;
 
+import java.text.NumberFormat;
+
 import com.gsmart.model.Orders;
 
 import de.jensd.fx.glyphs.GlyphsDude;
@@ -43,17 +45,15 @@ public class CalculatePane extends VBox {
 
 	public void setCalculatorInformation(Orders order) {
 		this.orders = order;
-		this.promotionPercentTxt.setText(order.getPromotion().toString());
-		this.totalPriceTxt.setText(order.getTotalPrice().toString());
+		this.promotionPercentTxt.setText(NumberFormat.getNumberInstance().format(order.getPromotion()));
+		this.totalPriceTxt.setText(NumberFormat.getNumberInstance().format(order.getTotalPrice()));
 		Double paymentPrice = (order.getTotalPrice() * (1 - order.getPromotion()));
-		this.paymentPriceTxt.setText(paymentPrice.toString());
+		this.paymentPriceTxt.setText(NumberFormat.getNumberInstance().format(paymentPrice));
 	}
 
 	public HBox getTopBar() {
 		HBox hb = new HBox();
 		VBox vb = new VBox();
-
-		// hb.setPadding(new Insets(5, 5, 5, 5));
 
 		Label label = new Label("Payment");
 		label.setGraphic(GlyphsDude.createIcon(MaterialDesignIcon.CASH_USD, "1.2em"));
@@ -62,7 +62,6 @@ public class CalculatePane extends VBox {
 		vb.setPrefWidth(160);
 		vb.getChildren().add(label);
 		vb.getChildren().add(printInvoicesCheckBox);
-
 		// Set image for payment button.
 		paymentBtn.getStyleClass().add("button-raised");
 		paymentBtn.setDefaultButton(true);
@@ -73,10 +72,8 @@ public class CalculatePane extends VBox {
 		Text materialDesignIcon = GlyphsDude.createIcon(MaterialDesignIcon.CALCULATOR, "2.5em");
 		paymentBtn.setGraphic(materialDesignIcon);
 		materialDesignIcon.setFill(Color.WHITE);
-
 		hb.getChildren().add(vb);
 		hb.getChildren().add(paymentBtn);
-
 		return hb;
 	}
 
@@ -120,7 +117,7 @@ public class CalculatePane extends VBox {
 				Double customerSent = Double.valueOf(newValue);
 
 				Double value = (customerSent - orders.getTotalPrice() * (1 - orders.getPromotion()));
-				this.changePriceTxt.setText(value.toString());
+				this.changePriceTxt.setText(NumberFormat.getNumberInstance().format(value));
 			}
 		});
 	}

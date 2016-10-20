@@ -9,11 +9,12 @@ import javafx.scene.image.ImageView
 import javafx.scene.image.Image
 import javafx.scene.control.Button
 import com.gsmart.ui.components.OrderInfoPane
-
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView
 component OrderInfoPane controlledby HomeController styledwith "css/order-info.css" {
 	VBox {
 		styleClass : [
-			"card"
+			"card",
+			"order-info-pane"
 		],
 		HBox {
 			Label {
@@ -21,7 +22,11 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 					"card-title"
 				],
 				prefWidth : 700,
-				text : "Customer Information"
+				text : "Customer Information",
+				graphic : MaterialDesignIconView {
+					glyphName : "ACCOUNT_STAR",
+					size : "2.5em"
+				}
 			},
 			Button {
 				styleClass : [
@@ -69,6 +74,19 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				contentDisplay : "TOP",
 				text : "Remove"
 			}
+		},
+		Button id receiveRoomBtn {
+			styleClass : [
+				"receive-room-button"
+			],
+			text : "Receive Room",
+			visible : false,
+			graphic : MaterialDesignIconView {
+				glyphName : "KEY",
+				size : "1.5em",
+				fill : "rgb(255,255,255)"
+			},
+			onAction : controllermethod receiveRoom
 		},
 		OrderInfoPane id orderInfoPane {
 		}

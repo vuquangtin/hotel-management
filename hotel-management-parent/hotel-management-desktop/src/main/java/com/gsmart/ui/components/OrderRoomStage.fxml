@@ -7,6 +7,7 @@
 <?import com.gsmart.ui.components.RoomOrderTable?>
 <?import com.gsmart.ui.controls.FXDateTimePicker?>
 <?import com.gsmart.ui.controls.FXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -55,10 +56,13 @@
 				</HBox>
 				<HBox style="-fx-padding : 10px;" spacing="10"> 
 					<FXTextField fx:id="roomTxt" label="Room" fieldName="room" editAble="false"/> 
-					<Button onAction="#openQuickSeachRoomStage" text="Quick search"> 
+					<Button onAction="#openQuickSeachRoomStage" text="Quick Search"> 
 						<styleClass>
 							<String fx:value="quick-search-button" />
 						</styleClass>
+						<graphic>
+							<MaterialDesignIconView glyphName="MAGNIFY_PLUS" size="2em" fill="rgb(255,255,255)"/> 
+						</graphic>
 					</Button>
 				</HBox>
 				<styleClass>
@@ -97,11 +101,17 @@
 			<styleClass>
 				<String fx:value="add-button" />
 			</styleClass>
+			<graphic>
+				<MaterialDesignIconView glyphName="CONTENT_SAVE" size="2em" fill="rgb(255,255,255)"/> 
+			</graphic>
 		</Button>
 		<Button fx:id="resetBtn" text="RESET" onAction="#resetOrderForm"> 
 			<styleClass>
 				<String fx:value="reset-button" />
 			</styleClass>
+			<graphic>
+				<MaterialDesignIconView glyphName="REFRESH" size="2em" fill="rgb(255,255,255)"/> 
+			</graphic>
 		</Button>
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 10px;"> 

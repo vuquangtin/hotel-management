@@ -1,5 +1,9 @@
 package com.gsmart.ui.components;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.gsmart.model.Orders;
 
 import javafx.geometry.Insets;
@@ -42,13 +46,19 @@ public class OrderInfoPane extends GridPane{
 		this.addressTxt.setText(getValidString(order.getCustomerAddress()));
 		this.telephoneTxt.setText(getValidString(order.getCustomerTelephone()));
 		this.idTxt.setText(getValidString(order.getCustomerId()));
-		this.fromDateTxt.setText(getValidString(order.getCreatedAt().toString()));
-		this.toDateTxt.setText(getValidString(order.getCheckOutAt().toString()));
+		this.fromDateTxt.setText(getValidStringDateTime(order.getCreatedAt()));
+		this.toDateTxt.setText(getValidStringDateTime(order.getCheckOutAt()));
 	}
 	
 	public String getValidString(String value) {
 		if(value.isEmpty() || value == null) return "";
 		return value;
+	}
+	
+	public String getValidStringDateTime(Date date) {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		if(date != null) return dateFormat.format(date);
+		return "";
 	}
 	
 	public void renderColumn1 () {

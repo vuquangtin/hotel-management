@@ -35,7 +35,7 @@
 .order-room-stage .add-button {
 	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.3), 6.0, 0.3, 0.0,
 		1.0);
-	-fx-pref-width: 75.0px;
+	-fx-pref-width: 85.0px;
 	-fx-pref-height: 35.0px;
 	-fx-background-color: blue;
 	-fx-padding: 10.0px;
@@ -46,7 +46,7 @@
 .order-room-stage .reset-button {
 	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.3), 6.0, 0.3, 0.0,
 		1.0);
-	-fx-pref-width: 75.0px;
+	-fx-pref-width: 85.0px;
 	-fx-pref-height: 35.0px;
 	-fx-background-color: red;
 	-fx-padding: 10.0px;
@@ -65,5 +65,5 @@
 
 .order-room-stage .order-table-label {
 	-fx-font-size: 15.0px;
-	-fx-font-weight: 500.0;
+	-fx-font-weight: bold;
 }

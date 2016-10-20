@@ -1,13 +1,10 @@
-.order-info-pane {
-	-fx-background-color: #ebeaef;
-}
-
-.top-bar .button {
-	-fx-background-fills: transparent;
-	-fx-background-color: transparent;
-	-fx-text-fill: white ;
-}
-
-.order-info-pane .label {
-	-fx-pref-width: 70px;
+.order-info-pane .receive-room-button {
+	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.3), 6.0, 0.3, 0.0,
+		1.0);
+	-fx-pref-width: 150.0px;
+	-fx-pref-height: 35.0px;
+	-fx-background-color: rgb(255,128,64);
+	-fx-padding: 10.0px;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
 }

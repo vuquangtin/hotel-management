@@ -1,7 +1,10 @@
 package com.gsmart.ui.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gsmart.model.Orders;
 import com.gsmart.repository.OrdersRepository;
 import com.gsmart.repository.RoomCategoryRepository;
 import com.gsmart.service.RoomService;
@@ -16,6 +19,10 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class HomeController implements DialogController {
 	private FXMLDialog dialog;
@@ -46,6 +53,8 @@ public class HomeController implements DialogController {
 
 	@FXML
 	RoomInfoPane roomInfoPane;
+
+	@FXML Button receiveRoomBtn;
 
 	@FXML
 	public void initialize() {
@@ -100,6 +109,30 @@ public class HomeController implements DialogController {
 
 	public OrderInfoPane getOrderInfoPane() {
 		return orderInfoPane;
+	}
+	
+	public void updateReceiveRoomButton(Orders order) {
+		if(order.getStatus() == 1 || order.getStatus() == 2) this.receiveRoomBtn.setVisible(false);
+		else this.receiveRoomBtn.setVisible(true);
+	}
+
+	@FXML public void receiveRoom(ActionEvent event) {
+		Orders order = orderTablePane.getSeletedOrder();
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Receive Room");
+		alert.setHeaderText("For customer " + order.getCustomerName());
+		alert.setContentText("Are you Ok ?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+		    order.setStatus(1);
+		    ordersRepository.save(order);
+		    updateOrderTable();
+		    this.receiveRoomBtn.setVisible(false);
+		} else {
+		    // ... User chose CANCEL or closed the dialog
+		}
 	}
 
 }

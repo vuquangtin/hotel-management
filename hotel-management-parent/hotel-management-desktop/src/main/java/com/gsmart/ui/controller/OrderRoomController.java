@@ -1,6 +1,7 @@
 package com.gsmart.ui.controller;
 
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -81,6 +82,7 @@ public class OrderRoomController implements DialogController , Initializable {
 	public void setOrderInformation(Orders order) {
 		this.order = order;
 		updateViewComponent();
+		if(order.getRoom()!= null) updateRoomOrderTable(order.getRoom());
 	}
 
 	public void updateCheckInInformation(Room room, Date timeIn, Date timeCheckOut) {
@@ -101,8 +103,8 @@ public class OrderRoomController implements DialogController , Initializable {
 			titleStage.setText("Update Order Information");
 
 			dateTimePicker.setDateTime(this.order.getCreatedAt(), this.order.getCheckOutAt());
-			prepayTxt.setText(this.order.getPrepay().toString());
-			promotionTxt.setText(this.order.getPromotion().toString());
+			prepayTxt.setText(NumberFormat.getNumberInstance().format(this.order.getPrepay()));
+			promotionTxt.setText(NumberFormat.getNumberInstance().format(this.order.getPromotion()));
 			registrationNotice.setText(this.order.getDescription());
 			roomTxt.setText(this.order.getRoomName());
 			roomTxt.setUserData(this.order.getRoom());

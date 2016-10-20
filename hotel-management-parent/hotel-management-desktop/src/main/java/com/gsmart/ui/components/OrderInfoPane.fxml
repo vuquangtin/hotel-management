@@ -5,6 +5,7 @@
 
 <?import java.lang.*?>
 <?import com.gsmart.ui.components.OrderInfoPane?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -20,6 +21,9 @@
 			<styleClass>
 				<String fx:value="card-title" />
 			</styleClass>
+			<graphic>
+				<MaterialDesignIconView glyphName="ACCOUNT_STAR" size="2.5em"/> 
+			</graphic>
 		</Label>
 		<Button textAlignment="CENTER" contentDisplay="TOP" text="Edit" onAction="#openEditOrderStage"> 
 			<styleClass>
@@ -58,8 +62,17 @@
 			</graphic>
 		</Button>
 	</HBox>
+	<Button fx:id="receiveRoomBtn" text="Receive Room" visible="false" onAction="#receiveRoom"> 
+		<styleClass>
+			<String fx:value="receive-room-button" />
+		</styleClass>
+		<graphic>
+			<MaterialDesignIconView glyphName="KEY" size="1.5em" fill="rgb(255,255,255)"/> 
+		</graphic>
+	</Button>
 	<OrderInfoPane fx:id="orderInfoPane"/> 
 	<styleClass>
 		<String fx:value="card" />
+		<String fx:value="order-info-pane" />
 	</styleClass>
 </VBox>

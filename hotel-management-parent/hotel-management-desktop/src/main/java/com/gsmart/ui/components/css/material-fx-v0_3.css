@@ -33,11 +33,13 @@
  *                                                                             *
  ******************************************************************************/
 
-/*
+/* 
 @font-face {
-    src: url('/com/gsmart/ui/components/font/Material-Design-Iconic-Font.ttf');
+    src: url('/com/gsmart/ui/components/font/fontawesome-webfont.ttf');
 }
-*/
+*/ 
+
+
 
 .root {
 	/* Swatch Colors - Blue*/
@@ -58,8 +60,8 @@
 	-dark: rgb(47.0, 52.0, 57.0);
 	-fx-background-color: #FF5722;
 	/*default font */
-	-fx-font-family: 'Roboto Medium';
-	-fx-font-size: 12.0px;
+	/*-fx-font-family: 'Roboto Medium';*/
+	/*-fx-font-size: 12.0px;*/
 	-fx-disabled-opacity: 0.9;
 	/*default colors */
 	-swatch-grey: rgb(200.0, 200.0, 200.0);

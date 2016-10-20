@@ -1,6 +1,7 @@
 package com.gsmart.ui.components;
 
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.springframework.data.jpa.domain.Specifications;
 
@@ -15,6 +16,8 @@ import com.gsmart.ui.utils.JavaFXUtils;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -170,9 +173,9 @@ public class OrderTablePane extends VBox {
 		orderSampler.setCreatedAt(JavaFXUtils.getDatePickerValue(fromDate));
 		orderSampler.setCheckOutAt(JavaFXUtils.getDatePickerValue(toDate));
 		orderSampler.getRoom().setRoomCategory(roomType.getValue());
-		
-		System.out.println("Created Date : " + JavaFXUtils.getDatePickerValue(fromDate) );
-		
+
+		System.out.println("Created Date : " + JavaFXUtils.getDatePickerValue(fromDate));
+
 		OrdersSpecification ordersSpecification = new OrdersSpecification(orderSampler);
 		table.setItems(FXCollections
 				.observableArrayList(getOrdersRepository().findAll(Specifications.where(ordersSpecification))));
@@ -182,19 +185,54 @@ public class OrderTablePane extends VBox {
 	public TableView<Orders> getTable() {
 
 		TableColumn<Orders, String> indexCol = new TableColumn<Orders, String>("ID");
-		TableColumn<Orders, String> statusCol = new TableColumn<Orders, String>("Status");
+		TableColumn<Orders, Text> statusCol = new TableColumn<Orders, Text>("Status");
 		TableColumn<Orders, String> customerNameCol = new TableColumn<Orders, String>("Customer Name");
 		TableColumn<Orders, String> roomNameCol = new TableColumn<Orders, String>("Room Name");
-		TableColumn<Orders, Date> fromDateCol = new TableColumn<Orders, Date>("From Date");
-		TableColumn<Orders, Date> toDateCol = new TableColumn<Orders, Date>("To Date");
+		TableColumn<Orders, String> fromDateCol = new TableColumn<Orders, String>("From Date");
+		TableColumn<Orders, String> toDateCol = new TableColumn<Orders, String>("To Date");
 		TableColumn<Orders, Integer> dateNumberCol = new TableColumn<Orders, Integer>("Date Number");
 
 		indexCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("id"));
-		statusCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("roomStatus"));
 		customerNameCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("customerName"));
 		roomNameCol.setCellValueFactory(new PropertyValueFactory<Orders, String>("roomName"));
-		fromDateCol.setCellValueFactory(new PropertyValueFactory<Orders, Date>("createdAt"));
-		toDateCol.setCellValueFactory(new PropertyValueFactory<Orders, Date>("checkOutAt"));
+
+		statusCol.setCellValueFactory(row -> {
+			Text text = null;
+			switch (row.getValue().getStatus()) {
+			case 0: {
+				text = GlyphsDude.createIcon(MaterialDesignIcon.CLOCK, "1em");
+				text.setFill(Color.GRAY);
+				break;
+			}
+			case 1: {
+				text = GlyphsDude.createIcon(MaterialDesignIcon.KEY_VARIANT, "1em");
+				text.setFill(Color.GREEN);
+				break;
+			}
+			case 2: {
+				text = GlyphsDude.createIcon(MaterialDesignIcon.CHECKBOX_MARKED, "1em");
+				text.setFill(Color.BLUEVIOLET);
+				break;
+			}
+			}
+			text.setText(row.getValue().getRoomStatus());
+			return new SimpleObjectProperty<Text>(text);
+		});
+
+		fromDateCol.setCellValueFactory(row -> {
+			SimpleStringProperty property = new SimpleStringProperty();
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			property.setValue(dateFormat.format(row.getValue().getCreatedAt()));
+			return property;
+		});
+
+		toDateCol.setCellValueFactory(row -> {
+			SimpleStringProperty property = new SimpleStringProperty();
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			property.setValue(dateFormat.format(row.getValue().getCheckOutAt()));
+			return property;
+		});
+
 		dateNumberCol.setCellValueFactory(new PropertyValueFactory<Orders, Integer>("numberDate"));
 
 		table.getColumns().addAll(indexCol, statusCol, customerNameCol, roomNameCol, fromDateCol, toDateCol,
@@ -206,6 +244,7 @@ public class OrderTablePane extends VBox {
 				getController().getOrderInfoPane().setOrderInfomation(orderSelected);
 				getController().getCalculatorPane().setCalculatorInformation(orderSelected);
 				getController().getRoomInfoPane().setRoomInformation(orderSelected);
+				getController().updateReceiveRoomButton(orderSelected);
 			}
 		});
 

@@ -19,6 +19,8 @@ import javafx.scene.image.Image
 import javafx.scene.text.Font
 import com.gsmart.ui.controls.FXTextField
 import com.gsmart.ui.controls.FXDateTimePicker
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView
+import javafx.scene.paint.Color
 
 component OrderRoomStage controlledby OrderRoomController styledwith [ "css/application.css",
 	"css/order-room-stage.css", "css/material-fx-v0_3.css" ] {
@@ -57,11 +59,11 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					styleClass : [
 						"card"
 					],
-					FXDateTimePicker id dateTimePicker{
+					FXDateTimePicker id dateTimePicker {
 						isInlineStyle : false,
 						firstDateLabel : "Date in",
 						firstTimeLabel : "Time in",
-						secondDateLabel :"Date out",
+						secondDateLabel : "Date out",
 						secondTimeLabel : "Time out"
 					},
 					FXTextField id prepayTxt {
@@ -102,7 +104,12 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 							styleClass : [
 								"quick-search-button"
 							],
-							text : "Quick search"
+							text : "Quick Search",
+							graphic : MaterialDesignIconView {
+								glyphName : "MAGNIFY_PLUS",
+								size : "2em",
+								fill : "rgb(255,255,255)"
+							}
 						}
 					}
 				}
@@ -157,6 +164,11 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					"add-button"
 				],
 				text : "SAVE",
+				graphic : MaterialDesignIconView {
+					glyphName : "CONTENT_SAVE",
+					size : "2em",
+					fill : "rgb(255,255,255)"
+				},
 				onAction : controllermethod saveOrder
 			},
 			Button id resetBtn {
@@ -164,6 +176,11 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					"reset-button"
 				],
 				text : "RESET",
+				graphic : MaterialDesignIconView {
+					glyphName : "REFRESH",
+					size : "2em",
+					fill : "rgb(255,255,255)"
+				},
 				onAction : controllermethod resetOrderForm
 			}
 		},
