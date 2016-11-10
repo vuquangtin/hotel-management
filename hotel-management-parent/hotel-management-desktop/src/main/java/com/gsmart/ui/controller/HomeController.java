@@ -39,6 +39,8 @@ public class HomeController implements DialogController {
 	@Autowired
 	private RoomService roomService;
 
+	
+	
 	@FXML
 	VBox content;
 
@@ -55,6 +57,8 @@ public class HomeController implements DialogController {
 	RoomInfoPane roomInfoPane;
 
 	@FXML Button receiveRoomBtn;
+	
+	@FXML Button removeRoom;
 
 	@FXML
 	public void initialize() {
@@ -84,6 +88,7 @@ public class HomeController implements DialogController {
 		applicationConfiguration.orderRoomController().setOrderInformation(orderTablePane.getSeletedOrder());
 
 	}
+	
 
 	public void closeDialog() {
 		dialog.close();
@@ -92,6 +97,24 @@ public class HomeController implements DialogController {
 	@Override
 	public void setDialog(FXMLDialog dialog) {
 		this.dialog = dialog;
+	}
+	
+	@FXML
+	public void removeRoom() {
+		
+		Orders orders = orderTablePane.getSeletedOrder();
+		
+		if(orders != null){
+			
+			System.out.println(orders);
+			ordersRepository.delete(orders);
+			updateOrderTable();
+			this.receiveRoomBtn.setVisible(true);
+		}
+		else {
+			System.out.println("no select...");
+		}
+		
 	}
 
 	@FXML
