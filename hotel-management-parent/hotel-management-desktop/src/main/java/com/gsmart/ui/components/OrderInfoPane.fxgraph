@@ -74,7 +74,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
 				text : "Remove",
-				onAction : controllermethod removeRoom
+				onAction : controllermethod removeOrder
 			}
 		},
 		Button id receiveRoomBtn {

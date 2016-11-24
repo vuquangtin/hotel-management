@@ -49,7 +49,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button textAlignment="CENTER" contentDisplay="TOP" text="Remove" onAction="#removeRoom"> 
+		<Button textAlignment="CENTER" contentDisplay="TOP" text="Remove" onAction="#removeOrder"> 
 			<styleClass>
 				<String fx:value="top-bar-btn" />
 			</styleClass>

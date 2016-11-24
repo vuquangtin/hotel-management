@@ -18,11 +18,11 @@ import application.ApplicationConfiguration;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
 
 public class HomeController implements DialogController {
 	private FXMLDialog dialog;
@@ -38,8 +38,6 @@ public class HomeController implements DialogController {
 	
 	@Autowired
 	private RoomService roomService;
-
-	
 	
 	@FXML
 	VBox content;
@@ -100,21 +98,21 @@ public class HomeController implements DialogController {
 	}
 	
 	@FXML
-	public void removeRoom() {
+	public void removeOrder() {
 		
 		Orders orders = orderTablePane.getSeletedOrder();
 		
 		if(orders != null){
+			//Must set order equal null because we don't want to remove 
+			//this room when delete this order.
+			//orders.setRoom(null);
 			
-			System.out.println(orders);
-			ordersRepository.delete(orders);
+			ordersRepository.removeById(orders.getId());
 			updateOrderTable();
-			this.receiveRoomBtn.setVisible(true);
 		}
 		else {
 			System.out.println("no select...");
 		}
-		
 	}
 
 	@FXML

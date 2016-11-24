@@ -2,23 +2,20 @@ package com.gsmart.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
-
-
 @Entity
-@Table(name="orders")
 public class Orders {
 
 	private int id;
@@ -139,7 +136,7 @@ public class Orders {
 		this.description = description;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name = "orders_room_id")
 	public Room getRoom() {
 		return room;
@@ -226,6 +223,11 @@ public class Orders {
 
 	public void setPrepay(Double prepay) {
 		this.prepay = prepay;
+	}
+
+	@Override
+	public String toString() {
+		return this.getRoomName();
 	}
 
 }

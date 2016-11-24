@@ -30,7 +30,7 @@ public class SearchRoomResult {
 		Date currentTime = new Date();
 		if(dateIn != null) {
 			calendar.setTimeInMillis(currentTime.getTime() - dateIn.getTime());
-			return calendar.get(Calendar.DATE) + " Date" + calendar.get(Calendar.HOUR) + " Hour" + calendar.get(Calendar.MINUTE) + " Minute";
+			return calendar.get(Calendar.DATE) + " Date " + calendar.get(Calendar.HOUR) + " Hour " + calendar.get(Calendar.MINUTE) + " Minute ";
 		}
 		if(dateIn.equals(currentTime)) {
 			return "Now";

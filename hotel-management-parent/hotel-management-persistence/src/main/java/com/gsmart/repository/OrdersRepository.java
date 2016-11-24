@@ -12,4 +12,5 @@ import com.gsmart.model.Room;
 public interface OrdersRepository extends JpaRepository<Orders, Integer>  ,  JpaSpecificationExecutor<Orders> {
 	List<Orders> findAll(Specification<Orders> spec);
 	List<Orders> findByRoom(Room room);
+	void removeById(int id);
 }
