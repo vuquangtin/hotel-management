@@ -133,7 +133,7 @@ public class InjectTestingData {
 		Orders order = new Orders();
 		order.setCreatedAt(new Date());
 		order.setCheckOutAt(new Date());
-		order.setCustomerName("Nguyễn Hữu Quyền");
+		order.setCustomerName("Nguy\u1EC5n H\u1EEFu Quy\u1EC1n 123 L\u00E1 l\u00E0 l\u00E1 l\u00E0 ~~");
 		order.setRoom(new Room("A123"));
 		order.setId(1);
 
@@ -151,7 +151,7 @@ public class InjectTestingData {
 			String userHomeDirectory = System.getProperty("user.home");
 			/* Output file location */
 			String outputFile = userHomeDirectory + File.separatorChar + "All-Orders-HotelManagement.pdf";
-
+			
 			/* Convert List to JRBeanCollectionDataSource */
 			JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(orders , false);
 

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-11-24T11:12:02 -->
+<!-- 2016-11-24T22:21:58 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="all-order-report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="873fa284-5b8f-4ad9-a162-7d79e5b0e7a8">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="net.sf.jasperreports.export.character.encoding" value="CP1258"/>
+	<property name="net.sf.jasperreports.default.pdf.embedded" value="True"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -69,11 +71,11 @@
 				<text><![CDATA[Orders Report]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="40" width="100" height="30" uuid="261e921a-3179-4da4-8422-69bde366482d"/>
+				<reportElement x="20" y="45" width="167" height="30" uuid="5062954a-935a-4131-91e3-8df9b01a737f"/>
 				<textElement>
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<text><![CDATA[Quản lí khách sạn]]></text>
+				<text><![CDATA[Quản Lí khách Sạn]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -102,15 +104,18 @@
 							<staticText>
 								<reportElement x="0" y="0" width="80" height="30" uuid="4b26d962-4175-477b-ba16-83c55598fc95"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="true"/>
+									<font fontName="Times New Roman" size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Số thứ tự]]></text>
+								<text><![CDATA[Mã số]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="e46c083b-fe98-4255-89d0-b14d4a7f6436"/>
+								<textElement>
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
@@ -122,10 +127,10 @@
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="80" height="30" uuid="c68fcd21-ce85-4066-88d3-ea4f48bb96df"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" isBold="true"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" markup="rtf">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Tên]]></text>
+								<text><![CDATA[Tên khách hàng]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
@@ -133,7 +138,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="add3521a-8c15-4520-aea3-673d2a088fec"/>
 								<textElement textAlignment="Left">
-									<font fontName="Arial" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+									<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
 							</textField>
@@ -147,7 +152,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="60" height="30" uuid="e6304dce-c961-4d4b-98ae-ecf304c2a56c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="true"/>
+									<font fontName="Times New Roman" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Phòng]]></text>
 							</staticText>
@@ -156,6 +161,9 @@
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="79ca6aa5-ab60-440d-bd7a-d5a77ee51dc5"/>
+								<textElement>
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{room}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
@@ -168,15 +176,18 @@
 							<staticText>
 								<reportElement x="0" y="0" width="100" height="30" uuid="6544ba01-9a87-4bab-a0e3-569712fac327"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="true"/>
+									<font fontName="Times New Roman" size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Ngày đến]]></text>
+								<text><![CDATA[Ngày vào]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="100" height="30" uuid="4c84d2e8-996e-4ced-af09-c4cee1da9e82"/>
+								<textElement>
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{createdAt}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
@@ -189,7 +200,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="30" uuid="b47c7fea-3507-406b-8657-789fbd322eba"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="true"/>
+									<font fontName="Times New Roman" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Ngày trả phòng]]></text>
 							</staticText>
@@ -198,6 +209,9 @@
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="30" uuid="78f818ce-6744-4c6a-bf7d-f1617650a47b"/>
+								<textElement>
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{checkOutAt}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
