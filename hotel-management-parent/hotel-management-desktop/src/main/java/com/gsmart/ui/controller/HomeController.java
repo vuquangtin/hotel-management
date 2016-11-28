@@ -105,8 +105,7 @@ public class HomeController implements DialogController {
 		Orders orders = orderTablePane.getSeletedOrder();
 		
 		if(orders != null){
-			
-			System.out.println(orders);
+			orders.setRoom(null);
 			ordersRepository.delete(orders);
 			updateOrderTable();
 			this.receiveRoomBtn.setVisible(true);

@@ -92,6 +92,8 @@ public class InjectTestingData {
 		System.out.println("Inject Testing Data Completed !!");
 		
 		testFindByNameWithSpecification();
+		
+//		testDeleteOrder();
 	}
 	
 	public void testFindByNameWithSpecification() {
@@ -113,4 +115,10 @@ public class InjectTestingData {
 			System.out.println("SEARCHING RESULT ---- " + "ORDER ID : " + item.getId() + " CUSTOMER NAME : " + item.getCustomerName() + " CREATED AT : " + item.getCreatedAt());
 		}
 	} 
+	
+//	public void testDeleteOrder(){
+//		System.out.println("test delete!");
+//		List<Orders> o = ordersRepository.findAll();
+//		ordersRepository.delete(o);
+//	}
 }
