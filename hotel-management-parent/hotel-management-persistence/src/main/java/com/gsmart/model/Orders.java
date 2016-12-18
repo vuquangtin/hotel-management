@@ -2,9 +2,7 @@ package com.gsmart.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -136,7 +134,7 @@ public class Orders {
 		this.description = description;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "orders_room_id")
 	public Room getRoom() {
 		return room;

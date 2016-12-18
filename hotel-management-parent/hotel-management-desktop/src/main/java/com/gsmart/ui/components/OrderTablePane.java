@@ -228,7 +228,7 @@ public class OrderTablePane extends VBox {
 			property.setValue(dateFormat.format(row.getValue().getCheckOutAt()));
 			return property;
 		});
-
+		
 		dateNumberCol.setCellValueFactory(new PropertyValueFactory<Orders, Integer>("numberDate"));
 
 		table.getColumns().addAll(indexCol, statusCol, customerNameCol, roomNameCol, fromDateCol, toDateCol,

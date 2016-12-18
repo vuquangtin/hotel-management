@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gsmart.model.Orders;
 import com.gsmart.repository.OrdersRepository;
 import com.gsmart.repository.RoomCategoryRepository;
+import com.gsmart.repository.specification.ValidOrderSpecification;
 import com.gsmart.service.RoomService;
 import com.gsmart.ui.components.CalculatePane;
 import com.gsmart.ui.components.FXMLDialog;
@@ -58,6 +59,8 @@ public class HomeController implements DialogController {
 	
 	@FXML Button removeRoom;
 
+	private ValidOrderSpecification validOrderSpec = new ValidOrderSpecification();
+	
 	@FXML
 	public void initialize() {
 		updateOrderTable();
@@ -66,7 +69,7 @@ public class HomeController implements DialogController {
 	public void updateOrderTable() {
 		if (orderTablePane != null) {
 			// Set date for table.
-			orderTablePane.getTableView().setItems(FXCollections.observableArrayList(ordersRepository.findAll()));
+			orderTablePane.getTableView().setItems(FXCollections.observableArrayList(ordersRepository.findAll(validOrderSpec)));
 
 			// Set date for combo box.
 			orderTablePane.getRoomType().setItems(FXCollections.observableArrayList(roomCategoryRepository.findAll()));
@@ -99,19 +102,23 @@ public class HomeController implements DialogController {
 	
 	@FXML
 	public void removeOrder() {
-		
-		Orders orders = orderTablePane.getSeletedOrder();
+		Orders orders = orderTablePane.getSeletedOrder();	
 		
 		if(orders != null){
-			//Must set order equal null because we don't want to remove 
-			//this room when delete this order.
-			//orders.setRoom(null);
-			
-			ordersRepository.removeById(orders.getId());
-			updateOrderTable();
-		}
-		else {
-			System.out.println("no select...");
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Remove Order");
+			alert.setHeaderText("For customer " + orders.getCustomerName());
+			alert.setContentText("Are you Ok ?");
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				//Set status equal -1 mean this order will hidden.
+				orders.setStatus(-1);
+				ordersRepository.save(orders);
+				updateOrderTable();
+			} else {
+			    // ... User chose CANCEL or closed the dialog
+			}
 		}
 	}
 
