@@ -56,7 +56,7 @@
 				</HBox>
 				<HBox style="-fx-padding : 10px;" spacing="10"> 
 					<FXTextField fx:id="roomTxt" label="Room" fieldName="room" editAble="false"/> 
-					<Button onAction="#openQuickSeachRoomStage" text="Quick Search"> 
+					<Button fx:id="quickSearchBtn" onAction="#openQuickSeachRoomStage" text="Quick Search"> 
 						<styleClass>
 							<String fx:value="quick-search-button" />
 						</styleClass>

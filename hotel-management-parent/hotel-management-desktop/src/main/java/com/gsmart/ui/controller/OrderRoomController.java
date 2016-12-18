@@ -30,7 +30,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 @Component
-public class OrderRoomController implements DialogController , Initializable {
+public class OrderRoomController implements DialogController, Initializable {
 
 	private FXMLDialog dialog;
 	@Autowired
@@ -73,6 +73,8 @@ public class OrderRoomController implements DialogController , Initializable {
 	Button resetBtn;
 	@FXML
 	FXDateTimePicker dateTimePicker;
+	@FXML
+	Button quickSearchBtn;
 
 	@FXML
 	public void clicked(ActionEvent event) {
@@ -82,7 +84,6 @@ public class OrderRoomController implements DialogController , Initializable {
 	public void setOrderInformation(Orders order) {
 		this.order = order;
 		updateViewComponent();
-		if(order.getRoom()!= null) updateRoomOrderTable(order.getRoom());
 	}
 
 	public void updateCheckInInformation(Room room, Date timeIn, Date timeCheckOut) {
@@ -90,15 +91,19 @@ public class OrderRoomController implements DialogController , Initializable {
 		roomTxt.setText(room.getName());
 		dateTimePicker.setDateTime(timeIn, timeCheckOut);
 		this.dateTimePicker.disableDateTimePicker(true);
-		
+
 		updateRoomOrderTable(room);
 	}
-	
+
 	public void updateRoomOrderTable(Room roomSelected) {
 		roomOrderTable.setItems(FXCollections.observableArrayList(ordersRepository.findByRoom(roomSelected)));
 	}
 
 	public void updateViewComponent() {
+		
+		//Firstly , we need reset table by way set empty array.
+		roomOrderTable.setItems(FXCollections.observableArrayList());
+		
 		if (this.order != null) {
 			titleStage.setText("Update Order Information");
 
@@ -113,6 +118,11 @@ public class OrderRoomController implements DialogController , Initializable {
 			customerAddress.setText(this.order.getCustomerAddress());
 			customerTelephone.setText(this.order.getCustomerTelephone());
 			customerNotice.setText(this.order.getCustomerNotice());
+			
+			if (this.order.getRoom() != null)
+				updateRoomOrderTable(order.getRoom());
+
+			disableChangeImportantInfo(this.order);
 
 			// We need disable date time picker when order already have room
 			// because it will safer.
@@ -184,7 +194,8 @@ public class OrderRoomController implements DialogController , Initializable {
 	@FXML
 	public void openQuickSeachRoomStage(ActionEvent event) {
 		applicationConfiguration.quickSearchRoomDialog().show();
-		//This method will send current date time selected to quick search stage.
+		// This method will send current date time selected to quick search
+		// stage.
 		quickSearchRoomController.setDateTimeForSearch(dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate());
 	}
 
@@ -207,6 +218,25 @@ public class OrderRoomController implements DialogController , Initializable {
 		this.dateTimePicker.disableDateTimePicker(false);
 	}
 
+	/**
+	 * Using for disable some important field not permit user changing when
+	 * order has created.
+	 */
+	private void disableChangeImportantInfo(Orders orderSelected) {
+
+		// If have date time we must turn off select date time picker.
+		if (this.dateTimePicker.getFirstDate() != null) {
+			this.dateTimePicker.disableDateTimePicker(true);
+		}
+
+		// If have room, mustn't choose new one.
+		if (orderSelected.getRoom() != null) {
+			this.roomTxt.setDisable(true);
+			this.quickSearchBtn.setVisible(false);
+		}
+
+	}
+
 	@FXML
 	public void saveOrder(ActionEvent event) {
 		if (isValidOrderInformation()) {
@@ -220,7 +250,7 @@ public class OrderRoomController implements DialogController , Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.dialog.setOnCloseRequest(event ->{
+		this.dialog.setOnCloseRequest(event -> {
 			resetOrderForm();
 		});
 	}

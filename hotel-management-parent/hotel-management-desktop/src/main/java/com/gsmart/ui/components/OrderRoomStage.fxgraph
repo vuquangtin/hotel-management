@@ -99,7 +99,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 							fieldName : "room",
 							editAble : false
 						},
-						Button {
+						Button id quickSearchBtn{
 							onAction : controllermethod openQuickSeachRoomStage,
 							styleClass : [
 								"quick-search-button"
