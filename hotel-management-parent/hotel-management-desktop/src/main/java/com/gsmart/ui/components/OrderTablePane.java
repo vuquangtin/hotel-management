@@ -23,7 +23,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -62,7 +61,7 @@ public class OrderTablePane extends VBox {
 		getChildren().add(getTable());
 
 		initSearchButtonListener();
-		setPadding(new Insets(10));
+		setPadding(new Insets(5));
 	}
 
 	public HBox getTopBar() {
@@ -95,40 +94,39 @@ public class OrderTablePane extends VBox {
 		// == Initialization Left Pane === //
 
 		// == Initialization Right Pane === //
-		roomType.setPromptText("All room type");
-
+		
 		HBox rightTop = new HBox();
 		rightTop.setPadding(new Insets(10));
 		rightTop.setSpacing(20);
-
-		Label fromDateLbl = new Label("From");
-		Label toDateLbl = new Label("To");
-
-		fromDateLbl.getStyleClass().add("control-label");
-		toDateLbl.getStyleClass().add("control-label");
-
+		
+		// Date picker
+		VBox vb = new VBox();
+		vb.setPadding(new Insets(2));
+		vb.setSpacing(2);
+		
 		fromDate.setPrefWidth(120);
 		toDate.setPrefWidth(120);
 
 		FxDatePickerConverter converter = new FxDatePickerConverter();
-
 		fromDate.setConverter(converter);
 		toDate.setConverter(converter);
-
-		rightTop.getChildren().add(fromDateLbl);
-		rightTop.getChildren().add(fromDate);
-		rightTop.getChildren().add(toDateLbl);
-		rightTop.getChildren().add(toDate);
-
-		Label roomTypeLbl = new Label("Type");
-		roomTypeLbl.getStyleClass().add("control-label");
-		rightTop.getChildren().add(roomTypeLbl);
+		fromDate.setPromptText("From date");
+		toDate.setPromptText("To date");
+		
+		vb.getChildren().add(fromDate);
+		vb.getChildren().add(toDate);
+		
+		rightTop.getChildren().add(vb);
+		// Date picker
+		
+		roomType.setPromptText("All room type");
 		rightTop.getChildren().add(roomType);
 
 		searchButton.getStyleClass().add("button-raised");
 		searchButton.setDefaultButton(true);
 		searchButton.setMnemonicParsing(false);
-		searchButton.setPadding(new Insets(10));
+		searchButton.setPadding(new Insets(5));
+		
 		Text materialDesignIcon = GlyphsDude.createIcon(MaterialDesignIcon.MAGNIFY, "2.5em");
 		materialDesignIcon.setFill(Color.WHITE);
 		searchButton.setGraphic(materialDesignIcon);
@@ -173,8 +171,6 @@ public class OrderTablePane extends VBox {
 		orderSampler.setCreatedAt(JavaFXUtils.getDatePickerValue(fromDate));
 		orderSampler.setCheckOutAt(JavaFXUtils.getDatePickerValue(toDate));
 		orderSampler.getRoom().setRoomCategory(roomType.getValue());
-
-		System.out.println("Created Date : " + JavaFXUtils.getDatePickerValue(fromDate));
 
 		OrdersSpecification ordersSpecification = new OrdersSpecification(orderSampler);
 		table.setItems(FXCollections
@@ -248,7 +244,7 @@ public class OrderTablePane extends VBox {
 			}
 		});
 
-		table.setMaxHeight(255);
+		table.setMaxHeight(200);
 		return table;
 	}
 

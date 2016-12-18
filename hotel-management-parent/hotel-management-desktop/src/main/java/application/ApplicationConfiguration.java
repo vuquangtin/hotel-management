@@ -100,6 +100,6 @@ public class ApplicationConfiguration {
 	@Scope("prototype")
 	public FXMLDialog homeDialog() {
 		return new FXMLDialog(homeController(), getClass().getResource("/com/gsmart/ui/components/Home.fxml"),
-				primaryStage, cssFiles);
+				primaryStage, cssFiles, Modality.WINDOW_MODAL);
 	}
 }

@@ -21,7 +21,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				styleClass : [
 					"card-title"
 				],
-				prefWidth : 700,
+				prefWidth : 420,
 				text : "Customer Information",
 				graphic : MaterialDesignIconView {
 					glyphName : "ACCOUNT_STAR",

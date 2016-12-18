@@ -33,6 +33,7 @@ public class CalculatePane extends VBox {
 	public CalculatePane() {
 		super();
 		setPrefWidth(310);
+		setPrefHeight(305);
 		setSpacing(10);
 		getStyleClass().add("card");
 
