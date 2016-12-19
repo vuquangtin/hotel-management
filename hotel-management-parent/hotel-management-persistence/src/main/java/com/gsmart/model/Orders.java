@@ -169,6 +169,9 @@ public class Orders {
 		case 1: {
 			return "Received";
 		}
+		case 2: {
+			return "Completed";
+		}
 		default:
 			return "Unknown";
 		}

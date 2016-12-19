@@ -81,8 +81,10 @@
 				</BorderPane>
 			</VBox>
 			<VBox spacing="10"> 
-				<CalculatePane fx:id="calculatorPane"/> 
-				<RoomInfoPane fx:id="roomInfoPane"/> 
+				<children>
+					<CalculatePane fx:id="calculatorPane"/> 
+					<RoomInfoPane fx:id="roomInfoPane"/> 
+				</children>
 			</VBox>
 		</HBox>
 		<styleClass>

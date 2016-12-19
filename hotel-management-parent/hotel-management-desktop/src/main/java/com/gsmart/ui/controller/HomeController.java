@@ -1,7 +1,5 @@
 package com.gsmart.ui.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsmart.model.Orders;
@@ -14,19 +12,20 @@ import com.gsmart.ui.components.FXMLDialog;
 import com.gsmart.ui.components.OrderInfoPane;
 import com.gsmart.ui.components.OrderTablePane;
 import com.gsmart.ui.components.RoomInfoPane;
+import com.gsmart.ui.utils.FXDialogController;
 
 import application.ApplicationConfiguration;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
 
 public class HomeController implements DialogController {
 	private FXMLDialog dialog;
+
+	@Autowired
+	CalculatePane cp;
 
 	@Autowired
 	private ApplicationConfiguration applicationConfiguration;
@@ -36,10 +35,10 @@ public class HomeController implements DialogController {
 
 	@Autowired
 	private RoomCategoryRepository roomCategoryRepository;
-	
+
 	@Autowired
 	private RoomService roomService;
-	
+
 	@FXML
 	VBox content;
 
@@ -55,26 +54,48 @@ public class HomeController implements DialogController {
 	@FXML
 	RoomInfoPane roomInfoPane;
 
-	@FXML Button receiveRoomBtn;
-	
-	@FXML Button removeRoom;
+	@FXML
+	Button receiveRoomBtn;
+
+	@FXML
+	Button removeRoom;
 
 	private ValidOrderSpecification validOrderSpec = new ValidOrderSpecification();
-	
+
+
+
 	@FXML
+	/**
+	 * Called after JavaFX initial completed UI components.
+	 */
 	public void initialize() {
+		injectionBeanForComponents();
 		updateOrderTable();
 	}
-
+	
+	/**
+	 * Load again data for table, it will refresh content for table.
+	 */
 	public void updateOrderTable() {
 		if (orderTablePane != null) {
 			// Set date for table.
-			orderTablePane.getTableView().setItems(FXCollections.observableArrayList(ordersRepository.findAll(validOrderSpec)));
+			orderTablePane.getTableView()
+					.setItems(FXCollections.observableArrayList(ordersRepository.findAll(validOrderSpec)));
 
-			// Set date for combo box.
+			// Set data for combo box.
 			orderTablePane.getRoomType().setItems(FXCollections.observableArrayList(roomCategoryRepository.findAll()));
 			orderTablePane.setController(this);
 			orderTablePane.setOrdersRepository(this.ordersRepository);
+		}
+	}
+	
+	/**
+	 * Using for injecting Spring Bean to UI Components. 
+	 */
+	public void injectionBeanForComponents() {
+		if(calculatorPane != null) {
+			calculatorPane.setOrderRepository(ordersRepository);
+			calculatorPane.setHomeController(this);
 		}
 	}
 
@@ -89,7 +110,6 @@ public class HomeController implements DialogController {
 		applicationConfiguration.orderRoomController().setOrderInformation(orderTablePane.getSeletedOrder());
 
 	}
-	
 
 	public void closeDialog() {
 		dialog.close();
@@ -99,32 +119,28 @@ public class HomeController implements DialogController {
 	public void setDialog(FXMLDialog dialog) {
 		this.dialog = dialog;
 	}
-	
+
 	@FXML
 	public void removeOrder() {
-		Orders orders = orderTablePane.getSeletedOrder();	
-		
-		if(orders != null){
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Remove Order");
-			alert.setHeaderText("For customer " + orders.getCustomerName());
-			alert.setContentText("Are you Ok ?");
+		Orders orders = orderTablePane.getSeletedOrder();
 
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK){
-				//Set status equal -1 mean this order will hidden.
+		if (orders != null) {
+			//Check whether user was confirmed this action.
+			boolean isComfirm = FXDialogController.showConfirmationDialog("Remove Order", "Are you sure to remove this order ?",
+					"Of customer " + orders.getCustomerName());
+			
+			if (isComfirm) {
+				// Set status equal -1 mean this order will hidden.
 				orders.setStatus(-1);
 				ordersRepository.save(orders);
 				updateOrderTable();
-			} else {
-			    // ... User chose CANCEL or closed the dialog
 			}
 		}
 	}
 
 	@FXML
 	public void openOrderRoomStage(ActionEvent event) {
-		//Before showing, we need update view.
+		// Before showing, we need update view.
 		applicationConfiguration.orderRoomController().updateViewComponent();
 		applicationConfiguration.orderRoomDialog().show();
 	}
@@ -140,28 +156,27 @@ public class HomeController implements DialogController {
 	public OrderInfoPane getOrderInfoPane() {
 		return orderInfoPane;
 	}
-	
+
 	public void updateReceiveRoomButton(Orders order) {
-		if(order.getStatus() == 1 || order.getStatus() == 2) this.receiveRoomBtn.setVisible(false);
-		else this.receiveRoomBtn.setVisible(true);
+		if (order.getStatus() == 1 || order.getStatus() == 2)
+			this.receiveRoomBtn.setVisible(false);
+		else
+			this.receiveRoomBtn.setVisible(true);
 	}
 
-	@FXML public void receiveRoom(ActionEvent event) {
+	@FXML
+	public void receiveRoom(ActionEvent event) {
 		Orders order = orderTablePane.getSeletedOrder();
 		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Receive Room");
-		alert.setHeaderText("For customer " + order.getCustomerName());
-		alert.setContentText("Are you Ok ?");
-
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
-		    order.setStatus(1);
-		    ordersRepository.save(order);
-		    updateOrderTable();
-		    this.receiveRoomBtn.setVisible(false);
-		} else {
-		    // ... User chose CANCEL or closed the dialog
+		//Check whether user was confirmed this action.
+		boolean isComfirm = FXDialogController.showConfirmationDialog("Receive Room", "Are you sure to Receive this room ?",
+				"For customer " + order.getCustomerName());
+		
+		if (isComfirm) {
+			order.setStatus(1);
+			ordersRepository.save(order);
+			updateOrderTable();
+			this.receiveRoomBtn.setVisible(false);
 		}
 	}
 

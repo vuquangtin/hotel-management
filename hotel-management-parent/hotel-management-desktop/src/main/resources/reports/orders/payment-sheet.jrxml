@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-12-19T11:10:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="payment-sheet" pageWidth="297" pageHeight="421" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Key" uuid="ba321f1e-c4fe-4b7f-af1e-b52f07966c0a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="checkOutAt" class="java.util.Date">
+		<fieldDescription><![CDATA[checkOutAt]]></fieldDescription>
+	</field>
+	<field name="customerName" class="java.lang.String">
+		<fieldDescription><![CDATA[customerName]]></fieldDescription>
+	</field>
+	<field name="roomName" class="java.lang.String">
+		<fieldDescription><![CDATA[roomName]]></fieldDescription>
+	</field>
+	<field name="createdAt" class="java.util.Date">
+		<fieldDescription><![CDATA[createdAt]]></fieldDescription>
+	</field>
+	<field name="paidAt" class="java.util.Date">
+		<fieldDescription><![CDATA[paidAt]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="room" class="com.gsmart.model.Room">
+		<fieldDescription><![CDATA[room]]></fieldDescription>
+	</field>
+	<field name="totalPrice" class="java.lang.Double">
+		<fieldDescription><![CDATA[totalPrice]]></fieldDescription>
+	</field>
+	<field name="paymentPrice" class="java.lang.Double">
+		<fieldDescription><![CDATA[paymentPrice]]></fieldDescription>
+	</field>
+	<field name="prepay" class="java.lang.Double">
+		<fieldDescription><![CDATA[prepay]]></fieldDescription>
+	</field>
+	<field name="promotion" class="java.lang.Double">
+		<fieldDescription><![CDATA[promotion]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="0" width="176" height="30" uuid="aabf2922-7d0b-41d6-963e-f4e955a56109"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hóa Đơn Thanh Toán]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="50" width="100" height="18" uuid="f1411e53-72be-4386-91e5-e06f97349a76"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Mẫu số : 001]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="118" y="30" width="100" height="16" uuid="3d3aa32d-8a25-4f5e-8145-50ccc1169a07"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="80" y="68" width="66" height="20" uuid="c64a29ca-2eaa-4535-8b36-dec2c9794e22"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Mã hóa đơn :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="40" uuid="ec8c1310-bc17-4af2-a7c6-74e743f3aeb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Bauhaus 93" size="16"/>
+				</textElement>
+				<text><![CDATA[Snow Love]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="68" width="106" height="20" uuid="3acf91ea-8243-4ed8-9871-c48405d2dc8d"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="196" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="14" width="60" height="16" uuid="82090544-26b0-4f96-b0a4-4d56526a1ff6"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="34" width="60" height="16" uuid="ece99b15-cd8a-47e0-8351-f2356b7e2b29"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Số phòng 	 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="53" width="60" height="16" uuid="7d87fcf3-bad5-4020-a94c-6615258a0f5e"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Loại phòng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="74" width="60" height="16" uuid="0ecd6763-17f7-46a7-a2ec-5ec15af72691"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Giờ vào]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="95" width="60" height="16" uuid="7ba028fc-9d40-412c-b4c0-c94482ca2a10"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Giờ ra]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="34" width="186" height="16" uuid="5a6dbffb-c84f-41c7-b328-b45a8123e166"/>
+				<textFieldExpression><![CDATA[$F{roomName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="14" width="186" height="16" uuid="68544a11-062f-48e9-9ab2-183b9ad6a855"/>
+				<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="74" width="110" height="16" uuid="86292058-7e7c-47cf-ae4c-0f34b4023651"/>
+				<textFieldExpression><![CDATA[$F{createdAt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="95" width="110" height="16" uuid="bca2818a-53d5-4a7c-b3fa-110cb944d87a"/>
+				<textFieldExpression><![CDATA[$F{paidAt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="53" width="186" height="16" uuid="00fe63c1-88a6-4921-809b-bfc732a2587f"/>
+				<textFieldExpression><![CDATA[$F{room}.getRoomCategory().getName()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="127" width="70" height="17" uuid="da1744c5-c0c2-4343-9988-8460ae242fe0"/>
+				<textFieldExpression><![CDATA[$F{totalPrice}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="127" width="60" height="17" uuid="f5318e27-b51b-4a14-82cc-0b33f35a5581"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tổng tiền]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="195" y="127" width="61" height="17" uuid="5da754da-ac93-4ab7-a129-6c49fe7dfe2c"/>
+				<textFieldExpression><![CDATA[$F{prepay}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="144" y="127" width="49" height="17" uuid="77dbccb9-32c2-4d24-b0f9-2792b043f7f4"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Trả trước]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="150" width="70" height="20" uuid="d0c00cc6-ee6e-48c6-9356-c382b14fb371"/>
+				<textFieldExpression><![CDATA[$F{promotion}*100]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="150" width="60" height="20" uuid="ef95ac77-5e08-4033-a15a-10170d8abd9b"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Giảm giá]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="150" width="25" height="20" uuid="b95c00c7-b284-4b4f-9f9c-f4dcec84e41e"/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="180" width="256" height="1" uuid="e533f9ba-9f80-475c-b149-c4dc345dbc18"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="70" y="0" width="100" height="20" uuid="cee1251d-35ed-464d-b937-1847955921e8"/>
+				<textFieldExpression><![CDATA[$F{paymentPrice}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="20" uuid="bc4cfa63-ba1e-4d80-a125-0a69c25431fb"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Thực thu]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

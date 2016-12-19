@@ -79,5 +79,9 @@
 			<version>6.1.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.hazelcast</groupId>
+			<artifactId>hazelcast</artifactId>
+		</dependency>
 	</dependencies>
 </project>

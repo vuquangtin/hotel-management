@@ -1,8 +1,15 @@
 package com.gsmart.ui.components;
 
 import java.text.NumberFormat;
+import java.util.Date;
+
+import org.springframework.stereotype.Component;
 
 import com.gsmart.model.Orders;
+import com.gsmart.repository.OrdersRepository;
+import com.gsmart.ui.controller.HomeController;
+import com.gsmart.ui.utils.FXDialogController;
+import com.gsmart.ui.utils.ReportController;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
@@ -18,7 +25,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+@Component
 public class CalculatePane extends VBox {
+
+	private OrdersRepository ordersRepository;
+	private HomeController homeController;
 
 	private Button paymentBtn = new Button();
 	private CheckBox printInvoicesCheckBox = new CheckBox("Print invoices");
@@ -40,7 +51,7 @@ public class CalculatePane extends VBox {
 		getChildren().add(getTopBar());
 		getChildren().add(getContent());
 
-		// Setup event handler for text field.
+		// Setup event handler for components.
 		addEventHandler();
 	}
 
@@ -48,7 +59,9 @@ public class CalculatePane extends VBox {
 		this.orders = order;
 		this.promotionPercentTxt.setText(NumberFormat.getNumberInstance().format(order.getPromotion()));
 		this.totalPriceTxt.setText(NumberFormat.getNumberInstance().format(order.getTotalPrice()));
-		Double paymentPrice = (order.getTotalPrice() * (1 - order.getPromotion()));
+		if(order.getPrepay() == null) orders.setPrepay(0.0);
+		
+		Double paymentPrice = (order.getTotalPrice() * (1 - order.getPromotion())) - order.getPrepay();
 		this.paymentPriceTxt.setText(NumberFormat.getNumberInstance().format(paymentPrice));
 	}
 
@@ -63,6 +76,7 @@ public class CalculatePane extends VBox {
 		vb.setPrefWidth(160);
 		vb.getChildren().add(label);
 		vb.getChildren().add(printInvoicesCheckBox);
+
 		// Set image for payment button.
 		paymentBtn.getStyleClass().add("button-raised");
 		paymentBtn.setDefaultButton(true);
@@ -73,6 +87,7 @@ public class CalculatePane extends VBox {
 		Text materialDesignIcon = GlyphsDude.createIcon(MaterialDesignIcon.CALCULATOR, "2.5em");
 		paymentBtn.setGraphic(materialDesignIcon);
 		materialDesignIcon.setFill(Color.WHITE);
+
 		hb.getChildren().add(vb);
 		hb.getChildren().add(paymentBtn);
 		return hb;
@@ -111,7 +126,11 @@ public class CalculatePane extends VBox {
 	}
 
 	public void addEventHandler() {
-		this.customerSentPriceTxt.textProperty().addListener((observable, oldValue, newValue) -> {
+
+		// Default we should print invoice when completed payment.
+		printInvoicesCheckBox.setSelected(true);
+
+		customerSentPriceTxt.textProperty().addListener((observable, oldValue, newValue) -> {
 			// We need check it because user can edit that text field when user
 			// not yet select the order.
 			if (!newValue.isEmpty() && this.orders != null) {
@@ -121,5 +140,44 @@ public class CalculatePane extends VBox {
 				this.changePriceTxt.setText(NumberFormat.getNumberInstance().format(value));
 			}
 		});
+
+		// Set action when user press payment button.
+		paymentBtn.setOnAction(event -> {
+			onClickPaymentButton();
+		});
+	}
+
+	public void onClickPaymentButton() {
+		if (orders != null) {
+			
+			//Check whether user was confirmed this action.
+			boolean isComfirm = FXDialogController.showConfirmationDialog("Payment Order", "Are you sure to payment this order ?",
+					"Order of customer " + orders.getCustomerName());
+			
+			if(isComfirm) {
+				// Status equal 2 mean this order has payment completed.
+				orders.setStatus(2);
+				ordersRepository.save(orders);
+				orders.setPaidAt(new Date());
+				if(orders.getPrepay() == null) orders.setPrepay(0.0);
+				
+				orders.setPaymentPrice(orders.getTotalPrice() * (1 - orders.getPromotion()) - orders.getPrepay() );
+				
+				// Printing invoice if user selected.
+				if (printInvoicesCheckBox.isSelected()) {
+					ReportController.printInvoice(orders);
+				}
+
+				homeController.updateOrderTable();
+			}
+		}
+	}
+
+	public void setOrderRepository(OrdersRepository or) {
+		this.ordersRepository = or;
+	}
+
+	public void setHomeController(HomeController ctrl) {
+		this.homeController = ctrl;
 	}
 }

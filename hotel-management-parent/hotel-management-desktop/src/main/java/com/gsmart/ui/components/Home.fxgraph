@@ -95,8 +95,10 @@ component Home controlledby HomeController styledwith [ "css/home.css", "css/ord
 				},
 				VBox {
 					spacing : 10,
-					CalculatePane id calculatorPane,
-					RoomInfoPane id roomInfoPane
+					children : [
+						CalculatePane id calculatorPane,
+						RoomInfoPane id roomInfoPane
+					]
 				}
 			}
 		}

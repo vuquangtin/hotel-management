@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.UIManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
@@ -28,7 +30,13 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.export.SimpleDocxReportConfiguration;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.view.JasperViewer;
 
 @Component
 public class InjectTestingData {
@@ -133,14 +141,65 @@ public class InjectTestingData {
 		Orders order = new Orders();
 		order.setCreatedAt(new Date());
 		order.setCheckOutAt(new Date());
+		order.setPaidAt(new Date());
 		order.setCustomerName("Nguy\u1EC5n H\u1EEFu Quy\u1EC1n 123 L\u00E1 l\u00E0 l\u00E1 l\u00E0 ~~");
-		order.setRoom(new Room("A123"));
+		order.setRoom(new Room("A123", new RoomCategory("Personal Room")));
 		order.setId(1);
+		order.setPromotion(0.1);
 
 		orders.add(order);
 
-		testJasperReportForOrder(orders);
+		testCreateOrderPaymentSheet(orders.get(0));
+		// testJasperReportForOrder(orders);
 
+	}
+
+	public void testCreateOrderPaymentSheet(Orders order) {
+		System.out.println("TESTING Orders Payment Sheet File Generated .......");
+
+		try {
+			/* User home directory location */
+			String userHomeDirectory = System.getProperty("user.home");
+			/* Output file location */
+			String outputFile = userHomeDirectory + File.separatorChar + "order-payment-HotelManagement.docx";
+
+			/* Map to hold Jasper report Parameters */
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			parameters.put("SomeParameter", "Some thing here");
+
+			/*
+			 * Using compiled version(.jasper) of Jasper report to generate PDF
+			 */
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					"src/main/resources/reports/orders/payment-sheet.jasper", parameters,
+					new JRBeanArrayDataSource(new Orders[] { order }));
+
+			JRDocxExporter export = new JRDocxExporter();
+			export.setExporterInput(new SimpleExporterInput(jasperPrint));
+			export.setExporterOutput(new SimpleOutputStreamExporterOutput(new File(outputFile)));
+
+			SimpleDocxReportConfiguration config = new SimpleDocxReportConfiguration();
+			export.setConfiguration(config);
+
+			export.exportReport();
+
+			try {
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			} catch (Exception e) {
+					
+			}
+				
+			JasperViewer viewer = new JasperViewer(jasperPrint, false);
+			viewer.setVisible(true);
+			viewer.setTitle("Order Payment Sheet");
+
+			
+
+			System.out.println("Orders Payment Sheet File Generated");
+
+		} catch (JRException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	public void testJasperReportForOrder(List<Orders> orders) {
@@ -151,9 +210,9 @@ public class InjectTestingData {
 			String userHomeDirectory = System.getProperty("user.home");
 			/* Output file location */
 			String outputFile = userHomeDirectory + File.separatorChar + "All-Orders-HotelManagement.pdf";
-			
+
 			/* Convert List to JRBeanCollectionDataSource */
-			JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(orders , false);
+			JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(orders, false);
 
 			/* Map to hold Jasper report Parameters */
 			Map<String, Object> parameters = new HashMap<String, Object>();
@@ -162,9 +221,9 @@ public class InjectTestingData {
 			/*
 			 * Using compiled version(.jasper) of Jasper report to generate PDF
 			 */
-			JasperPrint jasperPrint = JasperFillManager.fillReport("src/main/resources/reports/orders/all-order-report.jasper",
-					parameters, new JREmptyDataSource());
-			
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					"src/main/resources/reports/orders/all-order-report.jasper", parameters, new JREmptyDataSource());
+
 			/* outputStream to create PDF */
 			OutputStream outputStream = new FileOutputStream(new File(outputFile));
 
