@@ -1,5 +1,6 @@
 package com.gsmart.ui.utils;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +62,10 @@ public class ReportController {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			
 			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("ItemDataSource", itemsJRBean);
+			parameters.put("OrderItemDataSource", itemsJRBean);
+			parameters.put("fromDate", new Date());
+			parameters.put("toDate", new Date());
+			parameters.put("employeeName", "Nguy\u1EC5n H\u1EEFu Quy\u1EC1n");
 
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
 					"src/main/resources/reports/orders/all-order-report.jasper", parameters, new JREmptyDataSource());	

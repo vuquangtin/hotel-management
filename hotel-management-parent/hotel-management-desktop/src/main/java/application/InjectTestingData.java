@@ -1,9 +1,6 @@
 package application;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,7 +24,6 @@ import com.gsmart.repository.specification.OrdersSpecification;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
@@ -138,19 +134,23 @@ public class InjectTestingData {
 
 	public void testReport() {
 		List<Orders> orders = new ArrayList<>();
-		Orders order = new Orders();
-		order.setCreatedAt(new Date());
-		order.setCheckOutAt(new Date());
-		order.setPaidAt(new Date());
-		order.setCustomerName("Nguy\u1EC5n H\u1EEFu Quy\u1EC1n 123 L\u00E1 l\u00E0 l\u00E1 l\u00E0 ~~");
-		order.setRoom(new Room("A123", new RoomCategory("Personal Room")));
-		order.setId(1);
-		order.setPromotion(0.1);
+		
+		for(int i = 1 ; i <= 25 ; i++) {
+			Orders order = new Orders();
+			order.setId(i);
+			order.setCreatedAt(new Date());
+			order.setCheckOutAt(new Date());
+			order.setPaidAt(new Date());
+			order.setCustomerName("Nguy\u1EC5n H\u1EEFu Quy\u1EC1n 123 L\u00E1 l\u00E0 l\u00E1 l\u00E0 ~~");
+			order.setRoom(new Room("A123", new RoomCategory("Personal Room")));
+			order.setPromotion(0.1);
+			
+			orders.add(order);
+		}
+		
 
-		orders.add(order);
-
-		testCreateOrderPaymentSheet(orders.get(0));
-		// testJasperReportForOrder(orders);
+		//testCreateOrderPaymentSheet(orders.get(0));
+		testJasperReportForOrder(orders);
 
 	}
 
@@ -207,34 +207,40 @@ public class InjectTestingData {
 
 		try {
 			/* User home directory location */
-			String userHomeDirectory = System.getProperty("user.home");
+			//String userHomeDirectory = System.getProperty("user.home");
 			/* Output file location */
-			String outputFile = userHomeDirectory + File.separatorChar + "All-Orders-HotelManagement.pdf";
+			//String outputFile = userHomeDirectory + File.separatorChar + "All-Orders-HotelManagement.pdf";
 
 			/* Convert List to JRBeanCollectionDataSource */
 			JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(orders, false);
 
 			/* Map to hold Jasper report Parameters */
 			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("ItemDataSource", itemsJRBean);
+			parameters.put("OrderItemDataSource", itemsJRBean);
+			parameters.put("fromDate", new Date());
+			parameters.put("toDate", new Date());
+			parameters.put("employeeName", "Nguy\u1EC5n H\u1EEFu Quy\u1EC1n");
 
 			/*
 			 * Using compiled version(.jasper) of Jasper report to generate PDF
 			 */
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
 					"src/main/resources/reports/orders/all-order-report.jasper", parameters, new JREmptyDataSource());
+			
+			
+			JasperViewer viewer = new JasperViewer(jasperPrint, false);
+			viewer.setVisible(true);
+			viewer.setTitle("Order Payment Sheet");
 
-			/* outputStream to create PDF */
-			OutputStream outputStream = new FileOutputStream(new File(outputFile));
-
-			/* Write content to PDF file */
-			JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+//			/* outputStream to create PDF */
+//			OutputStream outputStream = new FileOutputStream(new File(outputFile));
+//
+//			/* Write content to PDF file */
+//			JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
 
 			System.out.println("Orders Report File Generated");
 
 		} catch (JRException ex) {
-			ex.printStackTrace();
-		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
 		}
 	}

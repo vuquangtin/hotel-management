@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-19T11:10:16 -->
+<!-- 2016-12-23T14:34:05 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="payment-sheet" pageWidth="297" pageHeight="421" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Key" uuid="ba321f1e-c4fe-4b7f-af1e-b52f07966c0a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -52,7 +52,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="106" splitType="Stretch">
+		<band height="138" splitType="Stretch">
 			<staticText>
 				<reportElement x="80" y="0" width="176" height="30" uuid="aabf2922-7d0b-41d6-963e-f4e955a56109"/>
 				<textElement textAlignment="Center">
@@ -80,8 +80,8 @@
 				<text><![CDATA[Mã hóa đơn :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="70" height="40" uuid="ec8c1310-bc17-4af2-a7c6-74e743f3aeb5"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
+				<reportElement x="0" y="0" width="80" height="60" uuid="ec8c1310-bc17-4af2-a7c6-74e743f3aeb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Bauhaus 93" size="16"/>
 				</textElement>
 				<text><![CDATA[Snow Love]]></text>
@@ -90,6 +90,22 @@
 				<reportElement x="150" y="68" width="106" height="20" uuid="3acf91ea-8243-4ed8-9871-c48405d2dc8d"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="16" uuid="ec7597ce-811c-45b3-a568-7ed1bcf488a2"/>
+				<text><![CDATA[Sơn Trà , Đà Nẵng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="100" width="55" height="16" uuid="5b35e1a1-eae0-4de2-b116-18fc931fdbd7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điện thoại:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="100" width="63" height="16" uuid="8ed77c3d-d8c5-440e-ba2e-1ebd80334d86"/>
+				<text><![CDATA[0934 945 891
+]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
@@ -195,17 +211,22 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="50" splitType="Stretch">
+		<band height="70" splitType="Stretch">
 			<textField>
-				<reportElement x="70" y="0" width="100" height="20" uuid="cee1251d-35ed-464d-b937-1847955921e8"/>
+				<reportElement x="85" y="0" width="100" height="20" uuid="cee1251d-35ed-464d-b937-1847955921e8"/>
 				<textFieldExpression><![CDATA[$F{paymentPrice}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="60" height="20" uuid="bc4cfa63-ba1e-4d80-a125-0a69c25431fb"/>
+				<reportElement x="0" y="0" width="80" height="20" uuid="bc4cfa63-ba1e-4d80-a125-0a69c25431fb"/>
 				<textElement>
-					<font isBold="true" isItalic="true"/>
+					<font size="14" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Thực thu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="50" width="179" height="20" uuid="f525906b-fa57-4ae5-ac65-70159d7a572d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Xin Cảm Ơn Và Hẹn Gặp Lại !]]></text>
 			</staticText>
 		</band>
 	</summary>
