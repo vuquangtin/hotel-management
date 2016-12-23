@@ -180,4 +180,9 @@ public class HomeController implements DialogController {
 		}
 	}
 
+	@FXML public void openReportManagedDialog(ActionEvent event) {
+		applicationConfiguration.reportSelectionManagedDialog().show();
+	}
+
+
 }

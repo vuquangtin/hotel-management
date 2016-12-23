@@ -17,7 +17,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HomeController">
 
 	<HBox> 
-		<Label prefWidth="420" text="Customer Information"> 
+		<Label prefWidth="620" text="Customer Information"> 
 			<styleClass>
 				<String fx:value="card-title" />
 			</styleClass>

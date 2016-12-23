@@ -107,8 +107,8 @@ public class InjectTestingData {
 
 		System.out.println("Inject Testing Data Completed !!");
 
-		testFindByNameWithSpecification();
-		testJasperReportForOrder(ordersRepository.findAll());
+		//testFindByNameWithSpecification();
+		//testJasperReportForOrder(ordersRepository.findAll());
 	}
 
 	public void testFindByNameWithSpecification() {
@@ -149,8 +149,8 @@ public class InjectTestingData {
 		}
 		
 
-		//testCreateOrderPaymentSheet(orders.get(0));
-		testJasperReportForOrder(orders);
+		testCreateOrderPaymentSheet(orders.get(0));
+		//testJasperReportForOrder(orders);
 
 	}
 

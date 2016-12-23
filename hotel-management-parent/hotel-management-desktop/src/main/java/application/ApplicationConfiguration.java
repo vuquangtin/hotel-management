@@ -14,6 +14,7 @@ import com.gsmart.ui.components.OrderTablePane;
 import com.gsmart.ui.controller.HomeController;
 import com.gsmart.ui.controller.OrderRoomController;
 import com.gsmart.ui.controller.QuickSearchRoomController;
+import com.gsmart.ui.controller.ReportManagedController;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,7 +28,7 @@ public class ApplicationConfiguration {
 
 	private final String[] cssFiles = { "css/home.css", "css/order-info.css", "css/order-table-pane.css",
 			"css/material-fx-v0_3.css", "css/application.css", "css/quick-search-room.css",
-			"css/order-room-stage.css" };
+			"css/order-room-stage.css" , "css/report-selection-stage.css" };
 
 	private Stage primaryStage;
 
@@ -72,6 +73,20 @@ public class ApplicationConfiguration {
 	@Scope("singleton")
 	public QuickSearchRoomController quickSearchRoomController() {
 		return new QuickSearchRoomController();
+	}
+	
+	@Bean
+	@Scope("singleton")
+	public ReportManagedController ReportManagedController() {
+		return new ReportManagedController();
+	}
+	
+	@Bean
+	@Scope("singleton")
+	public FXMLDialog reportSelectionManagedDialog() {
+		return new FXMLDialog(ReportManagedController(),
+				getClass().getResource("/com/gsmart/ui/components/ReportSelectionStage.fxml"), primaryStage,
+				cssFiles, Modality.WINDOW_MODAL);
 	}
 
 	@Bean

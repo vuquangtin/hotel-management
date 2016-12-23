@@ -1,0 +1,37 @@
+.report-selection-stage .select-button {
+	-fx-pref-width: 200px;
+	-fx-pref-height: 55px;
+	-fx-fill-width: true;
+	-fx-background-color: rgb(255,255,0);
+	-fx-text-fill: rgb(128,0,0);
+	
+	-fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, rgb(232,232,0) 0%, rgb(232,232,0) 100%),
+        rgb(225,225,0),
+        rgb(230,230,0),
+        radial-gradient(center 50% 50%, radius 100%, rgb(255,255,0), rgb(255,255,0));
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+.report-selection-stage .select-button:hover {
+	-fx-text-fill: rgb(135,10,10);
+	-fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, rgb(200,200,0) 0%, rgb(225,225,0) 100%),
+        rgb(219,219,0),
+        rgb(220,220,0),
+        radial-gradient(center 50% 50%, radius 100%, rgb(265,265,0), rgb(265,265,0));
+}
+
+.report-selection-stage .select-button:pressed {
+	-fx-text-fill: rgb(135,10,10);
+	-fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, rgb(190,190,0) 0%, rgb(225,225,0) 100%),
+        rgb(219,219,0)
+        rgb(255,255,60),
+        radial-gradient(center 60% 60%, radius 100%, rgb(255,255,85), rgb(255,255,85));
+}

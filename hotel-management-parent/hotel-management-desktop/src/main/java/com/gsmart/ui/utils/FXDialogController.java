@@ -2,11 +2,15 @@ package com.gsmart.ui.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.gsmart.ui.controls.FXDateTimePicker;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Dialog;
@@ -14,9 +18,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 public class FXDialogController {
 
@@ -189,7 +195,7 @@ public class FXDialogController {
 		alert.setHeaderText(headerText);
 		alert.setContentText(message);
 		setDialogIcon(alert);
-		
+
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
@@ -197,6 +203,33 @@ public class FXDialogController {
 		} else {
 			return false;
 		}
+	}
+
+	public static Optional<Pair<Date, Date>> showDateTimePickterDialog(String title, String headerText, String message) {
+		Dialog<Pair<Date, Date>> dialog = new Dialog<>();
+		dialog.setTitle(title);
+		dialog.setHeaderText(headerText);
+		dialog.setContentText(message);
+
+		// Set the icon (must be included in the project).
+		dialog.setGraphic(new ImageView(FXDialogController.class.getResource("/com/gsmart/ui/components/images/date-time-picker.png").toString()));
+		
+		// Set the button types.
+		ButtonType submitButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(submitButtonType, ButtonType.CANCEL);
+
+		FXDateTimePicker dateTimePicker = new FXDateTimePicker(false, "From date", "Time", "To date", "Time");
+		dialog.getDialogPane().setContent(dateTimePicker);
+		
+		// Convert the result to a date date -pair when the submit button is clicked.
+		dialog.setResultConverter(dialogButton -> {
+		    if (dialogButton == submitButtonType) {
+		        return new Pair<>(dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate());
+		    }
+		    return null;
+		});
+		
+		return dialog.showAndWait();
 	}
 
 }
