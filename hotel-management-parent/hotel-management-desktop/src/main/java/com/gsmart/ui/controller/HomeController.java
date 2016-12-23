@@ -140,9 +140,9 @@ public class HomeController implements DialogController {
 
 	@FXML
 	public void openOrderRoomStage(ActionEvent event) {
-		// Before showing, we need update view.
-		applicationConfiguration.orderRoomController().updateViewComponent();
 		applicationConfiguration.orderRoomDialog().show();
+		// After showing, we need update UI components view.
+		applicationConfiguration.orderRoomController().preparedForCreateNewOne();
 	}
 
 	public CalculatePane getCalculatorPane() {

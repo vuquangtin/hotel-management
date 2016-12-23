@@ -54,7 +54,12 @@ public class CalculatePane extends VBox {
 		// Setup event handler for components.
 		addEventHandler();
 	}
-
+	
+	/**
+	 * Used for render information of selected order to form.
+	 * <p>
+	 * @param order - Selected order from user.
+	 */
 	public void setCalculatorInformation(Orders order) {
 		this.orders = order;
 		this.promotionPercentTxt.setText(NumberFormat.getNumberInstance().format(order.getPromotion()));
@@ -63,6 +68,21 @@ public class CalculatePane extends VBox {
 		
 		Double paymentPrice = (order.getTotalPrice() * (1 - order.getPromotion())) - order.getPrepay();
 		this.paymentPriceTxt.setText(NumberFormat.getNumberInstance().format(paymentPrice));
+		
+		//Checking for render payment button.
+		
+		//If order status equal 0 . it mean this order still not received.
+		if(order.getStatus() == 0) 
+			this.paymentBtn.setDisable(true);
+		//Of status equal 2. It mean this order has paid. We must remove payment button.
+		else if (order.getStatus() == 2)
+			this.paymentBtn.setVisible(false);
+		//Else if status equal 1. It mean order is activity.
+		else {
+			this.paymentBtn.setDisable(false);
+			this.paymentBtn.setVisible(true);
+		}
+		
 	}
 
 	public HBox getTopBar() {
@@ -70,9 +90,9 @@ public class CalculatePane extends VBox {
 		VBox vb = new VBox();
 
 		Label label = new Label("Payment");
-		label.setGraphic(GlyphsDude.createIcon(MaterialDesignIcon.CASH_USD, "1.2em"));
+		label.setGraphic(GlyphsDude.createIcon(MaterialDesignIcon.CASH_USD, "1.4em"));
 		label.getStyleClass().add("card-title");
-
+		
 		vb.setPrefWidth(160);
 		vb.getChildren().add(label);
 		vb.getChildren().add(printInvoicesCheckBox);

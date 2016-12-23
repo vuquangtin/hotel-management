@@ -43,7 +43,6 @@ public class OrderRoomController implements DialogController, Initializable {
 	private QuickSearchRoomController quickSearchRoomController;
 	@Autowired
 	private OrdersRepository ordersRepository;
-	private Orders order;
 
 	@FXML
 	RoomOrderTable roomOrderTable;
@@ -76,16 +75,30 @@ public class OrderRoomController implements DialogController, Initializable {
 	@FXML
 	Button quickSearchBtn;
 
+	private Orders selectedOrder;
+
 	@FXML
 	public void clicked(ActionEvent event) {
+
 		this.dialog.close();
 	}
 
 	public void setOrderInformation(Orders order) {
-		this.order = order;
-		updateViewComponent();
+		// We need to hold selected order by user from table, because we need it
+		// ID for update data.
+		this.selectedOrder = order;
+		renderViewComponent(order);
 	}
 
+	/**
+	 * Update form data after user used Quick Search Room method. Must turn off
+	 * date time picker and disable seletecd room again.
+	 * <p>
+	 * 
+	 * @param room
+	 * @param timeIn
+	 * @param timeCheckOut
+	 */
 	public void updateCheckInInformation(Room room, Date timeIn, Date timeCheckOut) {
 		roomTxt.setUserData(room);
 		roomTxt.setText(room.getName());
@@ -95,34 +108,61 @@ public class OrderRoomController implements DialogController, Initializable {
 		updateRoomOrderTable(room);
 	}
 
+	/**
+	 * Get data of current selected room by user.
+	 * <p>
+	 */
 	public void updateRoomOrderTable(Room roomSelected) {
 		roomOrderTable.setItems(FXCollections.observableArrayList(ordersRepository.findByRoom(roomSelected)));
 	}
 
-	public void updateViewComponent() {
-		
-		//Firstly , we need reset table by way set empty array.
-		roomOrderTable.setItems(FXCollections.observableArrayList());
-		
-		if (this.order != null) {
+	/**
+	 * Using for reset all fields if user want to create new one.
+	 */
+	public void preparedForCreateNewOne() {
+		// Firstly , we need reset table by way set empty array.
+		if (roomOrderTable != null)
+			roomOrderTable.setItems(FXCollections.observableArrayList());
+
+		// Change title of dialog.
+		if (titleStage != null)
+			titleStage.setText("Create New Order");
+
+		// Need to call method reset to empty all fields and turn on Quick
+		// Search Room.
+		resetOrderForm();
+	}
+
+	/**
+	 * If take data from {@Order} object and binding to form.
+	 * <p>
+	 * 
+	 * @param order
+	 *            - Selected order for showing by user.
+	 */
+	public void renderViewComponent(Orders order) {
+
+		// For safe we need to check.
+		if (order != null) {
 			titleStage.setText("Update Order Information");
 
-			dateTimePicker.setDateTime(this.order.getCreatedAt(), this.order.getCheckOutAt());
-			prepayTxt.setText(NumberFormat.getNumberInstance().format(this.order.getPrepay()));
-			promotionTxt.setText(NumberFormat.getNumberInstance().format(this.order.getPromotion()));
-			registrationNotice.setText(this.order.getDescription());
-			roomTxt.setText(this.order.getRoomName());
-			roomTxt.setUserData(this.order.getRoom());
-			customerNameTxt.setText(this.order.getCustomerName());
-			customerIDTxt.setText(this.order.getCustomerId());
-			customerAddress.setText(this.order.getCustomerAddress());
-			customerTelephone.setText(this.order.getCustomerTelephone());
-			customerNotice.setText(this.order.getCustomerNotice());
-			
-			if (this.order.getRoom() != null)
+			dateTimePicker.setDateTime(order.getCreatedAt(), order.getCheckOutAt());
+			prepayTxt.setText(NumberFormat.getNumberInstance().format(order.getPrepay()));
+			promotionTxt.setText(NumberFormat.getNumberInstance().format(order.getPromotion()));
+			registrationNotice.setText(order.getDescription());
+			roomTxt.setText(order.getRoomName());
+			roomTxt.setUserData(order.getRoom());
+			customerNameTxt.setText(order.getCustomerName());
+			customerIDTxt.setText(order.getCustomerId());
+			customerAddress.setText(order.getCustomerAddress());
+			customerTelephone.setText(order.getCustomerTelephone());
+			customerNotice.setText(order.getCustomerNotice());
+
+			if (order.getRoom() != null)
 				updateRoomOrderTable(order.getRoom());
 
-			disableChangeImportantInfo(this.order);
+			// Need to verify some field important.
+			disableChangeImportantInfo(order);
 
 			// We need disable date time picker when order already have room
 			// because it will safer.
@@ -130,6 +170,12 @@ public class OrderRoomController implements DialogController, Initializable {
 		}
 	}
 
+	/**
+	 * Used for bean validation, it's help we bind error message to form.
+	 * <p>
+	 * 
+	 * @return TRUE if data is valid and FALSE if not.
+	 */
 	public boolean isValidOrderInformation() {
 
 		// Firstly , we need to validated date time.
@@ -159,9 +205,21 @@ public class OrderRoomController implements DialogController, Initializable {
 				customerTelephone);
 	}
 
+	/**
+	 * Get order information from form data user entry.
+	 * <p>
+	 * 
+	 * @return Orders - Information user entry.
+	 */
 	public Orders getOrder() {
-		if (this.order == null)
-			this.order = new Orders();
+		Orders order;
+
+		// We must do this, because if not. JPA will be create new one object
+		// because it don't have ID.
+		if (this.selectedOrder != null)
+			order = this.selectedOrder;
+		else
+			order = new Orders();
 
 		order.setCreatedAt(dateTimePicker.getFirstDate());
 		order.setCheckOutAt(dateTimePicker.getSecondDate());
@@ -173,7 +231,11 @@ public class OrderRoomController implements DialogController, Initializable {
 		order.setCustomerId(customerIDTxt.getText());
 		order.setCustomerAddress(customerAddress.getText());
 		order.setCustomerTelephone(customerTelephone.getText());
-		order.setRoom((Room) roomTxt.getUserData());
+
+		if (roomTxt.getUserData() != null)
+			order.setRoom((Room) roomTxt.getUserData());
+		else
+			order.setRoom(null);
 
 		return order;
 	}
@@ -201,8 +263,6 @@ public class OrderRoomController implements DialogController, Initializable {
 
 	@FXML
 	public void resetOrderForm() {
-		this.order = null;
-
 		dateTimePicker.reset();
 		prepayTxt.setText("");
 		promotionTxt.setText("");
@@ -214,8 +274,9 @@ public class OrderRoomController implements DialogController, Initializable {
 		customerAddress.setText("");
 		customerTelephone.setText("");
 		customerNotice.setText("");
-
 		this.dateTimePicker.disableDateTimePicker(false);
+		this.roomTxt.setDisable(false);
+		this.quickSearchBtn.setVisible(true);
 	}
 
 	/**
