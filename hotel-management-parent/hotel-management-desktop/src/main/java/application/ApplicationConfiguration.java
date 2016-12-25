@@ -1,5 +1,7 @@
 package application;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import com.gsmart.repository.UserSettingRepository;
 import com.gsmart.ui.components.FXMLDialog;
 import com.gsmart.ui.components.OrderTablePane;
 import com.gsmart.ui.controller.HomeController;
@@ -39,6 +42,13 @@ public class ApplicationConfiguration {
 	public void showScreen(Parent screen) {
 		primaryStage.setScene(new Scene(screen, 777, 500));
 		primaryStage.show();
+	}
+	
+	@PostConstruct
+	public void initApplicationSetting() {
+		UserSettingRepository userSettingRepo = new UserSettingRepository();
+		//Set user setting for application.
+		ApplicationSetting.userSetting = userSettingRepo.getUserSetting();
 	}
 
 	@Bean(name = "validationMessageSource")

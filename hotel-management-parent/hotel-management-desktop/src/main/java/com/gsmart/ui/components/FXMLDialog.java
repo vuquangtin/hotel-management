@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.gsmart.ui.controller.DialogController;
 
+import application.ApplicationSetting;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -39,7 +40,7 @@ public class FXMLDialog extends Stage {
         super(style);
    
 		ResourceBundle bundle = ResourceBundle.getBundle("com.gsmart.ui.components.locale.messages",
-				new Locale("vi", "VN"));
+				new Locale(ApplicationSetting.userSetting.getLocale()));
 		
         initOwner(owner);
         initModality(modality);
