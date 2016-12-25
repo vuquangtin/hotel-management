@@ -1,5 +1,8 @@
 package com.gsmart.ui.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsmart.model.Orders;
@@ -18,10 +21,11 @@ import application.ApplicationConfiguration;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class HomeController implements DialogController {
+public class HomeController implements DialogController, Initializable {
 	private FXMLDialog dialog;
 
 	@Autowired
@@ -62,17 +66,6 @@ public class HomeController implements DialogController {
 
 	private ValidOrderSpecification validOrderSpec = new ValidOrderSpecification();
 
-
-
-	@FXML
-	/**
-	 * Called after JavaFX initial completed UI components.
-	 */
-	public void initialize() {
-		injectionBeanForComponents();
-		updateOrderTable();
-	}
-	
 	/**
 	 * Load again data for table, it will refresh content for table.
 	 */
@@ -88,12 +81,12 @@ public class HomeController implements DialogController {
 			orderTablePane.setOrdersRepository(this.ordersRepository);
 		}
 	}
-	
+
 	/**
-	 * Using for injecting Spring Bean to UI Components. 
+	 * Using for injecting Spring Bean to UI Components.
 	 */
 	public void injectionBeanForComponents() {
-		if(calculatorPane != null) {
+		if (calculatorPane != null) {
 			calculatorPane.setOrderRepository(ordersRepository);
 			calculatorPane.setHomeController(this);
 		}
@@ -125,10 +118,10 @@ public class HomeController implements DialogController {
 		Orders orders = orderTablePane.getSeletedOrder();
 
 		if (orders != null) {
-			//Check whether user was confirmed this action.
-			boolean isComfirm = FXDialogController.showConfirmationDialog("Remove Order", "Are you sure to remove this order ?",
-					"Of customer " + orders.getCustomerName());
-			
+			// Check whether user was confirmed this action.
+			boolean isComfirm = FXDialogController.showConfirmationDialog("Remove Order",
+					"Are you sure to remove this order ?", "Of customer " + orders.getCustomerName());
+
 			if (isComfirm) {
 				// Set status equal -1 mean this order will hidden.
 				orders.setStatus(-1);
@@ -167,11 +160,11 @@ public class HomeController implements DialogController {
 	@FXML
 	public void receiveRoom(ActionEvent event) {
 		Orders order = orderTablePane.getSeletedOrder();
-		
-		//Check whether user was confirmed this action.
-		boolean isComfirm = FXDialogController.showConfirmationDialog("Receive Room", "Are you sure to Receive this room ?",
-				"For customer " + order.getCustomerName());
-		
+
+		// Check whether user was confirmed this action.
+		boolean isComfirm = FXDialogController.showConfirmationDialog("Receive Room",
+				"Are you sure to Receive this room ?", "For customer " + order.getCustomerName());
+
 		if (isComfirm) {
 			order.setStatus(1);
 			ordersRepository.save(order);
@@ -180,9 +173,40 @@ public class HomeController implements DialogController {
 		}
 	}
 
-	@FXML public void openReportManagedDialog(ActionEvent event) {
+	@FXML
+	public void openReportManagedDialog(ActionEvent event) {
 		applicationConfiguration.reportSelectionManagedDialog().show();
 	}
 
+	/**
+	 * Task for render multiple languages.
+	 */
+	public void multipleLanguagRender(ResourceBundle resources) {
+		// Set column label for multiple languages.
+		if (orderTablePane != null)
+			orderTablePane.setColumnLabel(resources);
+
+		// Initial multiple language.
+		if (calculatorPane != null)
+			calculatorPane.initFormFieldName(resources);
+
+		// Initial multiple language.
+		if (roomInfoPane != null)
+			roomInfoPane.initFormFieldName(resources);
+
+		// Initial multiple language.
+		if (orderInfoPane != null)
+			orderInfoPane.initFormFieldName(resources);
+	}
+
+	/**
+	 * Called after JavaFX initial completed UI components.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		injectionBeanForComponents();
+		updateOrderTable();
+		multipleLanguagRender(resources);
+	}
 
 }

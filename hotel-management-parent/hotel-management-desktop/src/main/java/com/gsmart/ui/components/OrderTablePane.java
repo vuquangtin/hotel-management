@@ -2,6 +2,7 @@ package com.gsmart.ui.components;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ResourceBundle;
 
 import org.springframework.data.jpa.domain.Specifications;
 
@@ -94,16 +95,16 @@ public class OrderTablePane extends VBox {
 		// == Initialization Left Pane === //
 
 		// == Initialization Right Pane === //
-		
+
 		HBox rightTop = new HBox();
 		rightTop.setPadding(new Insets(10));
 		rightTop.setSpacing(20);
-		
+
 		// Date picker
 		VBox vb = new VBox();
 		vb.setPadding(new Insets(2));
 		vb.setSpacing(2);
-		
+
 		fromDate.setPrefWidth(120);
 		toDate.setPrefWidth(120);
 
@@ -112,13 +113,13 @@ public class OrderTablePane extends VBox {
 		toDate.setConverter(converter);
 		fromDate.setPromptText("From date");
 		toDate.setPromptText("To date");
-		
+
 		vb.getChildren().add(fromDate);
 		vb.getChildren().add(toDate);
-		
+
 		rightTop.getChildren().add(vb);
 		// Date picker
-		
+
 		roomType.setPromptText("All room type");
 		rightTop.getChildren().add(roomType);
 
@@ -126,7 +127,7 @@ public class OrderTablePane extends VBox {
 		searchButton.setDefaultButton(true);
 		searchButton.setMnemonicParsing(false);
 		searchButton.setPadding(new Insets(5));
-		
+
 		Text materialDesignIcon = GlyphsDude.createIcon(MaterialDesignIcon.MAGNIFY, "2.5em");
 		materialDesignIcon.setFill(Color.WHITE);
 		searchButton.setGraphic(materialDesignIcon);
@@ -228,7 +229,7 @@ public class OrderTablePane extends VBox {
 			property.setValue(dateFormat.format(row.getValue().getCheckOutAt()));
 			return property;
 		});
-		
+
 		dateNumberCol.setCellValueFactory(new PropertyValueFactory<Orders, Integer>("numberDate"));
 
 		table.getColumns().addAll(indexCol, statusCol, customerNameCol, roomNameCol, fromDateCol, toDateCol,
@@ -275,5 +276,25 @@ public class OrderTablePane extends VBox {
 	public void setOrdersRepository(OrdersRepository ordersRepository) {
 		this.ordersRepository = ordersRepository;
 	}
-
+	
+	/**
+	 * Used for set column name for table.
+	 * 
+	 * <p>
+	 * @param resources : ResourceBundle of application.
+	 */
+	public void setColumnLabel(ResourceBundle resources) {
+		
+		//Notice: Order of columns label is very important.
+		String[] columnLabels = { 
+				"UIControls.OrderTablePane.Index", "UIControls.OrderTablePane.OrderStatus",
+				"UIControls.OrderTablePane.CustomerName", "UIControls.OrderTablePane.RoomName",
+				"UIControls.OrderTablePane.FromDate", "UIControls.OrderTablePane.ToDate",
+				"UIControls.OrderTablePane.NumbersDate", 
+		};
+		
+		for (int i = 0; i <= 6; i++) {
+			table.getColumns().get(i).setText(resources.getString(columnLabels[i]));
+		}
+	}
 }

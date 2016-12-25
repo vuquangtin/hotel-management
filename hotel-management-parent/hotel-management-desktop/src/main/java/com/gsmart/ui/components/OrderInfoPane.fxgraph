@@ -10,7 +10,8 @@ import javafx.scene.image.Image
 import javafx.scene.control.Button
 import com.gsmart.ui.components.OrderInfoPane
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView
-component OrderInfoPane controlledby HomeController styledwith "css/order-info.css" {
+component OrderInfoPane controlledby HomeController styledwith "css/order-info.css" resourcefile
+"locale/messages_vi_VN.properties" {
 	VBox {
 		styleClass : [
 			"card",
@@ -22,7 +23,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 					"card-title"
 				],
 				prefWidth : 620,
-				text : "Customer Information",
+				text : rstring "UIControls.OrderInfoPane",
 				graphic : MaterialDesignIconView {
 					glyphName : "ACCOUNT_STAR",
 					size : "2.5em"
@@ -41,7 +42,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
-				text : "Edit",
+				text : rstring "UIControls.OrderInfoPane.Button.EditButton",
 				onAction : controllermethod openEditOrderStage
 			},
 			Button {
@@ -57,8 +58,8 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
-				text : "Save"
-				
+				text : rstring "UIControls.OrderInfoPane.Button.SaveButton"
+
 			},
 			Button {
 				styleClass : [
@@ -73,7 +74,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				},
 				textAlignment : "CENTER",
 				contentDisplay : "TOP",
-				text : "Remove",
+				text : rstring "UIControls.OrderInfoPane.Button.RemoveButton",
 				onAction : controllermethod removeOrder
 			}
 		},

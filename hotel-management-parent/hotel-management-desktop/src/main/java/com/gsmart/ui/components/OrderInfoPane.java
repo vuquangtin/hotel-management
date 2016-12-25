@@ -3,6 +3,7 @@ package com.gsmart.ui.components;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import com.gsmart.model.Orders;
 
@@ -100,6 +101,24 @@ public class OrderInfoPane extends GridPane{
 		label.setPrefSize(100, 10);
 		hb.getChildren().addAll(label, textField);
 		return hb;
+	}
+	
+	
+	/**
+	 * Used for render form fields name for multiple languages.
+	 * <P>
+	 * 
+	 * @param resource
+	 *            - Resource Bundle file
+	 */
+	public void initFormFieldName(ResourceBundle resource) {
+		nameLbl.setText(resource.getString("UIControls.OrderInfoPane.Fields.Name"));
+		addressLbl.setText(resource.getString("UIControls.OrderInfoPane.Fields.Address"));
+		telephoneLbl.setText(resource.getString("UIControls.OrderInfoPane.Fields.Telephone"));
+		idLbl.setText(resource.getString("UIControls.OrderInfoPane.Fields.ID"));
+		fromDateLbl.setText(resource.getString("UIControls.OrderInfoPane.Fields.FromDate"));
+		toDateLbl.setText(resource.getString("UIControls.OrderInfoPane.Fields.ToDate"));
+		genderLbl.setText(resource.getString("UIControls.OrderInfoPane.Fields.Gender"));
 	}
 	
 }

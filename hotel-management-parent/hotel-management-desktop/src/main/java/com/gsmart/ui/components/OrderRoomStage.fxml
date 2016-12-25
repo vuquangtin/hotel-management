@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?scenebuilder-preview-i18n-resource locale/messages_vi_VN.properties?>
 <?scenebuilder-stylesheet css/application.css?>
 <?scenebuilder-stylesheet css/order-room-stage.css?>
 <?scenebuilder-stylesheet css/material-fx-v0_3.css?>
@@ -24,7 +25,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.OrderRoomController">
 
 	<HBox> 
-		<Label fx:id="titleStage" text="Order Room"> 
+		<Label fx:id="titleStage" text="%OrderRoomStage.Label.CreateNewOrder"> 
 			<styleClass>
 				<String fx:value="header-label" />
 			</styleClass>
@@ -41,22 +42,22 @@
 		</styleClass>
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 5px;"> 
-		<TitledPane collapsible="false" text="Registration Information"> 
+		<TitledPane collapsible="false" text="%OrderRoomStage.Label.RoomInfoHeader"> 
 			<VBox> 
 				<FXDateTimePicker fx:id="dateTimePicker" isInlineStyle="false" firstDateLabel="Date in" firstTimeLabel="Time in" secondDateLabel="Date out" secondTimeLabel="Time out"/> 
-				<FXTextField fx:id="prepayTxt" isInlineStyle="true" label="Prepay" unit=" VND" fieldName="prepay"/> 
-				<FXTextField fx:id="promotionTxt" isInlineStyle="true" label="Promotion" unit=" Percent" fieldName="promotion"/> 
+				<FXTextField fx:id="prepayTxt" isInlineStyle="true" label="%OrderRoomStage.Prepay" unit=" VND" fieldName="prepay"/> 
+				<FXTextField fx:id="promotionTxt" isInlineStyle="true" label="%OrderRoomStage.Promotion" unit=" %" fieldName="promotion"/> 
 				<HBox spacing="10"> 
-					<Label text="Notice"> 
+					<Label text="%OrderRoomStage.Notice"> 
 						<styleClass>
 							<String fx:value="control-label" />
 						</styleClass>
 					</Label>
 					<TextArea fx:id="registrationNotice" prefWidth="350" prefHeight="50"/> 
 				</HBox>
-				<HBox style="-fx-padding : 10px;" spacing="10"> 
-					<FXTextField fx:id="roomTxt" label="Room" fieldName="room" editAble="false"/> 
-					<Button fx:id="quickSearchBtn" onAction="#openQuickSeachRoomStage" text="Quick Search"> 
+				<HBox style="-fx-padding : 10px 0px 0px 0px;" spacing="10"> 
+					<FXTextField fx:id="roomTxt" label="%OrderRoomStage.Room" fieldName="room" editAble="false"/> 
+					<Button fx:id="quickSearchBtn" onAction="#openQuickSeachRoomStage" text="%OrderRoomStage.Button.QuickSearch"> 
 						<styleClass>
 							<String fx:value="quick-search-button" />
 						</styleClass>
@@ -73,14 +74,14 @@
 				<String fx:value="titled-pane" />
 			</styleClass>
 		</TitledPane>
-		<TitledPane prefHeight="390" collapsible="false" text="Customer Information"> 
+		<TitledPane prefHeight="390" collapsible="false" text="%OrderRoomStage.Label.CustomerInfoHeader"> 
 			<VBox> 
-				<FXTextField fx:id="customerNameTxt" label="Name" fieldName="customerName"/> 
-				<FXTextField fx:id="customerIDTxt" label="ID" fieldName="customerId"/> 
-				<FXTextField fx:id="customerAddress" label="Address" fieldName="customerAddress"/> 
-				<FXTextField fx:id="customerTelephone" label="Telephone" fieldName="customerTelephone"/> 
+				<FXTextField fx:id="customerNameTxt" label="%OrderRoomStage.Name" fieldName="customerName"/> 
+				<FXTextField fx:id="customerIDTxt" label="%OrderRoomStage.ID" fieldName="customerId"/> 
+				<FXTextField fx:id="customerAddress" label="%OrderRoomStage.Address" fieldName="customerAddress"/> 
+				<FXTextField fx:id="customerTelephone" label="%OrderRoomStage.Telephone" fieldName="customerTelephone"/> 
 				<HBox> 
-					<Label text="Notice"> 
+					<Label text="%OrderRoomStage.Notice"> 
 						<styleClass>
 							<String fx:value="control-label" />
 						</styleClass>
@@ -97,7 +98,7 @@
 		</TitledPane>
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 10px;"> 
-		<Button fx:id="saveBtn" text="SAVE" onAction="#saveOrder"> 
+		<Button fx:id="saveBtn" text="%OrderRoomStage.Button.Save" onAction="#saveOrder"> 
 			<styleClass>
 				<String fx:value="add-button" />
 			</styleClass>
@@ -105,7 +106,7 @@
 				<MaterialDesignIconView glyphName="CONTENT_SAVE" size="2em" fill="rgb(255,255,255)"/> 
 			</graphic>
 		</Button>
-		<Button fx:id="resetBtn" text="RESET" onAction="#resetOrderForm"> 
+		<Button fx:id="resetBtn" text="%OrderRoomStage.Button.Reset" onAction="#resetOrderForm"> 
 			<styleClass>
 				<String fx:value="reset-button" />
 			</styleClass>
@@ -115,7 +116,7 @@
 		</Button>
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 10px;"> 
-		<Text text="List of registered customers current room"> 
+		<Text text="%UIControls.OrderTablePane.ListCurrentOrderInRoomLabel"> 
 			<styleClass>
 				<String fx:value="order-table-label" />
 			</styleClass>

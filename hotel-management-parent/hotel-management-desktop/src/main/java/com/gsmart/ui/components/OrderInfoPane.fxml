@@ -12,12 +12,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?scenebuilder-preview-i18n-resource locale/messages_vi_VN.properties?>
 <?scenebuilder-stylesheet css/order-info.css?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.HomeController">
 
 	<HBox> 
-		<Label prefWidth="620" text="Customer Information"> 
+		<Label prefWidth="620" text="%UIControls.OrderInfoPane"> 
 			<styleClass>
 				<String fx:value="card-title" />
 			</styleClass>
@@ -25,7 +26,7 @@
 				<MaterialDesignIconView glyphName="ACCOUNT_STAR" size="2.5em"/> 
 			</graphic>
 		</Label>
-		<Button textAlignment="CENTER" contentDisplay="TOP" text="Edit" onAction="#openEditOrderStage"> 
+		<Button textAlignment="CENTER" contentDisplay="TOP" text="%UIControls.OrderInfoPane.Button.EditButton" onAction="#openEditOrderStage"> 
 			<styleClass>
 				<String fx:value="top-bar-btn" />
 			</styleClass>
@@ -37,7 +38,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button textAlignment="CENTER" contentDisplay="TOP" text="Save"> 
+		<Button textAlignment="CENTER" contentDisplay="TOP" text="%UIControls.OrderInfoPane.Button.SaveButton"> 
 			<styleClass>
 				<String fx:value="top-bar-btn" />
 			</styleClass>
@@ -49,7 +50,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button textAlignment="CENTER" contentDisplay="TOP" text="Remove" onAction="#removeOrder"> 
+		<Button textAlignment="CENTER" contentDisplay="TOP" text="%UIControls.OrderInfoPane.Button.RemoveButton" onAction="#removeOrder"> 
 			<styleClass>
 				<String fx:value="top-bar-btn" />
 			</styleClass>

@@ -23,7 +23,7 @@ import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView
 import javafx.scene.paint.Color
 
 component OrderRoomStage controlledby OrderRoomController styledwith [ "css/application.css",
-	"css/order-room-stage.css", "css/material-fx-v0_3.css" ] {
+	"css/order-room-stage.css", "css/material-fx-v0_3.css" ]  resourcefile "locale/messages_vi_VN.properties"{
 	VBox {
 		styleClass : [
 			"order-room-stage"
@@ -43,7 +43,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					fitHeight : 35,
 					fitWidth : 35
 				},
-				text : "Order Room"
+				text : rstring "OrderRoomStage.Label.CreateNewOrder"
 			}
 		},
 		HBox {
@@ -54,7 +54,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					"titled-pane"
 				],
 				collapsible : false,
-				text : "Registration Information",
+				text : rstring "OrderRoomStage.Label.RoomInfoHeader",
 				VBox {
 					styleClass : [
 						"card"
@@ -68,14 +68,14 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					},
 					FXTextField id prepayTxt {
 						isInlineStyle : true,
-						label : "Prepay",
+						label : rstring "OrderRoomStage.Prepay",
 						unit : " VND",
 						fieldName : "prepay"
 					},
 					FXTextField id promotionTxt {
 						isInlineStyle : true,
-						label : "Promotion",
-						unit : " Percent",
+						label : rstring "OrderRoomStage.Promotion",
+						unit : " %",
 						fieldName : "promotion"
 					},
 					HBox {
@@ -84,7 +84,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 							styleClass : [
 								"control-label"
 							],
-							text : "Notice"
+							text : rstring "OrderRoomStage.Notice"
 						},
 						TextArea id registrationNotice {
 							prefWidth : 350,
@@ -92,10 +92,10 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						}
 					},
 					HBox {
-						style : "-fx-padding : 10px;",
+						style : "-fx-padding : 10px 0px 0px 0px;",
 						spacing : 10,
 						FXTextField id roomTxt {
-							label : "Room",
+							label : rstring "OrderRoomStage.Room",
 							fieldName : "room",
 							editAble : false
 						},
@@ -104,7 +104,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 							styleClass : [
 								"quick-search-button"
 							],
-							text : "Quick Search",
+							text : rstring "OrderRoomStage.Button.QuickSearch",
 							graphic : MaterialDesignIconView {
 								glyphName : "MAGNIFY_PLUS",
 								size : "2em",
@@ -120,25 +120,25 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					"titled-pane"
 				],
 				collapsible : false,
-				text : "Customer Information",
+				text : rstring "OrderRoomStage.Label.CustomerInfoHeader",
 				VBox {
 					styleClass : [
 						"card"
 					],
 					FXTextField id customerNameTxt {
-						label : "Name",
+						label : rstring "OrderRoomStage.Name",
 						fieldName : "customerName"
 					},
 					FXTextField id customerIDTxt {
-						label : "ID",
+						label : rstring "OrderRoomStage.ID",
 						fieldName : "customerId"
 					},
 					FXTextField id customerAddress {
-						label : "Address",
+						label : rstring "OrderRoomStage.Address",
 						fieldName : "customerAddress"
 					},
 					FXTextField id customerTelephone {
-						label : "Telephone",
+						label : rstring "OrderRoomStage.Telephone",
 						fieldName : "customerTelephone"
 					},
 					HBox {
@@ -146,7 +146,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 							styleClass : [
 								"control-label"
 							],
-							text : "Notice"
+							text : rstring "OrderRoomStage.Notice"
 						},
 						TextArea id customerNotice {
 							prefWidth : 100,
@@ -163,7 +163,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 				styleClass : [
 					"add-button"
 				],
-				text : "SAVE",
+				text : rstring "OrderRoomStage.Button.Save",
 				graphic : MaterialDesignIconView {
 					glyphName : "CONTENT_SAVE",
 					size : "2em",
@@ -175,7 +175,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 				styleClass : [
 					"reset-button"
 				],
-				text : "RESET",
+				text : rstring "OrderRoomStage.Button.Reset",
 				graphic : MaterialDesignIconView {
 					glyphName : "REFRESH",
 					size : "2em",
@@ -191,7 +191,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 				styleClass : [
 					"order-table-label"
 				],
-				text : "List of registered customers current room"
+				text : rstring "UIControls.OrderTablePane.ListCurrentOrderInRoomLabel"
 			}
 		},
 		RoomOrderTable id roomOrderTable {

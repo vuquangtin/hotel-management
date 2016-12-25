@@ -76,6 +76,7 @@ public class OrderRoomController implements DialogController, Initializable {
 	Button quickSearchBtn;
 
 	private Orders selectedOrder;
+	private ResourceBundle resource;
 
 	@FXML
 	public void clicked(ActionEvent event) {
@@ -124,10 +125,6 @@ public class OrderRoomController implements DialogController, Initializable {
 		if (roomOrderTable != null)
 			roomOrderTable.setItems(FXCollections.observableArrayList());
 
-		// Change title of dialog.
-		if (titleStage != null)
-			titleStage.setText("Create New Order");
-
 		// Need to call method reset to empty all fields and turn on Quick
 		// Search Room.
 		resetOrderForm();
@@ -144,7 +141,8 @@ public class OrderRoomController implements DialogController, Initializable {
 
 		// For safe we need to check.
 		if (order != null) {
-			titleStage.setText("Update Order Information");
+			//Set stage title for update order information.
+			titleStage.setText(resource.getString("OrderRoomStage.Label.UpdateOrder"));
 
 			dateTimePicker.setDateTime(order.getCreatedAt(), order.getCheckOutAt());
 			prepayTxt.setText(NumberFormat.getNumberInstance().format(order.getPrepay()));
@@ -311,9 +309,21 @@ public class OrderRoomController implements DialogController, Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		this.resource = resources;
+
+		// Set Reset form action when stage has closed.
 		this.dialog.setOnCloseRequest(event -> {
 			resetOrderForm();
 		});
+
+		// Set columns name for multiple languages.
+		if (this.roomOrderTable != null)
+			this.roomOrderTable.setColumnLabel(resources);
+
+		// Default when we open order room stage, it need set title for create
+		// new one, we can update correct late.
+		if (this.titleStage != null)
+			titleStage.setText(resources.getString("OrderRoomStage.Label.CreateNewOrder"));
 	}
 
 }

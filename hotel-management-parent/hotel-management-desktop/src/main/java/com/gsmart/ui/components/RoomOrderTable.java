@@ -1,6 +1,7 @@
 package com.gsmart.ui.components;
 
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import com.gsmart.model.Orders;
 
@@ -36,5 +37,26 @@ public class RoomOrderTable extends TableView<Orders>{
 				dateNumberCol);
 
 		this.setMaxHeight(180);
+	}
+	
+	/**
+	 * Used for set column name for table.
+	 * 
+	 * <p>
+	 * @param resources : ResourceBundle of application.
+	 */
+	public void setColumnLabel(ResourceBundle resources) {
+		
+		//Notice: Order of columns label is very important.
+		String[] columnLabels = { 
+				"UIControls.OrderTablePane.Index", "UIControls.OrderTablePane.OrderStatus",
+				"UIControls.OrderTablePane.CustomerName", "UIControls.OrderTablePane.RoomName",
+				"UIControls.OrderTablePane.FromDate", "UIControls.OrderTablePane.ToDate",
+				"UIControls.OrderTablePane.NumbersDate", 
+		};
+		
+		for (int i = 0; i <= 6; i++) {
+			this.getColumns().get(i).setText(resources.getString(columnLabels[i]));
+		}
 	}
 }

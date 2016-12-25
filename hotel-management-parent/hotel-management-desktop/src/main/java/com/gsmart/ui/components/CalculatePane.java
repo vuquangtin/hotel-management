@@ -2,6 +2,7 @@ package com.gsmart.ui.components;
 
 import java.text.NumberFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
@@ -33,6 +34,14 @@ public class CalculatePane extends VBox {
 
 	private Button paymentBtn = new Button();
 	private CheckBox printInvoicesCheckBox = new CheckBox("Print invoices");
+	
+	private Label paneLabel = new Label();
+
+	private Label totalPriceLbl = new Label();
+	private Label promotionPercentLbl = new Label();
+	private Label paymentPriceLbl = new Label(); 
+	private Label customerSentPriceLbl = new Label();
+	private Label changePriceLbl = new Label();
 
 	private TextField totalPriceTxt = new TextField();
 	private TextField promotionPercentTxt = new TextField();
@@ -54,47 +63,50 @@ public class CalculatePane extends VBox {
 		// Setup event handler for components.
 		addEventHandler();
 	}
-	
+
 	/**
 	 * Used for render information of selected order to form.
 	 * <p>
-	 * @param order - Selected order from user.
+	 * 
+	 * @param order
+	 *            - Selected order from user.
 	 */
 	public void setCalculatorInformation(Orders order) {
 		this.orders = order;
 		this.promotionPercentTxt.setText(NumberFormat.getNumberInstance().format(order.getPromotion()));
 		this.totalPriceTxt.setText(NumberFormat.getNumberInstance().format(order.getTotalPrice()));
-		if(order.getPrepay() == null) orders.setPrepay(0.0);
-		
+		if (order.getPrepay() == null)
+			orders.setPrepay(0.0);
+
 		Double paymentPrice = (order.getTotalPrice() * (1 - order.getPromotion())) - order.getPrepay();
 		this.paymentPriceTxt.setText(NumberFormat.getNumberInstance().format(paymentPrice));
-		
-		//Checking for render payment button.
-		
-		//If order status equal 0 . it mean this order still not received.
-		if(order.getStatus() == 0) 
+
+		// Checking for render payment button.
+
+		// If order status equal 0 . it mean this order still not received.
+		if (order.getStatus() == 0)
 			this.paymentBtn.setDisable(true);
-		//Of status equal 2. It mean this order has paid. We must remove payment button.
+		// Of status equal 2. It mean this order has paid. We must remove
+		// payment button.
 		else if (order.getStatus() == 2)
 			this.paymentBtn.setVisible(false);
-		//Else if status equal 1. It mean order is activity.
+		// Else if status equal 1. It mean order is activity.
 		else {
 			this.paymentBtn.setDisable(false);
 			this.paymentBtn.setVisible(true);
 		}
-		
+
 	}
 
 	public HBox getTopBar() {
 		HBox hb = new HBox();
 		VBox vb = new VBox();
 
-		Label label = new Label("Payment");
-		label.setGraphic(GlyphsDude.createIcon(MaterialDesignIcon.CASH_USD, "1.4em"));
-		label.getStyleClass().add("card-title");
-		
+		paneLabel.setGraphic(GlyphsDude.createIcon(MaterialDesignIcon.CASH_USD, "1.4em"));
+		paneLabel.getStyleClass().add("card-title");
+
 		vb.setPrefWidth(160);
-		vb.getChildren().add(label);
+		vb.getChildren().add(paneLabel);
 		vb.getChildren().add(printInvoicesCheckBox);
 
 		// Set image for payment button.
@@ -117,28 +129,27 @@ public class CalculatePane extends VBox {
 		VBox vb = new VBox();
 		vb.setSpacing(2);
 
-		vb.getChildren().add(getRowField("Total Price", totalPriceTxt, " VNĐ", "#ff0000"));
-		vb.getChildren().add(getRowField("Promotion Percent ", promotionPercentTxt, " VNĐ", "#ff0000"));
-		vb.getChildren().add(getRowField("Payment Price", paymentPriceTxt, " VNĐ", "#ff0000"));
-		vb.getChildren().add(getRowField("Customer Sent", customerSentPriceTxt, " VNĐ", "#6600ff"));
-		vb.getChildren().add(getRowField("Customer Change", changePriceTxt, " VNĐ", "#99ff66"));
+		vb.getChildren().add(getRowField(totalPriceLbl, totalPriceTxt, " VNĐ", "#ff0000"));
+		vb.getChildren().add(getRowField(promotionPercentLbl, promotionPercentTxt, " VNĐ", "#ff0000"));
+		vb.getChildren().add(getRowField(paymentPriceLbl, paymentPriceTxt, " VNĐ", "#ff0000"));
+		vb.getChildren().add(getRowField(customerSentPriceLbl, customerSentPriceTxt, " VNĐ", "#6600ff"));
+		vb.getChildren().add(getRowField(changePriceLbl, changePriceTxt, " VNĐ", "#99ff66"));
 
 		return vb;
 	}
 
-	public HBox getRowField(String label, TextField textField, String unitName, String textColor) {
-		Label _label = new Label(label);
+	public HBox getRowField(Label label, TextField textField, String unitName, String textColor) {
 		Label _unitName = new Label(unitName);
-		_label.setPrefWidth(100);
+		label.setPrefWidth(100);
 
-		_label.getStyleClass().add("control-label");
+		label.getStyleClass().add("control-label");
 		_unitName.getStyleClass().add("control-label");
 
 		textField.setStyle("-fx-text-fill:" + textColor + ";");
 		textField.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 		HBox hb = new HBox();
 
-		hb.getChildren().add(_label);
+		hb.getChildren().add(label);
 		hb.getChildren().add(textField);
 		hb.getChildren().add(_unitName);
 
@@ -169,20 +180,21 @@ public class CalculatePane extends VBox {
 
 	public void onClickPaymentButton() {
 		if (orders != null) {
-			
-			//Check whether user was confirmed this action.
-			boolean isComfirm = FXDialogController.showConfirmationDialog("Payment Order", "Are you sure to payment this order ?",
-					"Order of customer " + orders.getCustomerName());
-			
-			if(isComfirm) {
+
+			// Check whether user was confirmed this action.
+			boolean isComfirm = FXDialogController.showConfirmationDialog("Payment Order",
+					"Are you sure to payment this order ?", "Order of customer " + orders.getCustomerName());
+
+			if (isComfirm) {
 				// Status equal 2 mean this order has payment completed.
 				orders.setStatus(2);
 				ordersRepository.save(orders);
 				orders.setPaidAt(new Date());
-				if(orders.getPrepay() == null) orders.setPrepay(0.0);
-				
-				orders.setPaymentPrice(orders.getTotalPrice() * (1 - orders.getPromotion()) - orders.getPrepay() );
-				
+				if (orders.getPrepay() == null)
+					orders.setPrepay(0.0);
+
+				orders.setPaymentPrice(orders.getTotalPrice() * (1 - orders.getPromotion()) - orders.getPrepay());
+
 				// Printing invoice if user selected.
 				if (printInvoicesCheckBox.isSelected()) {
 					ReportController.printInvoice(orders);
@@ -199,5 +211,23 @@ public class CalculatePane extends VBox {
 
 	public void setHomeController(HomeController ctrl) {
 		this.homeController = ctrl;
+	}
+
+	/**
+	 * Used for render form fields name for multiple languages.
+	 * <P>
+	 * 
+	 * @param resource
+	 *            - Resource Bundle file
+	 */
+	public void initFormFieldName(ResourceBundle resource) {
+		paneLabel.setText(resource.getString("UIControls.CalculatePane"));
+		paymentBtn.setText(resource.getString("UIControls.CalculatePane.PaymentButton"));
+		printInvoicesCheckBox.setText(resource.getString("UIControls.CalculatePane.PrintInvoice"));
+		totalPriceLbl.setText(resource.getString("UIControls.CalculatePane.TotalPrice"));
+		promotionPercentLbl.setText(resource.getString("UIControls.CalculatePane.Promotion"));
+		paymentPriceLbl.setText(resource.getString("UIControls.CalculatePane.PaymentPrice"));
+		customerSentPriceLbl.setText(resource.getString("UIControls.CalculatePane.CustomerSent"));
+		changePriceLbl.setText(resource.getString("UIControls.CalculatePane.CustomerChange"));
 	}
 }
