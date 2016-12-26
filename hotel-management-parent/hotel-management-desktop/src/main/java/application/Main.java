@@ -2,6 +2,7 @@ package application;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.ParseException;
 
 import javax.swing.JFrame;
 
@@ -54,7 +55,13 @@ public class Main extends Application {
 	@Autowired
 	public void injectTetingData(InjectTestingData injectTestingData) {
 		// TODO : Remove it on production version.
-		injectTestingData.doInject();
+		//injectTestingData.doInject();
+		try {
+			injectTestingData.preparedDataForTestQuickSearchRoom();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

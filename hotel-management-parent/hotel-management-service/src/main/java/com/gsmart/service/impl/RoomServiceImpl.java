@@ -1,14 +1,10 @@
 package com.gsmart.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.gsmart.model.Orders;
 import com.gsmart.model.Room;
 import com.gsmart.model.util.RoomUtils;
+import com.gsmart.repository.OrdersRepository;
 import com.gsmart.repository.RoomCategoryRepository;
 import com.gsmart.repository.RoomRepository;
 import com.gsmart.service.RoomService;
@@ -29,22 +26,38 @@ public class RoomServiceImpl implements RoomService {
 
 	@Autowired
 	RoomRepository roomRepository;
+	
+	@Autowired
+	OrdersRepository ordersRepository;
 
 	@Override
 	public void SearchRoom() {
-		// TODO Auto-generated method stub
 		System.out.println("Searching room by service...");
 	}
 
 	private boolean isFreeBetween(Orders order1, Orders order2, Date dateIn, Date checkOutDate) {
+		if(order1.getCheckOutAt().before(dateIn)) {
+			System.out.println("Criterial 1 correct !");
+		}else {
+			System.out.println("Criterial 1 failed !");
+			System.out.println("Order 2 has time | " + order2.getCreatedAt() + " Check Out Time Require is | " + checkOutDate);
+		}
+		
+		if(order2.getCreatedAt().after(checkOutDate)) {
+			System.out.println("Criterial 2 correct !");
+		} else {
+			System.out.println("Criterial 2 failed !");
+			System.out.println("Order 2 has time | " + order2.getCreatedAt() + " Check Out Time Require is | " + checkOutDate);
+		}
+		
 		if (order1.getCheckOutAt().before(dateIn) && order2.getCreatedAt().after(checkOutDate)) {
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isEndedOrder(Orders order) {
-		return order.getCheckOutAt().after(new Date());
+	private boolean isEndedOrder(Orders order, Date currentTime) {
+		return order.getCheckOutAt().before(currentTime);
 	}
 
 	@Override
@@ -52,56 +65,65 @@ public class RoomServiceImpl implements RoomService {
 		List<Room> rooms = roomRepository.findAll();
 		Collections.sort(rooms, RoomUtils.getSortByFreeTimeComparator());
 		List<SearchRoomResult> searchRoomResults = new ArrayList<SearchRoomResult>();
-		
-		//@lastOrder : contain last order of each room.
+
+		// Contain last order of each room.
 		List<Orders> lastOrder = new ArrayList<Orders>();
-		
-		Calendar calendar = GregorianCalendar.getInstance();
-		calendar.setTime(dateIn);
-		calendar.setTimeZone(TimeZone.getTimeZone("GTM+7:00"));
-		
-		SimpleDateFormat format = new SimpleDateFormat("mm:MM:yyyy hh:mm:ss");
-				
-		
-		System.out.println("TIME-IN : " + format.format(calendar.getTime()));
-		
-		int offset = 0;
-		
+		Date currentTime = new Date();
+		int numberOrderValid = 0;
 
 		for (Room room : rooms) {
-			Iterator<Orders> orders = room.getListOrders().iterator();
-
+			Iterator<Orders> orders = ordersRepository.findAllByRoomOrderByCreatedAtAsc(room).iterator();
+			numberOrderValid = 0;
+			
 			while (orders.hasNext()) {
 				Orders firstOrder = orders.next();
-				
-				while ((firstOrder.getCheckOutAt().after(dateIn) || isEndedOrder(firstOrder)) && orders.hasNext())
+				// It will get next item until has valid order.
+				// Valid order is.
+				// 1) Has checkout time before dateIn. 
+				// 2) Not ended.
+				System.out.println("Fist Order Is " + firstOrder.getCustomerName());
+				while ((firstOrder.getCheckOutAt().after(dateIn) || isEndedOrder(firstOrder, currentTime))
+						&& orders.hasNext()){
 					firstOrder = orders.next();
-
+				}
+					
+				numberOrderValid ++;
+				System.out.println("Valid First Order Of Room " + room.getName() + " Customer name " + firstOrder.getCustomerName());
+				
 				Orders secondOrder = null;
-
+				//Check if is last order.
 				if (orders.hasNext()) {
 					secondOrder = orders.next();
-
+					
+					System.out.println("Valid Second Order Of Room " + room.getName() + " Customer name " + secondOrder.getCustomerName());
+					//If free time between two order is valid with input.	
 					if (isFreeBetween(firstOrder, secondOrder, dateIn, checkOutDate)) {
+						System.out.println("Add to between " + firstOrder.getCustomerName() + " And " + secondOrder.getCustomerName());
 						searchRoomResults.add(new SearchRoomResult(room, firstOrder.getCheckOutAt()));
 					}
+
 				} else {
-					lastOrder.add(offset, firstOrder);
+					System.out.println("Set Orders of Room " + room.getName() + " is empty");
+					//Offset used for mark correct index of room.
+					lastOrder.add(firstOrder);
 				}
-				offset++;
 			}
+			//If no valid order , add null to that offset.
+			if(numberOrderValid == 0) lastOrder.add(null);
 		}
-
-		// complete add to between free time, try add to last
-		if (searchRoomResults.size() == 0) {
-			for (int index = 0; index < offset; index++) {
-				try {
-					searchRoomResults.add(new SearchRoomResult(rooms.get(index), lastOrder.get(index).getCheckOutAt()));
-				} catch (Exception ex) {
-					// Book room at the moment
-					searchRoomResults.add(new SearchRoomResult(rooms.get(index), new Date()));
-				}
-
+		
+		// Completed add to between free time, next try add to last.
+		for (int index = 0; index < lastOrder.size(); index++) {
+			try {
+				//Because some room is don't have any order valid, therefore not exist last order with that offset.
+				//It will throw array index exception, If that happened we just need to book room at the moment.
+				//else we try to add to time when last order is completed.
+				searchRoomResults.add(new SearchRoomResult(rooms.get(index), lastOrder.get(index).getCheckOutAt()));
+				System.out.println("Add to Ended Last Order Of Room " + rooms.get(index).getName());
+			} catch (Exception ex) {
+				// If room don't have any order try book room at the moment.
+				searchRoomResults.add(new SearchRoomResult(rooms.get(index), new Date()));
+				System.out.println("Add to Current Time Of Room " + rooms.get(index).getName());
 			}
 		}
 

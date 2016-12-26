@@ -1,6 +1,8 @@
 package application;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import java.util.Map;
 
 import javax.swing.UIManager;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
@@ -243,6 +246,83 @@ public class InjectTestingData {
 		} catch (JRException ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public void preparedDataForTestQuickSearchRoom() throws ParseException {
+		System.out.println("preparedDataForTestQuickSearchRoom ---- STARTED ");
+		
+		RoomCategory roomCategory = new RoomCategory();
+		roomCategory.setName("Room Type A");
+		roomCategory.setPrice(450.0);
+		roomCategory.setCapacity(2);
+		roomCategoryRepository.save(roomCategory);
+		
+		Room room_1 = new Room();
+		room_1.setName("A123");
+		room_1.setRoomCategory(roomCategory);
+		room_1.setAcreage("45");
+		
+		
+		Room room_2 = new Room();
+		room_2.setName("B456");
+		room_2.setRoomCategory(roomCategory);
+		room_2.setAcreage("45");
+		
+		Orders T1 = getSampleOrder("T1" , "28/12/2016 17:17","29/12/2016 17:17");
+		T1.setRoom(room_1);
+		
+		Orders T2 = getSampleOrder("T2" , "28/12/2016 12:12","29/12/2016 12:12");
+		T2.setRoom(room_2);
+		
+		Orders T3 = getSampleOrder("T3" , "31/12/2016 17:17","3/1/2016 17:17");
+		T3.setRoom(room_1);
+		
+		Orders T4 = getSampleOrder("T4" , "4/1/2017 12:12","7/1/2017 17:17");
+		T4.setRoom(room_2);
+		
+		HashSet<Orders> listOrder_1 = new HashSet<Orders>();
+		listOrder_1.add(T1);
+		listOrder_1.add(T3);
+		
+		HashSet<Orders> listOrder_2 = new HashSet<Orders>();
+		listOrder_2.add(T2);
+		listOrder_2.add(T4);
+		
+		room_1.setListOrders(listOrder_1);
+		room_2.setListOrders(listOrder_2);
+		
+		roomRepository.save(room_1);
+		roomRepository.save(room_2);
+		
+		ordersRepository.save(T1);
+		ordersRepository.save(T2);
+		ordersRepository.save(T3);
+		ordersRepository.save(T4);
+		
+		System.out.println("preparedDataForTestQuickSearchRoom ---- DONE ");
+	}
+	
+	/**
+	 * Used for get random valid order.
+	 * <p>
+	 * @param name
+	 * @param timeIn
+	 * @param timeCheckOut
+	 * @return
+	 * @throws ParseException
+	 */
+	private Orders getSampleOrder(String name , String timeIn , String timeCheckOut) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Orders O = new Orders();
+		O.setPrepay(0.0);
+		O.setPromotion(0.0);
+		O.setCustomerName(name);
+		O.setCustomerId(RandomStringUtils.randomAlphanumeric(20).toUpperCase());
+		O.setCustomerAddress(RandomStringUtils.randomAlphanumeric(20).toUpperCase());
+		O.setCustomerTelephone(RandomStringUtils.randomAlphanumeric(20).toUpperCase());
+		O.setCreatedAt(format.parse(timeIn));
+		O.setCheckOutAt(format.parse(timeCheckOut));
+		return O;
 	}
 
 	public static void main(String[] args) {

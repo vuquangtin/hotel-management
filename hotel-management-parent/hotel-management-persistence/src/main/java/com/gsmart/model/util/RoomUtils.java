@@ -27,6 +27,7 @@ public class RoomUtils {
 			
 			// If on the last order.
 			if (!orders.hasNext()) {
+				//Will take free time between there orders.
 				result = (orderItem.getCheckOutAt().getTime() - currentTime.getTime()) - result;
 			}
 		}

@@ -124,7 +124,10 @@ public class OrderRoomController implements DialogController, Initializable {
 		// Firstly , we need reset table by way set empty array.
 		if (roomOrderTable != null)
 			roomOrderTable.setItems(FXCollections.observableArrayList());
-
+		
+		//Very important, if not it will take current selected order on table.
+		this.selectedOrder = null;
+		
 		// Need to call method reset to empty all fields and turn on Quick
 		// Search Room.
 		resetOrderForm();

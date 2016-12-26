@@ -13,4 +13,5 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer>  ,  Jpa
 	List<Orders> findAll(Specification<Orders> spec);
 	List<Orders> findByRoom(Room room);
 	void removeById(int id);
+	List<Orders> findAllByRoomOrderByCreatedAtAsc(Room room);
 }
