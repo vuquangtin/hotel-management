@@ -1,6 +1,7 @@
 package com.gsmart.ui.controller;
 
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
 
 public class HomeController implements DialogController, Initializable {
 	private FXMLDialog dialog;
@@ -65,6 +67,32 @@ public class HomeController implements DialogController, Initializable {
 	Button removeRoom;
 
 	private ValidOrderSpecification validOrderSpec = new ValidOrderSpecification();
+
+	@FXML
+	Label orderInfoPaneTitle;
+
+	@FXML
+	Button homeBtn;
+
+	@FXML
+	Button reportBtn;
+
+	@FXML
+	Button orderRoom;
+
+	@FXML
+	Button settingBtn;
+
+	@FXML
+	Button orderRoomBtn;
+
+	@FXML
+	Button saveOrderBtn;
+
+	@FXML
+	Button removeOrderBtn;
+
+	@FXML Button editOrderBtn;
 
 	/**
 	 * Load again data for table, it will refresh content for table.
@@ -195,8 +223,38 @@ public class HomeController implements DialogController, Initializable {
 			roomInfoPane.initFormFieldName(resources);
 
 		// Initial multiple language.
-		if (orderInfoPane != null)
+		if (orderInfoPane != null) {
+			orderInfoPaneTitle.setText(resources.getString("UIControls.OrderInfoPane"));
 			orderInfoPane.initFormFieldName(resources);
+		}
+
+		// Change home components text.
+		homeBtn.setText(resources.getString("HomeStage.Buttons.HomeButton"));
+		reportBtn.setText(resources.getString("HomeStage.Buttons.ReportButton"));
+		orderRoomBtn.setText(resources.getString("HomeStage.Buttons.OrderRoomButton"));
+		settingBtn.setText(resources.getString("HomeStage.Buttons.SettingButton"));
+		
+		editOrderBtn.setText(resources.getString("UIControls.OrderInfoPane.Button.EditButton"));
+		removeOrderBtn.setText(resources.getString("UIControls.OrderInfoPane.Button.RemoveButton"));
+		saveOrderBtn.setText(resources.getString("UIControls.OrderInfoPane.Button.SaveButton"));
+	}
+
+	/**
+	 * Used for change and update locale of application.
+	 * <p>
+	 * 
+	 * @param newLocale
+	 *            - new locale selected by user.
+	 */
+	public void changeLanguage(String newLocale) {
+		if (newLocale == null | newLocale.equalsIgnoreCase(""))
+			return;
+
+		ResourceBundle bundle = ResourceBundle.getBundle("com.gsmart.ui.components.locale.messages",
+				new Locale(newLocale));
+
+		// Call method update again all components.
+		multipleLanguagRender(bundle);
 	}
 
 	/**
@@ -207,6 +265,14 @@ public class HomeController implements DialogController, Initializable {
 		injectionBeanForComponents();
 		updateOrderTable();
 		multipleLanguagRender(resources);
+	}
+
+	@FXML
+	public void openSettingStage() {
+		applicationConfiguration.SettingStageDialog().show();
+		// Get data and binding to form.
+		applicationConfiguration.SettingStageController().setHomeController(this);
+		applicationConfiguration.SettingStageController().preparedSettingStage();
 	}
 
 }

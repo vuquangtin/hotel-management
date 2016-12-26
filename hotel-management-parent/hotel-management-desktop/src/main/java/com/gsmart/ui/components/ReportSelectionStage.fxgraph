@@ -10,7 +10,7 @@ import javafx.scene.control.Button
 import com.gsmart.ui.controller.ReportManagedController
 
 component ReportSelectionStage controlledby ReportManagedController styledwith [ "css/quick-search-room.css", "css/report-selection-stage.css",
-	"css/application.css", "css/material-fx-v0_3.css" ] {
+	"css/application.css", "css/material-fx-v0_3.css" ] resourcefile "locale/messages.properties"{
 	VBox {
 		styleClass : [
 			"report-selection-stage"
@@ -34,23 +34,23 @@ component ReportSelectionStage controlledby ReportManagedController styledwith [
 					fitHeight : 35,
 					fitWidth : 35
 				},
-				text : "Report Managed"
+				text : rstring "ReportManageStage"
 			}
 		},
 		Button {
 			onAction : controllermethod renderDailyReport,
 			styleClass : ["select-button"],
-			text : "Daily Report"
+			text : rstring "ReportManageStage.Buttons.DailyReport"
 		},
 		Button {
 			onAction : controllermethod renderAllOrdersReport,
 			styleClass : ["select-button"],
-			text : "All Orders Report"
+			text : rstring "ReportManageStage.Buttons.AllOrderReport"
 		},
 		Button {
 			onAction : controllermethod renderOrderReportByDate,
 			styleClass : ["select-button"],
-			text : "Order Report By Date"
+			text : rstring "ReportManageStage.Buttons.ReportByDate"
 		}
 	}
 }

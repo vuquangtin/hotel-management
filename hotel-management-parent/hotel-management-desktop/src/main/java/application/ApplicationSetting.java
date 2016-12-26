@@ -11,5 +11,12 @@ public class ApplicationSetting {
 	public ApplicationSetting() {
 		
 	}
-
+	
+	public static void setUserSetting(UserSetting userSetting) {
+		ApplicationSetting.userSetting = userSetting;
+	}
+	
+	public static UserSetting getUserSetting() {
+		return userSetting;
+	}
 }

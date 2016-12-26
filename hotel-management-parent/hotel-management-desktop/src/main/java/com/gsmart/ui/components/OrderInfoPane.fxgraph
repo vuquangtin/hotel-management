@@ -11,14 +11,14 @@ import javafx.scene.control.Button
 import com.gsmart.ui.components.OrderInfoPane
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView
 component OrderInfoPane controlledby HomeController styledwith "css/order-info.css" resourcefile
-"locale/messages_vi_VN.properties" {
+"locale/messages.properties" {
 	VBox {
 		styleClass : [
 			"card",
 			"order-info-pane"
 		],
 		HBox {
-			Label {
+			Label id orderInfoPaneTitle {
 				styleClass : [
 					"card-title"
 				],
@@ -29,7 +29,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 					size : "2.5em"
 				}
 			},
-			Button {
+			Button id editOrderBtn {
 				styleClass : [
 					"top-bar-btn"
 				],
@@ -45,7 +45,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				text : rstring "UIControls.OrderInfoPane.Button.EditButton",
 				onAction : controllermethod openEditOrderStage
 			},
-			Button {
+			Button id saveOrderBtn {
 				styleClass : [
 					"top-bar-btn"
 				],
@@ -61,7 +61,7 @@ component OrderInfoPane controlledby HomeController styledwith "css/order-info.c
 				text : rstring "UIControls.OrderInfoPane.Button.SaveButton"
 
 			},
-			Button {
+			Button id removeOrderBtn {
 				styleClass : [
 					"top-bar-btn"
 				],

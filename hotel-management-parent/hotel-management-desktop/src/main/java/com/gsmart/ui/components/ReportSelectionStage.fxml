@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?scenebuilder-preview-i18n-resource locale/messages.properties?>
 <?scenebuilder-stylesheet css/quick-search-room.css?>
 <?scenebuilder-stylesheet css/report-selection-stage.css?>
 <?scenebuilder-stylesheet css/application.css?>
@@ -18,7 +19,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.ReportManagedController" prefWidth="300" prefHeight="400" alignment="TOP_CENTER" spacing="10">
 
 	<HBox> 
-		<Label text="Report Managed"> 
+		<Label text="%ReportManageStage"> 
 			<styleClass>
 				<String fx:value="header-label" />
 			</styleClass>
@@ -34,17 +35,17 @@
 			<String fx:value="top-bar" />
 		</styleClass>
 	</HBox>
-	<Button onAction="#renderDailyReport" text="Daily Report"> 
+	<Button onAction="#renderDailyReport" text="%ReportManageStage.Buttons.DailyReport"> 
 		<styleClass>
 			<String fx:value="select-button" />
 		</styleClass>
 	</Button>
-	<Button onAction="#renderAllOrdersReport" text="All Orders Report"> 
+	<Button onAction="#renderAllOrdersReport" text="%ReportManageStage.Buttons.AllOrderReport"> 
 		<styleClass>
 			<String fx:value="select-button" />
 		</styleClass>
 	</Button>
-	<Button onAction="#renderOrderReportByDate" text="Order Report By Date"> 
+	<Button onAction="#renderOrderReportByDate" text="%ReportManageStage.Buttons.ReportByDate"> 
 		<styleClass>
 			<String fx:value="select-button" />
 		</styleClass>

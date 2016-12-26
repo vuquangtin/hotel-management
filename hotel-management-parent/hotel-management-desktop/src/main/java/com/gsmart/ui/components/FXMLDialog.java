@@ -19,55 +19,61 @@ import javafx.stage.Window;
 import javafx.util.Callback;
 
 public class FXMLDialog extends Stage {
-	
-	public FXMLDialog(DialogController controller, URL fxml, Window owner , String[] css , Modality modality) {
-        this(controller, fxml, owner, StageStyle.DECORATED , css , modality);
-    }
-	
-	public FXMLDialog(DialogController controller, URL fxml, Window owner , String[] css) {
-        this(controller, fxml, owner, StageStyle.DECORATED , css , null);
-    }
-	
-	public FXMLDialog(DialogController controller, URL fxml, Window owner , Modality modality) {
-        this(controller, fxml, owner, StageStyle.DECORATED , null , modality);
-    }
-	
-    public FXMLDialog(DialogController controller, URL fxml, Window owner) {
-        this(controller, fxml, owner, StageStyle.DECORATED , null , null);
-    }
 
-    public FXMLDialog(final DialogController controller, URL fxml, Window owner, StageStyle style , String[] css , Modality modality) {
-        super(style);
-   
-		ResourceBundle bundle = ResourceBundle.getBundle("com.gsmart.ui.components.locale.messages",
-				new Locale(ApplicationSetting.userSetting.getLocale()));
-		
-        initOwner(owner);
-        initModality(modality);
-        
-        getIcons().add(new Image(getClass().getResource("/com/gsmart/ui/components/images/logo.png").toExternalForm()));
-        setTitle("Hotel Management - Version 1.0.0");
-        
-        FXMLLoader loader = new FXMLLoader(fxml, bundle);
-        try {
-            loader.setControllerFactory(new Callback<Class<?>, Object>() {
-                @Override
-                public Object call(Class<?> aClass) {
-                    return controller;
-                }
-            });
-            controller.setDialog(this);
-            
-            Scene scene  = new Scene((Parent) loader.load());
-            if(css != null) {
-            	for(String url : css) {
-            		scene.getStylesheets().add(getClass().getResource(url).toString());
-            	}
-            }
-            
-            setScene(scene);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+	public FXMLDialog(DialogController controller, URL fxml, Window owner, String[] css, Modality modality) {
+		this(controller, fxml, owner, StageStyle.DECORATED, css, modality);
+	}
+
+	public FXMLDialog(DialogController controller, URL fxml, Window owner, String[] css) {
+		this(controller, fxml, owner, StageStyle.DECORATED, css, null);
+	}
+
+	public FXMLDialog(DialogController controller, URL fxml, Window owner, Modality modality) {
+		this(controller, fxml, owner, StageStyle.DECORATED, null, modality);
+	}
+
+	public FXMLDialog(DialogController controller, URL fxml, Window owner) {
+		this(controller, fxml, owner, StageStyle.DECORATED, null, null);
+	}
+
+	public FXMLDialog(final DialogController controller, URL fxml, Window owner, StageStyle style, String[] css,
+			Modality modality) {
+		super(style);
+
+		Locale locale;
+		if (ApplicationSetting.getUserSetting().getLocale() == null)
+			locale = new Locale("en_EN");
+		else
+			locale = new Locale(ApplicationSetting.getUserSetting().getLocale());
+
+		ResourceBundle bundle = ResourceBundle.getBundle("com.gsmart.ui.components.locale.messages", locale);
+
+		initOwner(owner);
+		initModality(modality);
+
+		getIcons().add(new Image(getClass().getResource("/com/gsmart/ui/components/images/logo.png").toExternalForm()));
+		setTitle("Hotel Management - Version 1.0.0");
+
+		FXMLLoader loader = new FXMLLoader(fxml, bundle);
+		try {
+			loader.setControllerFactory(new Callback<Class<?>, Object>() {
+				@Override
+				public Object call(Class<?> aClass) {
+					return controller;
+				}
+			});
+			controller.setDialog(this);
+
+			Scene scene = new Scene((Parent) loader.load());
+			if (css != null) {
+				for (String url : css) {
+					scene.getStylesheets().add(getClass().getResource(url).toString());
+				}
+			}
+
+			setScene(scene);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

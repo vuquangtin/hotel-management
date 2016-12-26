@@ -18,6 +18,7 @@ import com.gsmart.ui.controller.HomeController;
 import com.gsmart.ui.controller.OrderRoomController;
 import com.gsmart.ui.controller.QuickSearchRoomController;
 import com.gsmart.ui.controller.ReportManagedController;
+import com.gsmart.ui.controller.SettingStageController;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -48,7 +49,7 @@ public class ApplicationConfiguration {
 	public void initApplicationSetting() {
 		UserSettingRepository userSettingRepo = new UserSettingRepository();
 		//Set user setting for application.
-		ApplicationSetting.userSetting = userSettingRepo.getUserSetting();
+		ApplicationSetting.setUserSetting(userSettingRepo.getUserSetting());
 	}
 
 	@Bean(name = "validationMessageSource")
@@ -72,6 +73,11 @@ public class ApplicationConfiguration {
 	public OrderTablePane orderTablePane() {
 		return new OrderTablePane();
 	}
+	
+	@Bean
+	public SettingStageController SettingStageController() {
+		return new SettingStageController();
+	}
 
 	@Bean
 	@Scope("singleton")
@@ -92,7 +98,15 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	@Scope("singleton")
+	@Scope("prototype")
+	public FXMLDialog SettingStageDialog() {
+		return new FXMLDialog(SettingStageController(),
+				getClass().getResource("/com/gsmart/ui/components/SettingStage.fxml"), homeDialog(),
+				cssFiles, Modality.APPLICATION_MODAL);
+	}
+	
+	@Bean
+	@Scope("prototype")
 	public FXMLDialog reportSelectionManagedDialog() {
 		return new FXMLDialog(ReportManagedController(),
 				getClass().getResource("/com/gsmart/ui/components/ReportSelectionStage.fxml"), primaryStage,
@@ -122,7 +136,7 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
-	@Scope("prototype")
+	@Scope("singleton")
 	public FXMLDialog homeDialog() {
 		return new FXMLDialog(homeController(), getClass().getResource("/com/gsmart/ui/components/Home.fxml"),
 				primaryStage, cssFiles, Modality.WINDOW_MODAL);

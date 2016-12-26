@@ -296,5 +296,16 @@ public class OrderTablePane extends VBox {
 		for (int i = 0; i <= 6; i++) {
 			table.getColumns().get(i).setText(resources.getString(columnLabels[i]));
 		}
+		
+		//Update form fields.
+		customerIdRadioBtn.setText(resources.getString("UIControls.OrderTablePane.Forms.ByID"));
+		roomNameRadioBtn.setText(resources.getString("UIControls.OrderTablePane.Forms.ByRoom"));
+		customerNameRadioBtn.setText(resources.getString("UIControls.OrderTablePane.Forms.ByName"));
+		searchTextField.setPromptText(resources.getString("UIControls.OrderTablePane.Forms.SearchPromptText"));
+		roomType.setPromptText(resources.getString("UIControls.OrderTablePane.Forms.RoomTypePromptText"));
+		fromDate.setPromptText(resources.getString("UIControls.OrderTablePane.Forms.FromDate"));
+		toDate.setPromptText(resources.getString("UIControls.OrderTablePane.Forms.ToDate"));
+		searchButton.setText(resources.getString("UIControls.OrderTablePane.Forms.SearchButton"));
+		
 	}
 }
