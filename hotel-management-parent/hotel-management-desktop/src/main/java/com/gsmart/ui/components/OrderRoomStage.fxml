@@ -43,19 +43,19 @@
 	</HBox>
 	<HBox spacing="10" style="-fx-padding : 5px;"> 
 		<TitledPane collapsible="false" text="%OrderRoomStage.Label.RoomInfoHeader"> 
-			<VBox> 
+			<VBox spacing="-10"> 
 				<FXDateTimePicker fx:id="dateTimePicker" isInlineStyle="false" firstDateLabel="Date in" firstTimeLabel="Time in" secondDateLabel="Date out" secondTimeLabel="Time out"/> 
 				<FXTextField fx:id="prepayTxt" isInlineStyle="true" label="%OrderRoomStage.Prepay" unit=" VND" fieldName="prepay"/> 
 				<FXTextField fx:id="promotionTxt" isInlineStyle="true" label="%OrderRoomStage.Promotion" unit=" %" fieldName="promotion"/> 
-				<HBox spacing="10"> 
+				<HBox> 
 					<Label text="%OrderRoomStage.Notice"> 
 						<styleClass>
 							<String fx:value="control-label" />
 						</styleClass>
 					</Label>
-					<TextArea fx:id="registrationNotice" prefWidth="350" prefHeight="50"/> 
+					<TextArea fx:id="registrationNotice" prefWidth="350" prefHeight="30"/> 
 				</HBox>
-				<HBox style="-fx-padding : 10px 0px 0px 0px;" spacing="10"> 
+				<HBox style="-fx-padding : 20px 0px 0px 0px;"> 
 					<FXTextField fx:id="roomTxt" label="%OrderRoomStage.Room" fieldName="room" editAble="false"/> 
 					<Button fx:id="quickSearchBtn" onAction="#openQuickSeachRoomStage" text="%OrderRoomStage.Button.QuickSearch"> 
 						<styleClass>

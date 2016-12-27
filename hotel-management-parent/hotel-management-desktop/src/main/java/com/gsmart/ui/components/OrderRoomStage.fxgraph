@@ -59,6 +59,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 					styleClass : [
 						"card"
 					],
+					spacing : -10,
 					FXDateTimePicker id dateTimePicker {
 						isInlineStyle : false,
 						firstDateLabel : "Date in",
@@ -79,7 +80,6 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						fieldName : "promotion"
 					},
 					HBox {
-						spacing : 10,
 						Label {
 							styleClass : [
 								"control-label"
@@ -88,12 +88,11 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 						},
 						TextArea id registrationNotice {
 							prefWidth : 350,
-							prefHeight : 50
+							prefHeight : 30
 						}
 					},
 					HBox {
-						style : "-fx-padding : 10px 0px 0px 0px;",
-						spacing : 10,
+						style : "-fx-padding : 20px 0px 0px 0px;",
 						FXTextField id roomTxt {
 							label : rstring "OrderRoomStage.Room",
 							fieldName : "room",

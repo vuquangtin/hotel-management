@@ -1,9 +1,12 @@
 package com.gsmart.ui.controller;
 
 import java.text.NumberFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.gsmart.service.RoomService;
 import com.gsmart.service.model.SearchRoomResult;
 import com.gsmart.ui.components.FXMLDialog;
@@ -69,9 +72,13 @@ public class QuickSearchRoomController implements DialogController {
 
 	@FXML
 	public void searchRoomByDateAction(ActionEvent event) {
-		if (dateTimePicker.isValidDateTime())
-			quickSearchRoomTable.setItems(FXCollections.observableArrayList(
-					roomService.findRoomByDate(dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate())));
+		if (dateTimePicker.isValidDateTime()) {
+			List<SearchRoomResult> searchResult = roomService.findRoomByDate(dateTimePicker.getFirstDate(), dateTimePicker.getSecondDate());
+			//Sorting list by ended time ascending.
+			Collections.sort(searchResult);
+			quickSearchRoomTable.setItems(FXCollections.observableArrayList(searchResult));
+		}
+			
 	}
 
 }

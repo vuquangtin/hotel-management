@@ -3,7 +3,6 @@ package com.gsmart.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class RoomServiceImpl implements RoomService {
 
 	@Autowired
 	RoomRepository roomRepository;
-	
+
 	@Autowired
 	OrdersRepository ordersRepository;
 
@@ -36,20 +35,6 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	private boolean isFreeBetween(Orders order1, Orders order2, Date dateIn, Date checkOutDate) {
-		if(order1.getCheckOutAt().before(dateIn)) {
-			System.out.println("Criterial 1 correct !");
-		}else {
-			System.out.println("Criterial 1 failed !");
-			System.out.println("Order 2 has time | " + order2.getCreatedAt() + " Check Out Time Require is | " + checkOutDate);
-		}
-		
-		if(order2.getCreatedAt().after(checkOutDate)) {
-			System.out.println("Criterial 2 correct !");
-		} else {
-			System.out.println("Criterial 2 failed !");
-			System.out.println("Order 2 has time | " + order2.getCreatedAt() + " Check Out Time Require is | " + checkOutDate);
-		}
-		
 		if (order1.getCheckOutAt().before(dateIn) && order2.getCreatedAt().after(checkOutDate)) {
 			return true;
 		}
@@ -69,61 +54,57 @@ public class RoomServiceImpl implements RoomService {
 		// Contain last order of each room.
 		List<Orders> lastOrder = new ArrayList<Orders>();
 		Date currentTime = new Date();
-		int numberOrderValid = 0;
 
 		for (Room room : rooms) {
-			Iterator<Orders> orders = ordersRepository.findAllByRoomOrderByCreatedAtAsc(room).iterator();
-			numberOrderValid = 0;
-			
-			while (orders.hasNext()) {
-				Orders firstOrder = orders.next();
-				// It will get next item until has valid order.
-				// Valid order is.
-				// 1) Has checkout time before dateIn. 
-				// 2) Not ended.
-				System.out.println("Fist Order Is " + firstOrder.getCustomerName());
-				while ((firstOrder.getCheckOutAt().after(dateIn) || isEndedOrder(firstOrder, currentTime))
-						&& orders.hasNext()){
-					firstOrder = orders.next();
-				}
-					
-				numberOrderValid ++;
-				System.out.println("Valid First Order Of Room " + room.getName() + " Customer name " + firstOrder.getCustomerName());
-				
-				Orders secondOrder = null;
-				//Check if is last order.
-				if (orders.hasNext()) {
-					secondOrder = orders.next();
-					
-					System.out.println("Valid Second Order Of Room " + room.getName() + " Customer name " + secondOrder.getCustomerName());
-					//If free time between two order is valid with input.	
-					if (isFreeBetween(firstOrder, secondOrder, dateIn, checkOutDate)) {
-						System.out.println("Add to between " + firstOrder.getCustomerName() + " And " + secondOrder.getCustomerName());
-						searchRoomResults.add(new SearchRoomResult(room, firstOrder.getCheckOutAt()));
-					}
 
+			List<Orders> roomOrderItems = ordersRepository.findAllByRoomOrderByCreatedAtAsc(room);
+			int i = 0;
+			// If Room don't have any order.
+			if (roomOrderItems.size() == 0)
+				lastOrder.add(null);
+			else {
+				// Check add to before first order if can.
+				if (roomOrderItems.get(0).getCreatedAt().after(currentTime) && dateIn.after(currentTime)
+						&& checkOutDate.before(roomOrderItems.get(0).getCreatedAt()))
+					searchRoomResults.add(new SearchRoomResult(room, dateIn));
+			}
+
+			while (i < roomOrderItems.size()) {
+				while ((roomOrderItems.get(i).getCheckOutAt().after(dateIn)
+						|| isEndedOrder(roomOrderItems.get(i), currentTime))) {
+					if (i < roomOrderItems.size() - 1)
+						i++;
+					else
+						break;
+				}
+				// If current index is last order.
+				if (i == roomOrderItems.size() - 1) {
+					// If last order still active then add to last orders list.
+					if (roomOrderItems.get(i).getCheckOutAt().after(currentTime))
+						lastOrder.add(roomOrderItems.get(i));
+					else
+						lastOrder.add(null);
+					
+					break;
 				} else {
-					System.out.println("Set Orders of Room " + room.getName() + " is empty");
-					//Offset used for mark correct index of room.
-					lastOrder.add(firstOrder);
+					if (isFreeBetween(roomOrderItems.get(i), roomOrderItems.get(i + 1), dateIn, checkOutDate)) {
+						searchRoomResults.add(new SearchRoomResult(room, roomOrderItems.get(i).getCheckOutAt()));
+					}
+					i++;
+					continue;
 				}
 			}
-			//If no valid order , add null to that offset.
-			if(numberOrderValid == 0) lastOrder.add(null);
+
 		}
 		
-		// Completed add to between free time, next try add to last.
-		for (int index = 0; index < lastOrder.size(); index++) {
-			try {
-				//Because some room is don't have any order valid, therefore not exist last order with that offset.
-				//It will throw array index exception, If that happened we just need to book room at the moment.
-				//else we try to add to time when last order is completed.
-				searchRoomResults.add(new SearchRoomResult(rooms.get(index), lastOrder.get(index).getCheckOutAt()));
-				System.out.println("Add to Ended Last Order Of Room " + rooms.get(index).getName());
-			} catch (Exception ex) {
-				// If room don't have any order try book room at the moment.
-				searchRoomResults.add(new SearchRoomResult(rooms.get(index), new Date()));
-				System.out.println("Add to Current Time Of Room " + rooms.get(index).getName());
+		//Try to add when last order was completed.
+		for (int i = 0; i < lastOrder.size(); i++) {
+			if (lastOrder.get(i) != null) {
+				// If last order is valid, try to add when last order completed.
+				searchRoomResults.add(new SearchRoomResult(rooms.get(i), lastOrder.get(i).getCheckOutAt()));
+			} else {
+				// It mean current room is free.
+				searchRoomResults.add(new SearchRoomResult(rooms.get(i), new Date()));
 			}
 		}
 

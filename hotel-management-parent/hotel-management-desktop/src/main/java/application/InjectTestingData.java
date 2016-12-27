@@ -274,7 +274,7 @@ public class InjectTestingData {
 		Orders T2 = getSampleOrder("T2" , "28/12/2016 12:12","29/12/2016 12:12");
 		T2.setRoom(room_2);
 		
-		Orders T3 = getSampleOrder("T3" , "31/12/2016 17:17","3/1/2016 17:17");
+		Orders T3 = getSampleOrder("T3" , "31/12/2016 17:17","3/1/2017 17:17");
 		T3.setRoom(room_1);
 		
 		Orders T4 = getSampleOrder("T4" , "4/1/2017 12:12","7/1/2017 17:17");
