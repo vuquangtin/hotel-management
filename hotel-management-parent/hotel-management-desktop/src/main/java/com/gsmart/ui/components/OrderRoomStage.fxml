@@ -74,7 +74,7 @@
 				<String fx:value="titled-pane" />
 			</styleClass>
 		</TitledPane>
-		<TitledPane prefHeight="390" collapsible="false" text="%OrderRoomStage.Label.CustomerInfoHeader"> 
+		<TitledPane prefHeight="400" collapsible="false" text="%OrderRoomStage.Label.CustomerInfoHeader"> 
 			<VBox> 
 				<FXTextField fx:id="customerNameTxt" label="%OrderRoomStage.Name" fieldName="customerName"/> 
 				<FXTextField fx:id="customerIDTxt" label="%OrderRoomStage.ID" fieldName="customerId"/> 

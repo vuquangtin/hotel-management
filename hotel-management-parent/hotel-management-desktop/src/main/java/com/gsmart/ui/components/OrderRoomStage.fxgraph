@@ -114,7 +114,7 @@ component OrderRoomStage controlledby OrderRoomController styledwith [ "css/appl
 				}
 			},
 			TitledPane {
-				prefHeight : 390,
+				prefHeight : 400,
 				styleClass : [
 					"titled-pane"
 				],

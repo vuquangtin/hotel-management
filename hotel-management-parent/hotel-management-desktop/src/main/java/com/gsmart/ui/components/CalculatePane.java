@@ -188,7 +188,7 @@ public class CalculatePane extends VBox {
 			if (isComfirm) {
 				// Status equal 2 mean this order has payment completed.
 				orders.setStatus(2);
-				ordersRepository.save(orders);
+				
 				orders.setPaidAt(new Date());
 				if (orders.getPrepay() == null)
 					orders.setPrepay(0.0);
@@ -199,7 +199,7 @@ public class CalculatePane extends VBox {
 				if (printInvoicesCheckBox.isSelected()) {
 					ReportController.printInvoice(orders);
 				}
-
+				ordersRepository.save(orders);
 				homeController.updateOrderTable();
 			}
 		}

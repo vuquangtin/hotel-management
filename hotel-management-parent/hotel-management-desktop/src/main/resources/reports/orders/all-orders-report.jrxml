@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-23T21:23:04 -->
+<!-- 2016-12-27T15:18:21 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="all-order-report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoPages" columnWidth="786" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" whenResourceMissingType="Empty" uuid="873fa284-5b8f-4ad9-a162-7d79e5b0e7a8">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="net.sf.jasperreports.export.character.encoding" value="CP1258"/>
@@ -478,7 +478,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="66" height="30" uuid="cdb2061d-141f-4da1-8dec-f70d1ab7a98d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{paidAt}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{paidAt} == null  ? "Chưa thanh toán" : $F{paidAt}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
