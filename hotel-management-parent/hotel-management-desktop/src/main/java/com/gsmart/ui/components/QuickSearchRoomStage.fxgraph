@@ -16,7 +16,7 @@ import com.gsmart.ui.controller.QuickSearchRoomController
 import com.gsmart.ui.controls.FXDateTimePicker
 
 component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith [ "css/quick-search-room.css",
-	"css/application.css", "css/material-fx-v0_3.css" ] {
+	"css/application.css", "css/material-fx-v0_3.css" ] resourcefile "locale/messages.properties"{
 	VBox {
 		styleClass : [
 			"quick-search-room-stage"
@@ -36,7 +36,7 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 					fitHeight : 35,
 					fitWidth : 35
 				},
-				text : "Quick Search Room"
+				text : rstring "QuickSearchRoomStage"
 			}
 		},
 		VBox {
@@ -48,21 +48,21 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 			FXDateTimePicker id dateTimePicker {
 				labelPreWidth : 60,
 				isInlineStyle : false,
-				firstDateLabel : "Date in",
-				firstTimeLabel : "Time in",
-				secondDateLabel : "Date out",
-				secondTimeLabel : "Time out"
+				firstDateLabel  : rstring "QuickSearchRoomStage.Form.DateIn",
+				firstTimeLabel  : rstring "QuickSearchRoomStage.Form.TimeIn",
+				secondDateLabel : rstring "QuickSearchRoomStage.Form.DateOut",
+				secondTimeLabel : rstring "QuickSearchRoomStage.Form.TimeOut"
 			},
 			Button {
 				styleClass : [
 					"find-button"
 				],
-				text : "Find",
+				text : rstring "QuickSearchRoomStage.Form.FindButton",
 				onAction : controllermethod searchRoomByDateAction
 			},
 			HBox {
 				Label {
-					text : "Room Selected : "
+					text : rstring "QuickSearchRoomStage.Form.RoomSelected.RoomName"
 				},
 				Text id roomNameTxt {
 
@@ -70,7 +70,7 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 			},
 			HBox {
 				Label {
-					text : "Room Type : "
+					text : rstring "QuickSearchRoomStage.Form.RoomSelected.RoomType"
 				},
 				Text id roomTypeTxt {
 
@@ -78,20 +78,20 @@ component QuickSearchRoomStage controlledby QuickSearchRoomController styledwith
 			},
 			HBox {
 				Label {
-					text : "Price : "
+					text : rstring "QuickSearchRoomStage.Form.RoomSelected.Price"
 				},
 				Text id priceTxt {
 
 				},
 				Label {
-					text : "/ Date"
+					text : rstring "QuickSearchRoomStage.Form.RoomSelected.PriceCalculateUnit"
 				}
 			},
 			Button {
 				styleClass : [
 					"selected-room-button"
 				],
-				text : "Select Room",
+				text : rstring "QuickSearchRoomStage.Form.SelectRoomButton",
 				onAction : controllermethod seletecRoomAction
 			},
 			QuickSearchRoomTable id quickSearchRoomTable

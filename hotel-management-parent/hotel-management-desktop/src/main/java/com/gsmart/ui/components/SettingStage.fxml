@@ -60,7 +60,7 @@
 						</styleClass>
 					</Label>
 					<HBox> 
-						<RadioButton fx:id="englishRadioBtn" text="English" userData="en_EN" toggleGroup="$languageRadioGroup"/> 
+						<RadioButton fx:id="englishRadioBtn" text="English" userData="en_US" toggleGroup="$languageRadioGroup"/> 
 						<RadioButton fx:id="vietnameseRadioBtn" text="Việt Nam" userData="vi_VN" toggleGroup="$languageRadioGroup"/> 
 					</HBox>
 					<HBox alignment="BOTTOM_RIGHT" style="-fx-padding: 20px 0 10px 0"> 

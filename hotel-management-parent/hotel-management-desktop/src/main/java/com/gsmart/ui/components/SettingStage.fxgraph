@@ -77,7 +77,7 @@ component SettingStage controlledby SettingStageController styledwith [ "css/app
 						HBox {
 							RadioButton id englishRadioBtn{
 								text : "English",
-								userData : "en_EN",
+								userData : "en_US",
 								toggleGroup : idref languageRadioGroup
 							},
 							RadioButton id vietnameseRadioBtn {

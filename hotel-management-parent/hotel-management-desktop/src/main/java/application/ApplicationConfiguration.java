@@ -54,11 +54,17 @@ public class ApplicationConfiguration {
 
 	@Bean(name = "validationMessageSource")
 	public ReloadableResourceBundleMessageSource validationMessageSource() {
+		String locale = ApplicationSetting.getUserSetting().getLocale();
+		if(locale == null || locale.isEmpty())
+			locale = "en_US";
+		
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("classpath:validation-messages/ValidationMessages_en_US");
+		messageSource.setBasename("classpath:validation-messages/ValidationMessages_" + locale);
 		messageSource.setCacheSeconds(10); // reload messages every 10 seconds
 		messageSource.setDefaultEncoding("UTF-8");
-
+		
+		//Hold message source for change when user selected other language.
+		ApplicationSetting.setMessageSource(messageSource);
 		return messageSource;
 	}
 

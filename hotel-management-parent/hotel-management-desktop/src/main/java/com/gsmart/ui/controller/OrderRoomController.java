@@ -21,6 +21,7 @@ import com.gsmart.ui.controls.FXDateTimePicker;
 import com.gsmart.ui.controls.FXTextField;
 
 import application.ApplicationConfiguration;
+import application.ApplicationSetting;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,7 +36,7 @@ public class OrderRoomController implements DialogController, Initializable {
 	private FXMLDialog dialog;
 	@Autowired
 	private ApplicationConfiguration applicationConfiguration;
-	@Autowired
+	//@Autowired
 	private Validator validator;
 	@Autowired
 	private HomeController homeController;
@@ -178,14 +179,18 @@ public class OrderRoomController implements DialogController, Initializable {
 	 * @return TRUE if data is valid and FALSE if not.
 	 */
 	public boolean isValidOrderInformation() {
-
+		//Update Validate message correct current selected language.
+		validator = ApplicationSetting.getValidator();
+		
+		System.out.println("Validator " + validator);
+		
 		// Firstly , we need to validated date time.
 		if (!dateTimePicker.isValidDateTime())
 			return false;
 
 		BindException errors = new BindException(getOrder(), "orders");
 		validator.validate(getOrder(), errors);
-
+		
 		if (errors.getErrorCount() != 0) {
 			for (FXTextField textField : getListFXTextField()) {
 				if (errors.getFieldErrorCount(textField.getFieldName()) != 0) {

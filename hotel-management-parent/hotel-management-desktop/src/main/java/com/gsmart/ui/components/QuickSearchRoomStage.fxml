@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?scenebuilder-preview-i18n-resource locale/messages.properties?>
 <?scenebuilder-stylesheet css/quick-search-room.css?>
 <?scenebuilder-stylesheet css/application.css?>
 <?scenebuilder-stylesheet css/material-fx-v0_3.css?>
@@ -20,7 +21,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.gsmart.ui.controller.QuickSearchRoomController">
 
 	<HBox> 
-		<Label text="Quick Search Room"> 
+		<Label text="%QuickSearchRoomStage"> 
 			<styleClass>
 				<String fx:value="header-label" />
 			</styleClass>
@@ -37,26 +38,26 @@
 		</styleClass>
 	</HBox>
 	<VBox style="-fx-padding : 10px;" spacing="10"> 
-		<FXDateTimePicker fx:id="dateTimePicker" labelPreWidth="60" isInlineStyle="false" firstDateLabel="Date in" firstTimeLabel="Time in" secondDateLabel="Date out" secondTimeLabel="Time out"/> 
-		<Button text="Find" onAction="#searchRoomByDateAction"> 
+		<FXDateTimePicker fx:id="dateTimePicker" labelPreWidth="60" isInlineStyle="false" firstDateLabel="%QuickSearchRoomStage.Form.DateIn" firstTimeLabel="%QuickSearchRoomStage.Form.TimeIn" secondDateLabel="%QuickSearchRoomStage.Form.DateOut" secondTimeLabel="%QuickSearchRoomStage.Form.TimeOut"/> 
+		<Button text="%QuickSearchRoomStage.Form.FindButton" onAction="#searchRoomByDateAction"> 
 			<styleClass>
 				<String fx:value="find-button" />
 			</styleClass>
 		</Button>
 		<HBox> 
-			<Label text="Room Selected : "/> 
+			<Label text="%QuickSearchRoomStage.Form.RoomSelected.RoomName"/> 
 			<Text fx:id="roomNameTxt"/> 
 		</HBox>
 		<HBox> 
-			<Label text="Room Type : "/> 
+			<Label text="%QuickSearchRoomStage.Form.RoomSelected.RoomType"/> 
 			<Text fx:id="roomTypeTxt"/> 
 		</HBox>
 		<HBox> 
-			<Label text="Price : "/> 
+			<Label text="%QuickSearchRoomStage.Form.RoomSelected.Price"/> 
 			<Text fx:id="priceTxt"/> 
-			<Label text="/ Date"/> 
+			<Label text="%QuickSearchRoomStage.Form.RoomSelected.PriceCalculateUnit"/> 
 		</HBox>
-		<Button text="Select Room" onAction="#seletecRoomAction"> 
+		<Button text="%QuickSearchRoomStage.Form.SelectRoomButton" onAction="#seletecRoomAction"> 
 			<styleClass>
 				<String fx:value="selected-room-button" />
 			</styleClass>

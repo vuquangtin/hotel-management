@@ -19,6 +19,7 @@ import com.gsmart.ui.components.RoomInfoPane;
 import com.gsmart.ui.utils.FXDialogController;
 
 import application.ApplicationConfiguration;
+import application.ApplicationSetting;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -255,6 +256,9 @@ public class HomeController implements DialogController, Initializable {
 
 		// Call method update again all components.
 		multipleLanguagRender(bundle);
+		
+		// Call update application setting for change language of validation messages.
+		ApplicationSetting.changeLanguage(newLocale);
 	}
 
 	/**
