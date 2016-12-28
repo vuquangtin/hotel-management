@@ -46,7 +46,7 @@ public class Orders {
 	private String description;
 	private byte gender;
 	private Double promotion;
-	private int status;
+	private int status = 0;
 
 	private Room room;
 

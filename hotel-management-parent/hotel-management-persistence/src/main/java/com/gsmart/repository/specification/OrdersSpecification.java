@@ -31,6 +31,7 @@ public class OrdersSpecification implements Specification<Orders> {
 		 * Find by customer name.
 		 */
 		if (!StringUtils.isEmpty(orderCreiteria.getCustomerName()) && orderCreiteria.getCustomerName() != null) {
+			System.out.println("Search By Customer Name.");
 			predicates.add(cb.like(cb.lower(root.get(Orders_.customerName)),
 					"%" + orderCreiteria.getCustomerName().toLowerCase() + "%"));
 		}
@@ -39,6 +40,7 @@ public class OrdersSpecification implements Specification<Orders> {
 		 * Find by customer ID.
 		 */
 		if (!StringUtils.isEmpty(orderCreiteria.getCustomerId()) && orderCreiteria.getCustomerId() != null) {
+			System.out.println("Search By Customer ID.");
 			predicates.add(cb.like(cb.lower(root.get(Orders_.customerId)), "%" + orderCreiteria.getCustomerId() + "%"));
 		}
 
@@ -47,14 +49,16 @@ public class OrdersSpecification implements Specification<Orders> {
 		 * give.
 		 */
 		if (orderCreiteria.getCreatedAt() != null && orderCreiteria.getCheckOutAt() != null) {
-			predicates.add(cb.and(cb.greaterThan(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()),
-					cb.lessThan(root.get(Orders_.checkOutAt), orderCreiteria.getCheckOutAt())));
+			System.out.println("Search By Pair Date.");
+			predicates.add(cb.and(cb.greaterThanOrEqualTo(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()),
+					cb.lessThanOrEqualTo(root.get(Orders_.checkOutAt), orderCreiteria.getCheckOutAt())));
 		}
 		
 		/**
 		 * Find all order had date created equal or greater.
 		 */
 		if(orderCreiteria.getCreatedAt() != null && orderCreiteria.getCheckOutAt() == null) {
+			System.out.println("Search By Created Date.");
 			predicates.add(cb.greaterThanOrEqualTo(root.get(Orders_.createdAt), orderCreiteria.getCreatedAt()));
 		}
 		
@@ -62,6 +66,7 @@ public class OrdersSpecification implements Specification<Orders> {
 		 * Find all order had date checkout equal or less than.
 		 */
 		if(orderCreiteria.getCreatedAt() == null && orderCreiteria.getCheckOutAt() != null) {
+			System.out.println("Search By Checkout Date.");
 			predicates.add(cb.lessThanOrEqualTo(root.get(Orders_.checkOutAt), orderCreiteria.getCheckOutAt()));
 		}
 
@@ -71,6 +76,7 @@ public class OrdersSpecification implements Specification<Orders> {
 			 */
 			if (!StringUtils.isEmpty(orderCreiteria.getRoom().getName())
 					&& orderCreiteria.getRoom().getName() != null) {
+				System.out.println("Search By Room Name.");
 				predicates.add(cb.like(cb.lower(root.get(Orders_.room).get(Room_.name)),
 						"%" + orderCreiteria.getRoom().getName() + "%"));
 			}
@@ -80,6 +86,7 @@ public class OrdersSpecification implements Specification<Orders> {
 			 */
 			if (!StringUtils.isEmpty(orderCreiteria.getRoom().getRoomCategory())
 					&& orderCreiteria.getRoom().getRoomCategory() != null) {
+				System.out.println("Search By Room Category.");
 				predicates.add(cb.equal(root.get(Orders_.room).get(Room_.roomCategory),
 						orderCreiteria.getRoom().getRoomCategory()));
 			}

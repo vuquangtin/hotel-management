@@ -40,8 +40,8 @@ public class OrderReportSpecification {
 				//To 23:59:59
 				Date toDate = calendar.getTime();
 				
-				return cb.and(cb.greaterThan(root.get(Orders_.createdAt), fromDate),
-						cb.lessThan(root.get(Orders_.checkOutAt), toDate));
+				return cb.and(cb.greaterThanOrEqualTo(root.get(Orders_.createdAt), fromDate),
+						cb.lessThanOrEqualTo(root.get(Orders_.checkOutAt), toDate));
 			}
 		};
 
@@ -56,8 +56,8 @@ public class OrderReportSpecification {
 
 			@Override
 			public Predicate toPredicate(Root<Orders> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-				return cb.and(cb.greaterThan(root.get(Orders_.createdAt), fromDate),
-						cb.lessThan(root.get(Orders_.checkOutAt), toDate));
+				return cb.and(cb.greaterThanOrEqualTo(root.get(Orders_.createdAt), fromDate),
+						cb.lessThanOrEqualTo(root.get(Orders_.checkOutAt), toDate));
 			}
 		};
 
