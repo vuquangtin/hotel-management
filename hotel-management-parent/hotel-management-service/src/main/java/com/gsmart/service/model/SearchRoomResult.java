@@ -31,7 +31,7 @@ public class SearchRoomResult implements Comparable<SearchRoomResult> {
 		Calendar current = Calendar.getInstance();
 		Calendar timeIn = Calendar.getInstance();
 		timeIn.setTime(dateIn);
-
+		
 		// Calculate the difference in millisecond between two dates
 		long diffInMilis = Math.abs(timeIn.getTimeInMillis() - current.getTimeInMillis());
 

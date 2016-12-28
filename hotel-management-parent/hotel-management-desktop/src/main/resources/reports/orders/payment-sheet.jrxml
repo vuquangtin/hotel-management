@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-23T20:52:09 -->
+<!-- 2016-12-28T11:17:45 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="payment-sheet" pageWidth="297" pageHeight="421" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Key" uuid="ba321f1e-c4fe-4b7f-af1e-b52f07966c0a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -167,7 +167,7 @@
 			</textField>
 			<textField>
 				<reportElement x="70" y="113" width="70" height="17" uuid="da1744c5-c0c2-4343-9988-8460ae242fe0"/>
-				<textFieldExpression><![CDATA[$F{totalPrice}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format( $F{totalPrice} )]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="113" width="60" height="17" uuid="f5318e27-b51b-4a14-82cc-0b33f35a5581"/>
@@ -178,7 +178,7 @@
 			</staticText>
 			<textField>
 				<reportElement x="195" y="114" width="61" height="17" uuid="5da754da-ac93-4ab7-a129-6c49fe7dfe2c"/>
-				<textFieldExpression><![CDATA[$F{prepay}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{prepay})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="144" y="114" width="49" height="17" uuid="77dbccb9-32c2-4d24-b0f9-2792b043f7f4"/>
@@ -217,7 +217,10 @@
 			</staticText>
 			<textField>
 				<reportElement x="90" y="168" width="100" height="20" uuid="cee1251d-35ed-464d-b937-1847955921e8"/>
-				<textFieldExpression><![CDATA[$F{paymentPrice}]]></textFieldExpression>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format( $F{paymentPrice} )]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="217" width="257" height="20" uuid="f525906b-fa57-4ae5-ac65-70159d7a572d"/>
@@ -225,6 +228,13 @@
 					<font size="14" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Xin Cảm Ơn Và Hẹn Gặp Lại !]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="168" width="54" height="20" uuid="c4681d0f-7a09-4c61-b7b8-1008fe180c8a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[VNĐ]]></text>
 			</staticText>
 		</band>
 	</detail>

@@ -7,4 +7,11 @@
   </parent>
   <artifactId>hotel-management-business</artifactId>
   <name>hotel-management-business</name>
+  <dependencies>
+  	<dependency>
+  		<groupId>gsmart.com</groupId>
+  		<artifactId>hotel-management-persistence</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

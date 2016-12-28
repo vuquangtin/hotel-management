@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
+import com.gsmart.business.OrderCalculateBusiness;
+import com.gsmart.business.exceptions.OrderInformationNotValid;
 import com.gsmart.model.Orders;
 import com.gsmart.repository.OrdersRepository;
 import com.gsmart.ui.controller.HomeController;
@@ -34,12 +36,12 @@ public class CalculatePane extends VBox {
 
 	private Button paymentBtn = new Button();
 	private CheckBox printInvoicesCheckBox = new CheckBox("Print invoices");
-	
+
 	private Label paneLabel = new Label();
 
 	private Label totalPriceLbl = new Label();
 	private Label promotionPercentLbl = new Label();
-	private Label paymentPriceLbl = new Label(); 
+	private Label paymentPriceLbl = new Label();
 	private Label customerSentPriceLbl = new Label();
 	private Label changePriceLbl = new Label();
 
@@ -70,15 +72,16 @@ public class CalculatePane extends VBox {
 	 * 
 	 * @param order
 	 *            - Selected order from user.
+	 * @throws OrderInformationNotValid
 	 */
 	public void setCalculatorInformation(Orders order) {
-		this.orders = order;
-		this.promotionPercentTxt.setText(NumberFormat.getNumberInstance().format(order.getPromotion()));
-		this.totalPriceTxt.setText(NumberFormat.getNumberInstance().format(order.getTotalPrice()));
-		if (order.getPrepay() == null)
-			orders.setPrepay(0.0);
 
+		order.setTotalPrice(OrderCalculateBusiness.calculateTotalPriceOfOrder(order));
 		Double paymentPrice = (order.getTotalPrice() * (1 - order.getPromotion())) - order.getPrepay();
+		order.setPaymentPrice(paymentPrice);
+
+		this.promotionPercentTxt.setText(NumberFormat.getNumberInstance().format(order.getPromotion() * 100));
+		this.totalPriceTxt.setText(NumberFormat.getNumberInstance().format(order.getTotalPrice()));
 		this.paymentPriceTxt.setText(NumberFormat.getNumberInstance().format(paymentPrice));
 
 		// Checking for render payment button.
@@ -96,6 +99,7 @@ public class CalculatePane extends VBox {
 			this.paymentBtn.setVisible(true);
 		}
 
+		this.orders = order;
 	}
 
 	public HBox getTopBar() {
@@ -130,10 +134,10 @@ public class CalculatePane extends VBox {
 		vb.setSpacing(2);
 
 		vb.getChildren().add(getRowField(totalPriceLbl, totalPriceTxt, " VNĐ", "#ff0000"));
-		vb.getChildren().add(getRowField(promotionPercentLbl, promotionPercentTxt, " VNĐ", "#ff0000"));
+		vb.getChildren().add(getRowField(promotionPercentLbl, promotionPercentTxt, " %", "#ff0000"));
 		vb.getChildren().add(getRowField(paymentPriceLbl, paymentPriceTxt, " VNĐ", "#ff0000"));
 		vb.getChildren().add(getRowField(customerSentPriceLbl, customerSentPriceTxt, " VNĐ", "#6600ff"));
-		vb.getChildren().add(getRowField(changePriceLbl, changePriceTxt, " VNĐ", "#99ff66"));
+		vb.getChildren().add(getRowField(changePriceLbl, changePriceTxt, " VNĐ", "#ff3300"));
 
 		return vb;
 	}
@@ -165,9 +169,12 @@ public class CalculatePane extends VBox {
 			// We need check it because user can edit that text field when user
 			// not yet select the order.
 			if (!newValue.isEmpty() && this.orders != null) {
+				//Remove comma of string.
+				newValue = newValue.replaceAll(",", "");
 				Double customerSent = Double.valueOf(newValue);
-
 				Double value = (customerSent - orders.getTotalPrice() * (1 - orders.getPromotion()));
+				
+				this.customerSentPriceTxt.setText(NumberFormat.getNumberInstance().format(customerSent));
 				this.changePriceTxt.setText(NumberFormat.getNumberInstance().format(value));
 			}
 		});
@@ -188,7 +195,7 @@ public class CalculatePane extends VBox {
 			if (isComfirm) {
 				// Status equal 2 mean this order has payment completed.
 				orders.setStatus(2);
-				
+
 				orders.setPaidAt(new Date());
 				if (orders.getPrepay() == null)
 					orders.setPrepay(0.0);

@@ -138,22 +138,23 @@ public class InjectTestingData {
 	public void testReport() {
 		List<Orders> orders = new ArrayList<>();
 		
-		for(int i = 1 ; i <= 25 ; i++) {
+		for(int i = 1 ; i <= 5 ; i++) {
 			Orders order = new Orders();
 			order.setId(i);
 			order.setCreatedAt(new Date());
 			order.setCheckOutAt(new Date());
 			order.setPaidAt(new Date());
-			order.setCustomerName("Nguy\u1EC5n H\u1EEFu Quy\u1EC1n 123 L\u00E1 l\u00E0 l\u00E1 l\u00E0 ~~");
-			order.setRoom(new Room("A123", new RoomCategory("Personal Room")));
+			order.setCustomerName("Nguy\u1EC5n H\u1EEFu Quy\u1EC1n");
+			order.setRoom(new Room("A123", new RoomCategory("Phòng đơn")));
 			order.setPromotion(0.1);
-			
+			order.setTotalPrice(100000.0);
+			order.setPaymentPrice(100000.0*(1 - 0.1 ));
 			orders.add(order);
 		}
 		
 
-		testCreateOrderPaymentSheet(orders.get(0));
-		//testJasperReportForOrder(orders);
+		//testCreateOrderPaymentSheet(orders.get(0));
+		testJasperReportForOrder(orders);
 
 	}
 
@@ -228,7 +229,7 @@ public class InjectTestingData {
 			 * Using compiled version(.jasper) of Jasper report to generate PDF
 			 */
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					"src/main/resources/reports/orders/all-order-report.jasper", parameters, new JREmptyDataSource());
+					"src/main/resources/reports/orders/all-orders-report.jasper", parameters, new JREmptyDataSource());
 			
 			
 			JasperViewer viewer = new JasperViewer(jasperPrint, false);
@@ -268,16 +269,16 @@ public class InjectTestingData {
 		room_2.setRoomCategory(roomCategory);
 		room_2.setAcreage("45");
 		
-		Orders T1 = getSampleOrder("T1" , "28/12/2016 17:17","29/12/2016 17:17");
+		Orders T1 = getSampleOrder("Nguyễn Hữu Quyền" , "28/12/2016 17:17","29/12/2016 17:17");
 		T1.setRoom(room_1);
 		
-		Orders T2 = getSampleOrder("T2" , "28/12/2016 12:12","29/12/2016 12:12");
+		Orders T2 = getSampleOrder("Hoàng Bùi Ngọc Quý" , "28/12/2016 12:12","29/12/2016 12:12");
 		T2.setRoom(room_2);
 		
-		Orders T3 = getSampleOrder("T3" , "31/12/2016 17:17","3/1/2017 17:17");
+		Orders T3 = getSampleOrder("Nguyễn Văn A" , "31/12/2016 17:17","3/1/2017 17:17");
 		T3.setRoom(room_1);
 		
-		Orders T4 = getSampleOrder("T4" , "4/1/2017 12:12","7/1/2017 17:17");
+		Orders T4 = getSampleOrder("Trần Văn B" , "4/1/2017 12:12","7/1/2017 17:17");
 		T4.setRoom(room_2);
 		
 		HashSet<Orders> listOrder_1 = new HashSet<Orders>();

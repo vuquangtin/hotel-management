@@ -225,7 +225,7 @@ public class OrderRoomController implements DialogController, Initializable {
 		order.setCreatedAt(dateTimePicker.getFirstDate());
 		order.setCheckOutAt(dateTimePicker.getSecondDate());
 		order.setPrepay(getDoubleValueFromTextField(prepayTxt));
-		order.setPromotion(getDoubleValueFromTextField(promotionTxt));
+		order.setPromotion(getDoubleValueFromTextField(promotionTxt) / 100);
 		order.setDescription(registrationNotice.getText());
 		order.setCustomerNotice(customerNotice.getText());
 		order.setCustomerName(customerNameTxt.getText());

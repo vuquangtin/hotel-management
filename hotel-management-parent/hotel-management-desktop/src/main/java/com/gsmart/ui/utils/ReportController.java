@@ -2,6 +2,7 @@ package com.gsmart.ui.utils;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
@@ -10,6 +11,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.gsmart.business.OrderCalculateBusiness;
 import com.gsmart.model.Orders;
 import com.gsmart.repository.OrdersRepository;
 import com.gsmart.repository.specification.OrderReportSpecification;
@@ -75,7 +77,8 @@ public class ReportController {
 	 */
 	public static void printAllOrderReport(OrdersRepository ordersRepository) {
 		try {
-			JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(ordersRepository.findAll(), false);
+			JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(
+					preparedInformationForOrders(ordersRepository.findAll()), false);
 
 			// Set theme window.
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -114,7 +117,7 @@ public class ReportController {
 			}
 
 			JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(
-					ordersRepository.findAll(specification), false);
+					preparedInformationForOrders(ordersRepository.findAll(specification)), false);
 
 			// Set theme window.
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -138,5 +141,22 @@ public class ReportController {
 				| UnsupportedLookAndFeelException e) {
 			FXDialogController.showErrorDialog(e);
 		}
+	}
+
+	private static List<Orders> preparedInformationForOrders(List<Orders> orders) {
+		for (Orders item : orders) {
+			//If order has paid status equal 2.
+			if(item.getStatus() == 2) {
+				item.setTotalPrice(OrderCalculateBusiness.calculateTotalPriceOfOrder(item));
+				item.setPaymentPrice((item.getTotalPrice() * (1 - item.getPromotion())) - item.getPrepay());
+			} else {
+				//Else we don't calculate total price.
+				item.setPaidAt(null);
+				item.setTotalPrice(0.0);
+				item.setPaymentPrice(0.0);
+			}
+			
+		}
+		return orders;
 	}
 }
