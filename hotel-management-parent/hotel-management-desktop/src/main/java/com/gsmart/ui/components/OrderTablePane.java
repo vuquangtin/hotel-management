@@ -214,7 +214,14 @@ public class OrderTablePane extends VBox {
 				break;
 			}
 			}
-			text.setText(row.getValue().getRoomStatus());
+			
+			try {
+				//TODO : Check here, i don't know why it NULL.
+				text.setText(row.getValue().getRoomStatus());
+			} catch(NullPointerException ex) {
+				text.setText("Watting");
+			}
+			
 			return new SimpleObjectProperty<Text>(text);
 		});
 

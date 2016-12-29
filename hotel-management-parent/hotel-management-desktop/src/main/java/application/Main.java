@@ -2,7 +2,6 @@ package application;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.text.ParseException;
 
 import javax.swing.JFrame;
 
@@ -19,7 +18,6 @@ import com.gsmart.service.config.ServiceModuleConfiguration;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
 @SpringBootApplication
 @ContextConfiguration(classes = { ConfigurationDAO.class, ApplicationConfiguration.class,
 		ServiceModuleConfiguration.class })
@@ -29,14 +27,14 @@ public class Main extends Application {
 
 	private static String[] savedArgs;
 	public static ConfigurableApplicationContext applicationContext;
-	
+
 	private JFrame loadingFrame;
 
 	public void showLoadingFrame() {
 		loadingFrame = new JFrame();
 		loadingFrame.setUndecorated(true);
 		loadingFrame.setSize(400, 400);
-		
+
 		Dimension screenSize, frameSize;
 		int x, y;
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -47,7 +45,7 @@ public class Main extends Application {
 
 		loadingFrame.setVisible(true);
 	}
-	
+
 	public void closeLoadingFrame() {
 		loadingFrame.dispose();
 	}
@@ -55,13 +53,14 @@ public class Main extends Application {
 	@Autowired
 	public void injectTetingData(InjectTestingData injectTestingData) {
 		// TODO : Remove it on production version.
-		//injectTestingData.doInject();
-		try {
-			injectTestingData.preparedDataForTestQuickSearchRoom();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// injectTestingData.doInject();
+
+		// try {
+		// injectTestingData.preparedDataForTestQuickSearchRoom();
+		// } catch (ParseException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 	}
 
 	@Override

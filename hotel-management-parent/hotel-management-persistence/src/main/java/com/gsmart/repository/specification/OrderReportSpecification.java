@@ -33,15 +33,14 @@ public class OrderReportSpecification {
 				//From 00:00:00
 				Date fromDate = calendar.getTime();
 				
-				calendar.set(Calendar.HOUR, 23);
-				calendar.set(Calendar.MINUTE, 59);
-				calendar.set(Calendar.SECOND, 59);
+				//calendar.set(Calendar.HOUR, 23);
+				//calendar.set(Calendar.MINUTE, 59);
+				//calendar.set(Calendar.SECOND, 59);
 				
 				//To 23:59:59
-				Date toDate = calendar.getTime();
+				//Date toDate = calendar.getTime();
 				
-				return cb.and(cb.greaterThanOrEqualTo(root.get(Orders_.createdAt), fromDate),
-						cb.lessThanOrEqualTo(root.get(Orders_.checkOutAt), toDate));
+				return cb.greaterThanOrEqualTo(root.get(Orders_.createdAt), fromDate);
 			}
 		};
 
