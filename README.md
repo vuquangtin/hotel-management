@@ -18,6 +18,7 @@ a) Yêu cầu cơ bản
 + Giao diện thân thiện dễ sử dụng.
 + Có thể trích xuất báo cáo, hóa đơn thanh toán.
 + Có thể tìm kiếm , tra cứu thông tin về tình trạng phòng , khách hàng.
+
 b) Phạm vi dự án hiện tại
 <br/>Hiện tại dự án đã được triển khai dưới dạng phần mềm cài đặt theo gói, đối tượng hướng đến chính là đội ngũ nhân viên quản lý của khách sạn, đã đáp ứng được các nhu cầu cơ bản được yêu cầu
 Hệ thống chạy ổn định trên nền tảng hệ điều hành Windows 7 trở lên và Linux.
@@ -44,20 +45,23 @@ Hệ thống được xây dựng dựa trên mô hình MVC. Sử dụng ngôn n
  Sản phẩm bao gồm các tính năng chính sau đây: 
 
 ### 2.1. Quản lý đặt phòng
-  a) Xem thông tin phiếu đặt phòng.
-  b) Thay đổi thông tin phiếu đặt phòng.
-  c) Tìm kiếm phòng.
-  d) Thanh toán phòng.
-  e) Xuất hóa đơn thanh toán
+  
+ - Xem thông tin phiếu đặt phòng.
+ - Thay đổi thông tin phiếu đặt phòng.
+ - Tìm kiếm phòng.
+ - Thanh toán phòng.
+ - Xuất hóa đơn thanh toán
 
 ### 2.2 Quản lý báo cáo
-  a) Xuất báo cáo hằng ngày.
-  b) Xuất báo cáo theo mốc thời gian.
-  c) Xuất báo cáo tổng doanh thu.
+  
+  a) Xuất báo cáo hằng ngày.<br/>
+  b) Xuất báo cáo theo mốc thời gian.<br/>
+  c) Xuất báo cáo tổng doanh thu.<br/>
 
 ### 2.3 Quản lý phần mềm
-  a) Cài đặt đa ngôn ngữ
-  b) Tùy chỉnh thông tin cơ bản của khách sạn.
+  
+  a) Cài đặt đa ngôn ngữ<br/>
+  b) Tùy chỉnh thông tin cơ bản của khách sạn.<br/>
 ## PHẦN 3. ĐẶC TẢ YÊU CẦU 
 
 ###  3.1. Xem thông tin phiếu đặt phòng
@@ -159,7 +163,7 @@ Thanh công cụ màu xanh lá cây trên cùng có hai chức năng :
 Thanh màu cam bên tay phải là thanh điều hướng , để chuyển đổi giữa các màn hình với nhau. Có hai chức năng chính là:
 
   1) Quản lý : Mở giao diện quản lý chính (Như hình trên)
-
+<br/>
   2) Mở Của Sổ Quản Lí Báo Cáo : Mở cửa sổ quản lí việc xuất báo cáo.
 
 vùng chính giữa là vùng tương tác, ta có 4 phần quan trọng sau đây.
